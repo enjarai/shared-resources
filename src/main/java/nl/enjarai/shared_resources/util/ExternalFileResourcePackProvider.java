@@ -1,31 +1,29 @@
 package nl.enjarai.shared_resources.util;
 
-import nl.enjarai.shared_resources.mixin.FileResourcePackProviderAccessor;
 import net.minecraft.resource.FileResourcePackProvider;
 import net.minecraft.resource.ResourcePackProfile;
 import net.minecraft.resource.ResourcePackSource;
+import nl.enjarai.shared_resources.mixin.FileResourcePackProviderAccessor;
 
-import javax.annotation.Nullable;
-import java.io.File;
+import java.nio.file.Path;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public class ExternalFileResourcePackProvider extends FileResourcePackProvider {
-    public ExternalFileResourcePackProvider() {
+    protected final Supplier<Path> pathSupplier;
+
+    public ExternalFileResourcePackProvider(Supplier<Path> pathSupplier) {
         super(null, ResourcePackSource.PACK_SOURCE_NONE);
+        this.pathSupplier = pathSupplier;
     }
 
     @Override
     public void register(Consumer<ResourcePackProfile> profileAdder, ResourcePackProfile.Factory factory) {
         var thiz = (FileResourcePackProviderAccessor) this;
 
+        thiz.setPacksFolder(pathSupplier.get().toFile());
         if (thiz.getPacksFolder() == null) return;
 
         super.register(profileAdder, factory);
-    }
-
-    public void setPacksFolder(@Nullable File packsFolder) {
-        var thiz = (FileResourcePackProviderAccessor) this;
-
-        thiz.setPacksFolder(packsFolder);
     }
 }

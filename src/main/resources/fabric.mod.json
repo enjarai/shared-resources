@@ -1,38 +1,31 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "shared-resources",
   "version": "${version}",
 
-  "name": "Example Mod",
+  "name": "Shared Resources",
   "description": "This is an example description! Tell everyone what your mod is about!",
   "authors": [
-    "Me!"
+    "enjarai"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://enjarai.nl/",
+    "sources": "https://github.com/enjarai/shared-resources"
   },
 
-  "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
+  "license": "LGPLv3",
+  "icon": "assets/shared-resources/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "nl.enjarai.shared_resources.ExampleMod"
+      "nl.enjarai.shared_resources.SharedResources"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "shared-resources.mixins.json"
   ],
 
   "depends": {
-    "fabricloader": ">=0.14.6",
-    "fabric": "*",
-    "minecraft": "~1.19",
-    "java": ">=17"
-  },
-  "suggests": {
-    "another-mod": "*"
   }
 }

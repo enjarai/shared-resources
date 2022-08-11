@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.HashSet;
 import java.util.Set;
 
-import static nl.enjarai.shared_resources.ExampleMod.GLOBAL_RP_PROVIDER;
+import static nl.enjarai.shared_resources.SharedResources.GLOBAL_RP_PROVIDER;
 
 @Mixin(ResourcePackManager.class)
 public abstract class ResourcePackManagerMixin {

@@ -1,5 +1,6 @@
 package nl.enjarai.shared_resources.util.directory;
 
+import nl.enjarai.shared_resources.api.ResourceDirectory;
 import org.jetbrains.annotations.Nullable;
 
 import java.nio.file.Path;
@@ -11,13 +12,13 @@ public class RootedGameDirectoryProvider implements GameDirectoryProvider {
         this.root = root;
     }
 
-    public Path getDirectory() {
+    public Path getRoot() {
         return root;
     }
 
     @Nullable
     @Override
-    public Path getResourcePackDirectory() {
-        return getDirectory().resolve("resourcepacks");
+    public Path getDirectory(ResourceDirectory resource) {
+        return getRoot().resolve(resource.getDefaultSubdirectory());
     }
 }
