@@ -1,11 +1,9 @@
 package nl.enjarai.shared_resources;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.util.Identifier;
-import nl.enjarai.shared_resources.api.ResourceDirectory;
-import nl.enjarai.shared_resources.api.ResourceDirectoryBuilder;
-import nl.enjarai.shared_resources.api.ResourceDirectoryHelper;
-import nl.enjarai.shared_resources.api.ResourceDirectoryRegistry;
+import nl.enjarai.shared_resources.api.*;
 import nl.enjarai.shared_resources.util.ExternalFileResourcePackProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +20,8 @@ public class SharedResources implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		FabricLoader.getInstance().getEntrypoints("shared-resources", SharedResourcesEntrypoint.class).forEach(
+				entrypoint -> entrypoint.onInitialize(ResourceDirectoryRegistry.REGISTRY));
 	}
 
 	public static Identifier id(String path) {
