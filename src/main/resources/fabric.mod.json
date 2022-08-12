@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "Shared Resources",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "description": "#TODO",
   "authors": [
     "enjarai"
   ],
@@ -20,10 +20,14 @@
   "entrypoints": {
     "main": [
       "nl.enjarai.shared_resources.SharedResources"
+    ],
+    "shared-resources": [
+      "nl.enjarai.shared_resources.registry.ResourceDirectories"
     ]
   },
   "mixins": [
-    "shared-resources.mixins.json"
+    "shared-resources.mixins.json",
+    "shared-resources.compat.iris.mixins.json"
   ],
 
   "depends": {

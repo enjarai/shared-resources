@@ -19,6 +19,6 @@ public class RootedGameDirectoryProvider implements GameDirectoryProvider {
     @Nullable
     @Override
     public Path getDirectory(ResourceDirectory resource) {
-        return getRoot().resolve(resource.getDefaultSubdirectory());
+        return getRoot().resolve(resource.getDefaultDirectory());
     }
 }

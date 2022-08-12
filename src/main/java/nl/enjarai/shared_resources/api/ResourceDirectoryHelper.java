@@ -7,7 +7,14 @@ import java.nio.file.Path;
 
 public class ResourceDirectoryHelper {
     @Nullable
-    public static Path getDirectory(ResourceDirectory resource) {
-        return ModConfig.INSTANCE.getGlobalDirectory().getDirectory(resource);
+    public static Path getPathFor(ResourceDirectory resource) {
+        var path = ModConfig.INSTANCE.getGlobalDirectory().getDirectory(resource);
+
+        // Ensure the path exists.
+        if (path != null && !path.toFile().isDirectory()) {
+            path.toFile().mkdirs();
+        }
+
+        return path;
     }
 }

@@ -1,5 +1,6 @@
 package nl.enjarai.shared_resources.api;
 
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 import javax.annotation.Nullable;
@@ -10,5 +11,7 @@ public interface ResourceDirectory {
         return ResourceDirectoryRegistry.REGISTRY.getId(this);
     }
 
-    String getDefaultSubdirectory();
+    String getDefaultDirectory();
+
+    Text getDisplayName();
 }
