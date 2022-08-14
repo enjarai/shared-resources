@@ -13,6 +13,10 @@ public class ResourceDirectoryHelper {
      */
     @Nullable
     public static Path getPathFor(ResourceDirectory resource) {
+        if (!ModConfig.INSTANCE.isEnabled(resource)) {
+            return null;
+        }
+
         var path = ModConfig.INSTANCE.getGlobalDirectory().getDirectory(resource);
 
         // Ensure the path exists.

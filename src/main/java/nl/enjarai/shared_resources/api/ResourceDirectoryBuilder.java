@@ -2,18 +2,30 @@ package nl.enjarai.shared_resources.api;
 
 import net.minecraft.text.Text;
 
+import java.nio.file.Path;
+
 public class ResourceDirectoryBuilder {
-    private final String defaultDirectory;
+    private final Path defaultDirectory;
     private Text displayName;
     private boolean requiresRestart = false;
     private boolean overridesDefaultDirectory = false;
+    private boolean defaultEnabled = true;
 
     /**
      * A simple builder for {@link ResourceDirectory}s, providing easy access to all settings and defaults.
      * @param defaultDirectory The subdirectory of <code>.minecraft</code> where this resource usually resides.
      */
-    public ResourceDirectoryBuilder(String defaultDirectory) {
+    public ResourceDirectoryBuilder(Path defaultDirectory) {
         this.defaultDirectory = defaultDirectory;
+    }
+
+    /**
+     * A simple builder for {@link ResourceDirectory}s, providing easy access to all settings and defaults.
+     * (Alternative constructor)
+     * @param defaultDirectory The subdirectory of <code>.minecraft</code> where this resource usually resides.
+     */
+    public ResourceDirectoryBuilder(String defaultDirectory) {
+        this(Path.of(defaultDirectory));
     }
 
     /**
@@ -41,19 +53,25 @@ public class ResourceDirectoryBuilder {
         return this;
     }
 
-    public ResourceDirectory build() {
-        if (displayName == null) {
-            displayName = Text.of(defaultDirectory);
-        }
+    /**
+     * Set this if the default directory should be enabled by default.
+     */
+    public ResourceDirectoryBuilder defaultEnabled(boolean enabled) {
+        defaultEnabled = enabled;
+        return this;
+    }
 
+    public ResourceDirectory build() {
         return new ResourceDirectory() {
             @Override
-            public String getDefaultDirectory() {
+            public Path getDefaultDirectory() {
                 return defaultDirectory;
             }
 
             @Override
             public Text getDisplayName() {
+                if (displayName == null) return ResourceDirectory.super.getDisplayName();
+
                 return displayName;
             }
 
@@ -65,6 +83,11 @@ public class ResourceDirectoryBuilder {
             @Override
             public boolean overridesDefaultDirectory() {
                 return overridesDefaultDirectory;
+            }
+
+            @Override
+            public boolean defaultEnabled() {
+                return defaultEnabled;
             }
         };
     }

@@ -23,6 +23,9 @@
     ],
     "shared-resources": [
       "nl.enjarai.shared_resources.registry.ResourceDirectories"
+    ],
+    "modmenu": [
+      "nl.enjarai.shared_resources.compat.modmenu.ModMenuIntegration"
     ]
   },
   "mixins": [

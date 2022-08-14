@@ -4,6 +4,8 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 import javax.annotation.Nullable;
+import java.nio.file.Path;
+import java.util.Objects;
 
 /**
  * Represents a directory in <code>.minecraft</code> where a certain resource is stored.
@@ -18,12 +20,17 @@ public interface ResourceDirectory {
     /**
      * The subdirectory of <code>.minecraft</code> where this resource usually resides.
      */
-    String getDefaultDirectory();
+    Path getDefaultDirectory();
 
     /**
      * The display name of the resource directory, used in the config menu.
      */
-    Text getDisplayName();
+    default Text getDisplayName() {
+        var id = getId();
+        Objects.requireNonNull(id, "Resource directory should be registered.");
+
+        return Text.of(id.toString());
+    }
 
     /**
      * Whether this directory requires a restart to be changed.
@@ -34,4 +41,9 @@ public interface ResourceDirectory {
      * Whether this directory completely overrides the default directory for this resource.
      */
     boolean overridesDefaultDirectory();
+
+    /**
+     * If this directory should be enabled by default.
+     */
+    boolean defaultEnabled();
 }

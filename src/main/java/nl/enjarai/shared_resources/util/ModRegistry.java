@@ -4,6 +4,7 @@ import net.minecraft.util.Identifier;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class ModRegistry<T> {
     private final HashMap<Identifier, T> entries = new HashMap<>();
@@ -25,5 +26,9 @@ public class ModRegistry<T> {
             }
         }
         return null;
+    }
+
+    public Iterator<T> iterator() {
+        return entries.values().iterator();
     }
 }

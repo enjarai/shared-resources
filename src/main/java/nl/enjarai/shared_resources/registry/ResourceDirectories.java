@@ -19,6 +19,7 @@ public class ResourceDirectories implements SharedResourcesEntrypoint {
             .setDisplayName(Text.translatable("shared_resources.directory.config"))
             .requiresRestart()
             .overridesDefaultDirectory()
+            .defaultEnabled(false)
             .build();
     public static final ResourceDirectory SHADERPACKS = new ResourceDirectoryBuilder("shaderpacks")
             .setDisplayName(Text.translatable("shared_resources.directory.shaderpacks"))
