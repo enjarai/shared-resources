@@ -26,7 +26,7 @@ public class ResourceDirectories implements SharedResourcesEntrypoint {
             .build();
 
     @Override
-    public void onInitialize(ResourceDirectoryRegistry registry) {
+    public void registerResources(ResourceDirectoryRegistry registry) {
         registry.register(SharedResources.id("resourcepacks"), RESOURCEPACKS);
         registry.register(SharedResources.id("saves"), SAVES);
         registry.register(SharedResources.id("config"), CONFIG);

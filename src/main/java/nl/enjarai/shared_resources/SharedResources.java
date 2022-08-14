@@ -22,7 +22,7 @@ public class SharedResources implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		FabricLoader.getInstance().getEntrypoints("shared-resources", SharedResourcesEntrypoint.class).forEach(
-				entrypoint -> entrypoint.onInitialize(ResourceDirectoryRegistry.REGISTRY));
+				entrypoint -> entrypoint.registerResources(ResourceDirectoryRegistry.REGISTRY));
 	}
 
 	public static Identifier id(String path) {

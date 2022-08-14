@@ -5,5 +5,5 @@ package nl.enjarai.shared_resources.api;
  * Use this to register custom resource directories without a hard dependency.
  */
 public interface SharedResourcesEntrypoint {
-    void onInitialize(ResourceDirectoryRegistry registry);
+    void registerResources(ResourceDirectoryRegistry registry);
 }
