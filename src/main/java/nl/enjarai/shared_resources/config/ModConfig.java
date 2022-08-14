@@ -23,7 +23,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.HashMap;
 
-// TODO make this save to json and be editable ingame
 public class ModConfig {
     // Make sure we use the default config location instead of our modified one.
     public static final File CONFIG_FILE = ResourceDirectories.CONFIG.getDefaultDirectory().resolve(SharedResources.MODID + ".json").toFile();

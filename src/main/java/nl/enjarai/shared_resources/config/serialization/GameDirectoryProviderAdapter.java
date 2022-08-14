@@ -21,20 +21,30 @@ public class GameDirectoryProviderAdapter extends TypeAdapter<GameDirectoryProvi
             value = rooted.getRoot().toString();
         }
 
+        out.beginObject();
+        out.name("root");
         out.value(value);
+        out.endObject();
     }
 
     @Override
     public GameDirectoryProvider read(JsonReader in) throws IOException {
+        GameDirectoryProvider result = null;
 
-        var value = in.nextString();
+        in.beginObject();
+        while (in.hasNext()) {
+            var name = in.nextName();
 
-        if (!value.isEmpty()) {
-            var path = Path.of(value);
+            if (name.equals("root")) {
+                var root = in.nextString();
 
-            return new RootedGameDirectoryProvider(path);
+                result = new RootedGameDirectoryProvider(Path.of(root));
+            } else {
+                in.skipValue();
+            }
         }
+        in.endObject();
 
-        return new EmptyGameDirectoryProvider();
+        return result != null ? result : new EmptyGameDirectoryProvider();
     }
 }
