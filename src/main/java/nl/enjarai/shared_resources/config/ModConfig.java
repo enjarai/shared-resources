@@ -100,21 +100,33 @@ public class ModConfig {
 
         var generalCategory = builder
                 .getOrCreateCategory(Text.translatable("config.shared_resources.general"))
+                .addEntry(
+                        entryBuilder.startTextDescription(
+                                Text.translatable("config.shared_resources.general.directory")
+                        ).build()
+                )
                 .addEntry(new DirectoryConfigEntry(
                         Text.translatable("config.shared_resources.general.directory"),
                         getGlobalDirectory() instanceof RootedGameDirectoryProvider rooted ? rooted.getRoot() : null,
                         Path.of("global_resources"),
                         this::setGlobalDirectory
-                ));
+                ))
+                .addEntry(
+                        entryBuilder.startTextDescription(
+                                Text.translatable("config.shared_resources.general.enabled")
+                        ).build()
+                );
 
         enabled.forEach((id, enabled) -> {
             var directory = ResourceDirectoryRegistry.REGISTRY.get(id);
             if (directory == null) return;
 
-            generalCategory.addEntry(entryBuilder.startBooleanToggle(directory.getDisplayName(), enabled)
+            var entry = entryBuilder.startBooleanToggle(directory.getDisplayName(), enabled)
                     .setDefaultValue(directory.defaultEnabled())
                     .setSaveConsumer(newEnabled -> setEnabled(id, newEnabled))
-                    .build());
+                    .build();
+            entry.setRequiresRestart(directory.requiresRestart());
+            generalCategory.addEntry(entry);
         });
 
         return builder.build();

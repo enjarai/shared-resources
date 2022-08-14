@@ -1,0 +1,9 @@
+{
+  "config.shared_resources.title": "Shared Resources",
+  "config.shared_resources.general.directory": "Shared global root directory:",
+  "config.shared_resources.general.enabled": "Folders to share:",
+  "shared_resources.directory.resourcepacks": "Resource packs",
+  "shared_resources.directory.saves": "Saves",
+  "shared_resources.directory.config": "Configs",
+  "shared_resources.directory.shaderpacks": "Iris shader packs"
+}
