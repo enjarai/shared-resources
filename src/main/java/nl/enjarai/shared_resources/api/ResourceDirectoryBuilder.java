@@ -3,6 +3,7 @@ package nl.enjarai.shared_resources.api;
 import net.minecraft.text.Text;
 
 import java.nio.file.Path;
+import java.util.function.Consumer;
 
 public class ResourceDirectoryBuilder {
     private final Path defaultDirectory;
@@ -10,6 +11,8 @@ public class ResourceDirectoryBuilder {
     private boolean requiresRestart = false;
     private boolean overridesDefaultDirectory = false;
     private boolean defaultEnabled = true;
+    private boolean experimental = false;
+    private Consumer<Path> updateCallback = (path) -> {};
 
     /**
      * A simple builder for {@link ResourceDirectory}s, providing easy access to all settings and defaults.
@@ -54,10 +57,26 @@ public class ResourceDirectoryBuilder {
     }
 
     /**
-     * Set this if the default directory should be enabled by default.
+     * Set this if this directory should be enabled by default.
      */
     public ResourceDirectoryBuilder defaultEnabled(boolean enabled) {
         defaultEnabled = enabled;
+        return this;
+    }
+
+    /**
+     * Set this if this directory is experimental and should be used with caution.
+     */
+    public ResourceDirectoryBuilder isExperimental() {
+        experimental = true;
+        return this;
+    }
+
+    /**
+     * Set the callback to be called whenever this directory is changed.
+     */
+    public ResourceDirectoryBuilder setUpdateCallback(Consumer<Path> updateCallback) {
+        this.updateCallback = updateCallback;
         return this;
     }
 
@@ -88,6 +107,16 @@ public class ResourceDirectoryBuilder {
             @Override
             public boolean defaultEnabled() {
                 return defaultEnabled;
+            }
+
+            @Override
+            public boolean isExperimental() {
+                return experimental;
+            }
+
+            @Override
+            public Consumer<Path> getUpdateCallback() {
+                return updateCallback;
             }
         };
     }

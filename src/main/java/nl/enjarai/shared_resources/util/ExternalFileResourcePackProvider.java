@@ -3,7 +3,7 @@ package nl.enjarai.shared_resources.util;
 import net.minecraft.resource.FileResourcePackProvider;
 import net.minecraft.resource.ResourcePackProfile;
 import net.minecraft.resource.ResourcePackSource;
-import nl.enjarai.shared_resources.mixin.FileResourcePackProviderAccessor;
+import nl.enjarai.shared_resources.mixin.resourcepacks.FileResourcePackProviderAccessor;
 
 import java.nio.file.Path;
 import java.util.function.Consumer;

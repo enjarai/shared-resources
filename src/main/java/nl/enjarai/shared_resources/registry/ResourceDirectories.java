@@ -20,6 +20,7 @@ public class ResourceDirectories implements SharedResourcesEntrypoint {
             .requiresRestart()
             .overridesDefaultDirectory()
             .defaultEnabled(false)
+            .isExperimental()
             .build();
     public static final ResourceDirectory SHADERPACKS = new ResourceDirectoryBuilder("shaderpacks")
             .setDisplayName(Text.translatable("shared_resources.directory.shaderpacks"))
@@ -30,7 +31,8 @@ public class ResourceDirectories implements SharedResourcesEntrypoint {
         registry.register(SharedResources.id("resourcepacks"), RESOURCEPACKS);
         registry.register(SharedResources.id("saves"), SAVES);
         registry.register(SharedResources.id("config"), CONFIG);
-        // TODO make saves and config work.
+        // TODO make saves work.
+        // TODO vanilla options.txt and other files maybe.
 
         // Only load shaderpack compat if iris is available.
         if (FabricLoader.getInstance().isModLoaded("iris")) {

@@ -21,6 +21,9 @@
     "main": [
       "nl.enjarai.shared_resources.SharedResources"
     ],
+    "preLaunch": [
+      "nl.enjarai.shared_resources.SharedResourcesPreLaunch"
+    ],
     "shared-resources": [
       "nl.enjarai.shared_resources.registry.ResourceDirectories"
     ],

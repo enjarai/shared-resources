@@ -1,4 +1,4 @@
-package nl.enjarai.shared_resources.mixin;
+package nl.enjarai.shared_resources.mixin.resourcepacks;
 
 import net.minecraft.resource.FileResourcePackProvider;
 import org.spongepowered.asm.mixin.Mixin;

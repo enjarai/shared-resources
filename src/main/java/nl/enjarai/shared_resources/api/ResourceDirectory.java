@@ -6,6 +6,7 @@ import net.minecraft.util.Identifier;
 import javax.annotation.Nullable;
 import java.nio.file.Path;
 import java.util.Objects;
+import java.util.function.Consumer;
 
 /**
  * Represents a directory in <code>.minecraft</code> where a certain resource is stored.
@@ -46,4 +47,16 @@ public interface ResourceDirectory {
      * If this directory should be enabled by default.
      */
     boolean defaultEnabled();
+
+    /**
+     * If this directory change is experimental and should be used with caution.
+     */
+    boolean isExperimental();
+
+    /**
+     * The callback to be called whenever this directory is changed
+     */
+    default Consumer<Path> getUpdateCallback() {
+        return (path) -> {};
+    }
 }
