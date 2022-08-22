@@ -1,8 +1,8 @@
 package nl.enjarai.shared_resources.compat.iris.mixin;
 
-import nl.enjarai.shared_resources.api.ResourceDirectoryHelper;
+import nl.enjarai.shared_resources.api.DirectoryResourceHelper;
 import nl.enjarai.shared_resources.compat.iris.IrisMixinHooks;
-import nl.enjarai.shared_resources.registry.ResourceDirectories;
+import nl.enjarai.shared_resources.registry.DirectoryResources;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;
@@ -24,7 +24,7 @@ public abstract class IrisMixin {
         if (IrisMixinHooks.fixShaderpackFolders > 0) {
             IrisMixinHooks.fixShaderpackFolders--;
 
-            var source = ResourceDirectoryHelper.getPathFor(ResourceDirectories.SHADERPACKS);
+            var source = DirectoryResourceHelper.getPathFor(DirectoryResources.SHADERPACKS);
             if (source != null) {
                 ci.setReturnValue(source);
             }
@@ -37,7 +37,7 @@ public abstract class IrisMixin {
     )
     private static void fixShaderpackDirectory(String name, CallbackInfoReturnable<Boolean> ci) {
 
-        var source = ResourceDirectoryHelper.getPathFor(ResourceDirectories.SHADERPACKS);
+        var source = DirectoryResourceHelper.getPathFor(DirectoryResources.SHADERPACKS);
         if (source == null) return;
 
         if (source.resolve(name).toFile().exists()) {

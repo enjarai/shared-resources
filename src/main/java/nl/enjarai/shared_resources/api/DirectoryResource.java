@@ -10,12 +10,12 @@ import java.util.function.Consumer;
 
 /**
  * Represents a directory in <code>.minecraft</code> where a certain resource is stored.
- * Should be registered in {@link ResourceDirectoryRegistry} and probably stored in a constant for later use.
+ * Should be registered in {@link DirectoryResourceRegistry} and probably stored in a constant for later use.
  */
-public interface ResourceDirectory {
+public interface DirectoryResource {
     @Nullable
     default Identifier getId() {
-        return ResourceDirectoryRegistry.REGISTRY.getId(this);
+        return DirectoryResourceRegistry.REGISTRY.getId(this);
     }
 
     /**
@@ -54,9 +54,13 @@ public interface ResourceDirectory {
     boolean isExperimental();
 
     /**
-     * The callback to be called whenever this directory is changed
+     * The callback to be called whenever this directory is changed, may be called even when the directory is not changed.
      */
-    default Consumer<Path> getUpdateCallback() {
+    default DirectoryUpdateCallback getUpdateCallback() {
         return (path) -> {};
+    }
+
+    interface DirectoryUpdateCallback {
+        void onDirectoryUpdate(@Nullable Path path);
     }
 }

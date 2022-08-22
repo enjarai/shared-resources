@@ -7,12 +7,13 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import nl.enjarai.shared_resources.SharedResources;
-import nl.enjarai.shared_resources.api.ResourceDirectory;
-import nl.enjarai.shared_resources.api.ResourceDirectoryRegistry;
+import nl.enjarai.shared_resources.api.DirectoryResource;
+import nl.enjarai.shared_resources.api.DirectoryResourceHelper;
+import nl.enjarai.shared_resources.api.DirectoryResourceRegistry;
 import nl.enjarai.shared_resources.config.serialization.GameDirectoryProviderAdapter;
 import nl.enjarai.shared_resources.config.serialization.IdentifierAdapter;
 import nl.enjarai.shared_resources.gui.DirectoryConfigEntry;
-import nl.enjarai.shared_resources.registry.ResourceDirectories;
+import nl.enjarai.shared_resources.registry.DirectoryResources;
 import nl.enjarai.shared_resources.util.directory.EmptyGameDirectoryProvider;
 import nl.enjarai.shared_resources.util.directory.GameDirectoryProvider;
 import nl.enjarai.shared_resources.util.directory.RootedGameDirectoryProvider;
@@ -25,7 +26,7 @@ import java.util.HashMap;
 
 public class ModConfig {
     // Make sure we use the default config location instead of our modified one.
-    public static final File CONFIG_FILE = ResourceDirectories.CONFIG.getDefaultDirectory().resolve(SharedResources.MODID + ".json").toFile();
+    public static final File CONFIG_FILE = DirectoryResources.CONFIG.getDefaultDirectory().resolve(SharedResources.MODID + ".json").toFile();
     private static final Gson GSON = new GsonBuilder()
             .registerTypeAdapter(Identifier.class, new IdentifierAdapter())
             .registerTypeAdapter(GameDirectoryProvider.class, new GameDirectoryProviderAdapter())
@@ -38,7 +39,7 @@ public class ModConfig {
     static {
         INSTANCE = loadConfigFile(CONFIG_FILE);
 
-        var allDirs = ResourceDirectoryRegistry.REGISTRY.iterator();
+        var allDirs = DirectoryResourceRegistry.REGISTRY.iterator();
         while (allDirs.hasNext()) {
             var dir = allDirs.next();
             var id = dir.getId();
@@ -65,6 +66,11 @@ public class ModConfig {
         } else {
             globalDirectory = new RootedGameDirectoryProvider(path);
         }
+
+        DirectoryResourceRegistry.REGISTRY.iterator().forEachRemaining(directory -> {
+            var dirPath = DirectoryResourceHelper.getPathFor(directory);
+            directory.getUpdateCallback().onDirectoryUpdate(dirPath);
+        });
     }
 
 
@@ -78,11 +84,11 @@ public class ModConfig {
         this.enabled.put(id, enabled);
     }
 
-    public boolean isEnabled(ResourceDirectory directory) {
+    public boolean isEnabled(DirectoryResource directory) {
         return isEnabled(directory.getId());
     }
 
-    public void setEnabled(ResourceDirectory directory, boolean enabled) {
+    public void setEnabled(DirectoryResource directory, boolean enabled) {
         setEnabled(directory.getId(), enabled);
     }
 
@@ -117,12 +123,15 @@ public class ModConfig {
                 );
 
         enabled.forEach((id, enabled) -> {
-            var directory = ResourceDirectoryRegistry.REGISTRY.get(id);
+            var directory = DirectoryResourceRegistry.REGISTRY.get(id);
             if (directory == null) return;
 
             var entry = entryBuilder.startBooleanToggle(directory.getDisplayName(), enabled)
                     .setDefaultValue(directory.defaultEnabled())
-                    .setSaveConsumer(newEnabled -> setEnabled(id, newEnabled))
+                    .setSaveConsumer(newEnabled -> {
+                        setEnabled(id, newEnabled);
+                        directory.getUpdateCallback().onDirectoryUpdate(DirectoryResourceHelper.getPathFor(directory));
+                    })
                     .build();
             entry.setRequiresRestart(directory.requiresRestart());
             generalCategory.addEntry(entry);

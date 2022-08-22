@@ -7,7 +7,8 @@
   ],
   "client": [
     "resourcepacks.FileResourcePackProviderAccessor",
-    "resourcepacks.ResourcePackManagerMixin"
+    "resourcepacks.ResourcePackManagerMixin",
+    "saves.WorldListWidgetMixin"
   ],
   "injectors": {
     "defaultRequire": 1

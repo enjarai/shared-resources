@@ -1,13 +1,12 @@
 package nl.enjarai.shared_resources.compat.iris.mixin;
 
 import nl.enjarai.shared_resources.SharedResources;
-import nl.enjarai.shared_resources.api.ResourceDirectoryHelper;
-import nl.enjarai.shared_resources.registry.ResourceDirectories;
+import nl.enjarai.shared_resources.api.DirectoryResourceHelper;
+import nl.enjarai.shared_resources.registry.DirectoryResources;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -27,7 +26,7 @@ public abstract class ShaderpackDirectoryManagerMixin {
     private Stream<Path> injectShaderpacks(Path originalPath) throws IOException {
         var original = Files.list(originalPath);
 
-        var source = ResourceDirectoryHelper.getPathFor(ResourceDirectories.SHADERPACKS);
+        var source = DirectoryResourceHelper.getPathFor(DirectoryResources.SHADERPACKS);
         if (source == null) return original;
 
 

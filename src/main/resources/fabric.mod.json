@@ -25,7 +25,7 @@
       "nl.enjarai.shared_resources.SharedResourcesPreLaunch"
     ],
     "shared-resources": [
-      "nl.enjarai.shared_resources.registry.ResourceDirectories"
+      "nl.enjarai.shared_resources.registry.DirectoryResources"
     ],
     "modmenu": [
       "nl.enjarai.shared_resources.compat.modmenu.ModMenuIntegration"

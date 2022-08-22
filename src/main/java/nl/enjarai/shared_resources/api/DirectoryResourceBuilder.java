@@ -5,36 +5,36 @@ import net.minecraft.text.Text;
 import java.nio.file.Path;
 import java.util.function.Consumer;
 
-public class ResourceDirectoryBuilder {
+public class DirectoryResourceBuilder {
     private final Path defaultDirectory;
     private Text displayName;
     private boolean requiresRestart = false;
     private boolean overridesDefaultDirectory = false;
     private boolean defaultEnabled = true;
     private boolean experimental = false;
-    private Consumer<Path> updateCallback = (path) -> {};
+    private DirectoryResource.DirectoryUpdateCallback updateCallback = (path) -> {};
 
     /**
-     * A simple builder for {@link ResourceDirectory}s, providing easy access to all settings and defaults.
+     * A simple builder for {@link DirectoryResource}s, providing easy access to all settings and defaults.
      * @param defaultDirectory The subdirectory of <code>.minecraft</code> where this resource usually resides.
      */
-    public ResourceDirectoryBuilder(Path defaultDirectory) {
+    public DirectoryResourceBuilder(Path defaultDirectory) {
         this.defaultDirectory = defaultDirectory;
     }
 
     /**
-     * A simple builder for {@link ResourceDirectory}s, providing easy access to all settings and defaults.
+     * A simple builder for {@link DirectoryResource}s, providing easy access to all settings and defaults.
      * (Alternative constructor)
      * @param defaultDirectory The subdirectory of <code>.minecraft</code> where this resource usually resides.
      */
-    public ResourceDirectoryBuilder(String defaultDirectory) {
+    public DirectoryResourceBuilder(String defaultDirectory) {
         this(Path.of(defaultDirectory));
     }
 
     /**
      * Sets the display name of the resource directory to be used in the config menu.
      */
-    public ResourceDirectoryBuilder setDisplayName(Text displayName) {
+    public DirectoryResourceBuilder setDisplayName(Text displayName) {
         this.displayName = displayName;
         return this;
     }
@@ -42,7 +42,7 @@ public class ResourceDirectoryBuilder {
     /**
      * Set whether this directory requires a restart to be changed.
      */
-    public ResourceDirectoryBuilder requiresRestart() {
+    public DirectoryResourceBuilder requiresRestart() {
         requiresRestart = true;
         return this;
     }
@@ -51,7 +51,7 @@ public class ResourceDirectoryBuilder {
      * Set this if the default directory will be fully overridden by the custom one.
      * Try to avoid this if possible by merging entries.
      */
-    public ResourceDirectoryBuilder overridesDefaultDirectory() {
+    public DirectoryResourceBuilder overridesDefaultDirectory() {
         overridesDefaultDirectory = true;
         return this;
     }
@@ -59,7 +59,7 @@ public class ResourceDirectoryBuilder {
     /**
      * Set this if this directory should be enabled by default.
      */
-    public ResourceDirectoryBuilder defaultEnabled(boolean enabled) {
+    public DirectoryResourceBuilder defaultEnabled(boolean enabled) {
         defaultEnabled = enabled;
         return this;
     }
@@ -67,21 +67,21 @@ public class ResourceDirectoryBuilder {
     /**
      * Set this if this directory is experimental and should be used with caution.
      */
-    public ResourceDirectoryBuilder isExperimental() {
+    public DirectoryResourceBuilder isExperimental() {
         experimental = true;
         return this;
     }
 
     /**
-     * Set the callback to be called whenever this directory is changed.
+     * Set the callback to be called whenever this directory is changed, may be called even when the directory is not changed.
      */
-    public ResourceDirectoryBuilder setUpdateCallback(Consumer<Path> updateCallback) {
+    public DirectoryResourceBuilder setUpdateCallback(DirectoryResource.DirectoryUpdateCallback updateCallback) {
         this.updateCallback = updateCallback;
         return this;
     }
 
-    public ResourceDirectory build() {
-        return new ResourceDirectory() {
+    public DirectoryResource build() {
+        return new DirectoryResource() {
             @Override
             public Path getDefaultDirectory() {
                 return defaultDirectory;
@@ -89,7 +89,7 @@ public class ResourceDirectoryBuilder {
 
             @Override
             public Text getDisplayName() {
-                if (displayName == null) return ResourceDirectory.super.getDisplayName();
+                if (displayName == null) return DirectoryResource.super.getDisplayName();
 
                 return displayName;
             }
@@ -115,7 +115,7 @@ public class ResourceDirectoryBuilder {
             }
 
             @Override
-            public Consumer<Path> getUpdateCallback() {
+            public DirectoryUpdateCallback getUpdateCallback() {
                 return updateCallback;
             }
         };
