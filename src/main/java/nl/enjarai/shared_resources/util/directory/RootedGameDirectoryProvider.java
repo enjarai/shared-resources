@@ -1,6 +1,6 @@
 package nl.enjarai.shared_resources.util.directory;
 
-import nl.enjarai.shared_resources.api.DirectoryResource;
+import nl.enjarai.shared_resources.api.GameResource;
 import org.jetbrains.annotations.Nullable;
 
 import java.nio.file.Path;
@@ -18,7 +18,7 @@ public class RootedGameDirectoryProvider implements GameDirectoryProvider {
 
     @Nullable
     @Override
-    public Path getDirectory(DirectoryResource resource) {
+    public Path getDirectory(GameResource resource) {
         return getRoot().resolve(resource.getDefaultDirectory());
     }
 }

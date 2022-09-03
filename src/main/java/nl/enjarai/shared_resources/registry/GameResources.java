@@ -3,37 +3,40 @@ package nl.enjarai.shared_resources.registry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.text.Text;
 import nl.enjarai.shared_resources.SharedResources;
-import nl.enjarai.shared_resources.api.DirectoryResource;
-import nl.enjarai.shared_resources.api.DirectoryResourceBuilder;
-import nl.enjarai.shared_resources.api.DirectoryResourceRegistry;
-import nl.enjarai.shared_resources.api.SharedResourcesEntrypoint;
+import nl.enjarai.shared_resources.api.*;
 
-public class DirectoryResources implements SharedResourcesEntrypoint {
-    public static final DirectoryResource RESOURCEPACKS = new DirectoryResourceBuilder("resourcepacks")
+public class GameResources implements SharedResourcesEntrypoint {
+    public static final ResourceDirectory RESOURCEPACKS = new ResourceDirectoryBuilder("resourcepacks")
             .setDisplayName(Text.translatable("shared_resources.directory.resourcepacks"))
             .build();
-    public static final DirectoryResource SAVES = new DirectoryResourceBuilder("saves")
+    public static final ResourceDirectory SAVES = new ResourceDirectoryBuilder("saves")
             .setDisplayName(Text.translatable("shared_resources.directory.saves"))
             .requiresRestart()
             .overridesDefaultDirectory()
             .build();
-    public static final DirectoryResource CONFIG = new DirectoryResourceBuilder("config")
+    public static final ResourceDirectory CONFIG = new ResourceDirectoryBuilder("config")
             .setDisplayName(Text.translatable("shared_resources.directory.config"))
             .requiresRestart()
             .overridesDefaultDirectory()
             .defaultEnabled(false)
             .isExperimental()
             .build();
-    public static final DirectoryResource SHADERPACKS = new DirectoryResourceBuilder("shaderpacks")
+    public static final ResourceDirectory SHADERPACKS = new ResourceDirectoryBuilder("shaderpacks")
             .setDisplayName(Text.translatable("shared_resources.directory.shaderpacks"))
             .build();
 
+    public static final ResourceFile OPTIONS = new ResourceFileBuilder("options.txt")
+            .setDisplayName(Text.translatable("shared_resources.file.options"))
+            .requiresRestart()
+            .build();
+
     @Override
-    public void registerResources(DirectoryResourceRegistry registry) {
+    public void registerResources(GameResourceRegistry registry) {
         registry.register(SharedResources.id("resourcepacks"), RESOURCEPACKS);
         registry.register(SharedResources.id("saves"), SAVES);
         registry.register(SharedResources.id("config"), CONFIG);
-        // TODO vanilla options.txt and other files maybe.
+
+        registry.register(SharedResources.id("options"), OPTIONS);
 
         // Only load shaderpack compat if iris is available.
         if (FabricLoader.getInstance().isModLoaded("iris")) {

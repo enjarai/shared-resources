@@ -5,14 +5,14 @@ import nl.enjarai.shared_resources.config.SharedResourcesConfig;
 import javax.annotation.Nullable;
 import java.nio.file.Path;
 
-public class DirectoryResourceHelper {
+public class GameResourceHelper {
     /**
-     * Returns the current custom path for this resource directory, or null if it is either disabled or not set.
+     * Returns the current custom path for this resource, or null if it is either disabled or not set.
      * Always use this instead of interacting with {@link SharedResourcesConfig} directly.
-     * @param resource The resource directory to get the path for.
+     * @param resource The resource to get the path for.
      */
     @Nullable
-    public static Path getPathFor(DirectoryResource resource) {
+    public static Path getPathFor(GameResource resource) {
         if (!SharedResourcesConfig.INSTANCE.isEnabled(resource)) {
             return null;
         }
@@ -20,8 +20,8 @@ public class DirectoryResourceHelper {
         var path = SharedResourcesConfig.INSTANCE.getGlobalDirectory().getDirectory(resource);
 
         // Ensure the path exists.
-        if (path != null && !path.toFile().isDirectory()) {
-            path.toFile().mkdirs();
+        if (path != null) {
+            resource.ensureExists(path);
         }
 
         return path;

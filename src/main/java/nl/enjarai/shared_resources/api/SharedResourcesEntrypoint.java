@@ -7,5 +7,5 @@ package nl.enjarai.shared_resources.api;
  * For more information see {@link net.fabricmc.loader.api.entrypoint.PreLaunchEntrypoint}
  */
 public interface SharedResourcesEntrypoint {
-    void registerResources(DirectoryResourceRegistry registry);
+    void registerResources(GameResourceRegistry registry);
 }

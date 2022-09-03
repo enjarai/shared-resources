@@ -56,7 +56,7 @@ public class DirectoryConfigEntry extends AbstractConfigListEntry<Path> {
 
     @Override
     public boolean isRequiresRestart() { // TODO check if entries need restart
-        return super.isRequiresRestart();
+        return true;
     }
 
     @Override

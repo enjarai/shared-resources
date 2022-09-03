@@ -1,8 +1,8 @@
 package nl.enjarai.shared_resources.mixin.saves;
 
 import net.minecraft.client.MinecraftClient;
-import nl.enjarai.shared_resources.api.DirectoryResourceHelper;
-import nl.enjarai.shared_resources.registry.DirectoryResources;
+import nl.enjarai.shared_resources.api.GameResourceHelper;
+import nl.enjarai.shared_resources.registry.GameResources;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -19,7 +19,7 @@ public abstract class MinecraftClientMixin {
             )
     )
     private Path changePath(Path rootDir, String defaultPath) {
-        var newPath = DirectoryResourceHelper.getPathFor(DirectoryResources.SAVES);
+        var newPath = GameResourceHelper.getPathFor(GameResources.SAVES);
 
         if (newPath != null) {
             return newPath;
