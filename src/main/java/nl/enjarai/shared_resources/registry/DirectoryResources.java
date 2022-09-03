@@ -14,6 +14,8 @@ public class DirectoryResources implements SharedResourcesEntrypoint {
             .build();
     public static final DirectoryResource SAVES = new DirectoryResourceBuilder("saves")
             .setDisplayName(Text.translatable("shared_resources.directory.saves"))
+            .requiresRestart()
+            .overridesDefaultDirectory()
             .build();
     public static final DirectoryResource CONFIG = new DirectoryResourceBuilder("config")
             .setDisplayName(Text.translatable("shared_resources.directory.config"))
@@ -29,9 +31,8 @@ public class DirectoryResources implements SharedResourcesEntrypoint {
     @Override
     public void registerResources(DirectoryResourceRegistry registry) {
         registry.register(SharedResources.id("resourcepacks"), RESOURCEPACKS);
-        registry.register(SharedResources.id("saves"), SAVES); // NOT WORKING YET, DONT USE
+        registry.register(SharedResources.id("saves"), SAVES);
         registry.register(SharedResources.id("config"), CONFIG);
-        // TODO make saves work.
         // TODO vanilla options.txt and other files maybe.
 
         // Only load shaderpack compat if iris is available.

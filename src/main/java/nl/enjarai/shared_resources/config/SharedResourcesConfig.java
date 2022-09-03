@@ -24,7 +24,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.HashMap;
 
-public class ModConfig {
+public class SharedResourcesConfig {
     // Make sure we use the default config location instead of our modified one.
     public static final File CONFIG_FILE = DirectoryResources.CONFIG.getDefaultDirectory().resolve(SharedResources.MODID + ".json").toFile();
     private static final Gson GSON = new GsonBuilder()
@@ -34,7 +34,7 @@ public class ModConfig {
             .disableHtmlEscaping() // We'll be able to use custom chars without them being saved differently
             .create();
 
-    public static ModConfig INSTANCE;
+    public static SharedResourcesConfig INSTANCE;
 
     static {
         INSTANCE = loadConfigFile(CONFIG_FILE);
@@ -149,10 +149,10 @@ public class ModConfig {
      * Loads config file.
      *
      * @param file file to load the config file from.
-     * @return ModConfig object
+     * @return SharedResourcesConfig object
      */
-    private static ModConfig loadConfigFile(File file) {
-        ModConfig config = null;
+    private static SharedResourcesConfig loadConfigFile(File file) {
+        SharedResourcesConfig config = null;
 
         if (file.exists()) {
             // An existing config is present, we should use its values
@@ -160,14 +160,14 @@ public class ModConfig {
                     new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8)
             )) {
                 // Parses the config file and puts the values into config object
-                config = GSON.fromJson(fileReader, ModConfig.class);
+                config = GSON.fromJson(fileReader, SharedResourcesConfig.class);
             } catch (IOException e) {
                 throw new RuntimeException("Problem occurred when trying to load config: ", e);
             }
         }
         // gson.fromJson() can return null if file is empty
         if (config == null) {
-            config = new ModConfig();
+            config = new SharedResourcesConfig();
         }
 
         // Saves the file in order to write new fields if they were added

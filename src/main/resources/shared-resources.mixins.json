@@ -8,7 +8,9 @@
   "client": [
     "resourcepacks.FileResourcePackProviderAccessor",
     "resourcepacks.ResourcePackManagerMixin",
-    "saves.WorldListWidgetMixin"
+    "saves.FileDownloadMixin",
+    "saves.MinecraftClientMixin",
+    "saves.RealmsUploadScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1
