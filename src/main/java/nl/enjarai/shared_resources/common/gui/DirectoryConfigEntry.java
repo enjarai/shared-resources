@@ -17,6 +17,8 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 
+import static nl.enjarai.shared_resources.common.SharedResources.TEXT_BUILDER;
+
 public class DirectoryConfigEntry extends AbstractConfigListEntry<Path> {
 
     private final AtomicReference<Path> path;
@@ -35,14 +37,14 @@ public class DirectoryConfigEntry extends AbstractConfigListEntry<Path> {
         this.defaultValue = defaultValue;
         this.saveConsumer = saveConsumer;
 
-        pathButton = new ButtonWidget(0, 0, 150, 20, Text.translatable("config.shared_resources.directoryEntry"), button -> {
+        pathButton = new ButtonWidget(0, 0, 150, 20, TEXT_BUILDER.translatable("config.shared_resources.directoryEntry"), button -> {
             String val = TinyFileDialogs.tinyfd_selectFolderDialog("Select directory", path.get().toString());
 
             if (val != null) {
                 path.set(Path.of(val));
             }
         });
-        Text resetButtonKey = Text.translatable("text.cloth-config.reset_value");
+        Text resetButtonKey = TEXT_BUILDER.translatable("text.cloth-config.reset_value");
         resetButton = new ButtonWidget(0, 0, MinecraftClient.getInstance().textRenderer.getWidth(resetButtonKey) + 6, 20, resetButtonKey, (widget) -> {
             path.set(defaultValue);
         });

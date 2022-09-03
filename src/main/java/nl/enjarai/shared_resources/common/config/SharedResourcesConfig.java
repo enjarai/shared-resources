@@ -24,6 +24,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.HashMap;
 
+import static nl.enjarai.shared_resources.common.SharedResources.TEXT_BUILDER;
+
 public class SharedResourcesConfig {
     // Make sure we use the default config location instead of our modified one.
     public static final File CONFIG_FILE = GameResources.CONFIG.getDefaultDirectory().resolve(SharedResources.MODID + ".json").toFile();
@@ -98,27 +100,27 @@ public class SharedResourcesConfig {
 
         var builder = ConfigBuilder.create()
                 .setParentScreen(parent)
-                .setTitle(Text.translatable("config.shared_resources.title"))
+                .setTitle(TEXT_BUILDER.translatable("config.shared_resources.title"))
                 .setSavingRunnable(this::save);
 
         var entryBuilder = builder.entryBuilder();
 
         var generalCategory = builder
-                .getOrCreateCategory(Text.translatable("config.shared_resources.general"))
+                .getOrCreateCategory(TEXT_BUILDER.translatable("config.shared_resources.general"))
                 .addEntry(
                         entryBuilder.startTextDescription(
-                                Text.translatable("config.shared_resources.general.directory")
+                                TEXT_BUILDER.translatable("config.shared_resources.general.directory")
                         ).build()
                 )
                 .addEntry(new DirectoryConfigEntry(
-                        Text.translatable("config.shared_resources.general.directory"),
+                        TEXT_BUILDER.translatable("config.shared_resources.general.directory"),
                         getGlobalDirectory() instanceof RootedGameDirectoryProvider rooted ? rooted.getRoot() : null,
                         Path.of("global_resources"),
                         this::setGlobalDirectory
                 ))
                 .addEntry(
                         entryBuilder.startTextDescription(
-                                Text.translatable("config.shared_resources.general.enabled")
+                                TEXT_BUILDER.translatable("config.shared_resources.general.enabled")
                         ).build()
                 );
 
