@@ -19,16 +19,16 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "nl.enjarai.shared_resources.SharedResources"
+      "nl.enjarai.shared_resources.common.SharedResources"
     ],
     "preLaunch": [
-      "nl.enjarai.shared_resources.SharedResourcesPreLaunch"
+      "nl.enjarai.shared_resources.common.SharedResourcesPreLaunch"
     ],
     "shared-resources": [
-      "nl.enjarai.shared_resources.registry.GameResources"
+        "nl.enjarai.shared_resources.common.registry.GameResources"
     ],
     "modmenu": [
-      "nl.enjarai.shared_resources.compat.modmenu.ModMenuIntegration"
+        "nl.enjarai.shared_resources.common.compat.modmenu.ModMenuIntegration"
     ]
   },
   "mixins": [
@@ -37,5 +37,6 @@
   ],
 
   "depends": {
+    "minecraft": ["1.16.x", "1.18.x", "1.19.x"]
   }
 }
