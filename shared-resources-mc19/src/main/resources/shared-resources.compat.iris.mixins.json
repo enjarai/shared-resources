@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "nl.enjarai.shared_resources.mc19.compat.iris.mixin",
+  "plugin": "nl.enjarai.shared_resources.common.compat.iris.IrisMixinPlugin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+      "IrisMixin",
+      "ShaderpackDirectoryManagerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

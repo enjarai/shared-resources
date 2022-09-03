@@ -1,4 +1,4 @@
-package nl.enjarai.shared_resources.mc18.compat.modmenu;
+package nl.enjarai.shared_resources.common.compat.modmenu;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;

@@ -26,6 +26,10 @@
     "minecraft": "~1.16",
     "cloth-config": ">=4.14.54"
   },
+  "mixins": [
+    "shared-resources.mixins.json",
+    "shared-resources.compat.iris.mixins.json"
+  ],
   "custom": {
     "modmenu": {
       "parent": "shared-resources",

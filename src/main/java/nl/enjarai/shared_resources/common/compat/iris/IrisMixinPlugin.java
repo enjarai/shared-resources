@@ -1,4 +1,4 @@
-package nl.enjarai.shared_resources.mc16.compat.iris;
+package nl.enjarai.shared_resources.common.compat.iris;
 
 import nl.enjarai.shared_resources.common.compat.CompatMixinPlugin;
 

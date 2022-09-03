@@ -1,4 +1,4 @@
-package nl.enjarai.shared_resources.common.compat.iris.mixin;
+package nl.enjarai.shared_resources.mc18.compat.iris.mixin;
 
 import nl.enjarai.shared_resources.common.SharedResources;
 import nl.enjarai.shared_resources.common.api.GameResourceHelper;
@@ -17,7 +17,7 @@ import java.util.stream.Stream;
 @Mixin(targets = "net.coderbot.iris.shaderpack.discovery.ShaderpackDirectoryManager")
 public abstract class ShaderpackDirectoryManagerMixin {
     @Redirect(
-            method = "enumerate()L;",
+            method = "enumerate",
             at = @At(
                     value = "INVOKE",
                     target = "Ljava/nio/file/Files;list(Ljava/nio/file/Path;)Ljava/util/stream/Stream;"

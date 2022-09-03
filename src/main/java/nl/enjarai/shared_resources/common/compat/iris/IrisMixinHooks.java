@@ -1,4 +1,4 @@
-package nl.enjarai.shared_resources.mc16.compat.iris;
+package nl.enjarai.shared_resources.common.compat.iris;
 
 public class IrisMixinHooks {
     public static int fixShaderpackFolders = 0;
