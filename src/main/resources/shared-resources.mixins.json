@@ -6,12 +6,12 @@
   "mixins": [
   ],
   "client": [
-    "options.GameOptionsMixin",
-    "resourcepacks.FileResourcePackProviderAccessor",
-    "resourcepacks.ResourcePackManagerMixin",
-    "saves.FileDownloadMixin",
-    "saves.MinecraftClientMixin",
-    "saves.RealmsUploadScreenMixin"
+      "nl.enjarai.shared_resources.common.mixin.options.GameOptionsMixin",
+      "nl.enjarai.shared_resources.common.mixin.resourcepacks.FileResourcePackProviderAccessor",
+      "nl.enjarai.shared_resources.common.mixin.resourcepacks.ResourcePackManagerMixin",
+      "nl.enjarai.shared_resources.common.mixin.saves.FileDownloadMixin",
+      "nl.enjarai.shared_resources.common.mixin.saves.MinecraftClientMixin",
+      "nl.enjarai.shared_resources.common.mixin.saves.RealmsUploadScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1
