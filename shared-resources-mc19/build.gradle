@@ -7,7 +7,7 @@ dependencies {
 
     modImplementation "com.terraformersmc:modmenu:4.0.6"
     modImplementation "maven.modrinth:iris:1.19.x-v1.2.8"
-    modApi("me.shedaniel.cloth:cloth-config-fabric:8.0.75") {
+    modImplementation("me.shedaniel.cloth:cloth-config-fabric:8.0.75") {
         exclude(group: "net.fabricmc.fabric-api")
     }
 
