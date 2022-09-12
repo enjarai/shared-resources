@@ -22,7 +22,7 @@ public abstract class GameOptionsMixin {
             method = "<init>",
             at = @At(value = "RETURN")
     )
-    private void overwritePath(CallbackInfo ci) {
+    private void shared_resources_overwritePath(CallbackInfo ci) {
         var newPath = GameResourceHelper.getPathFor(GameResources.OPTIONS);
 
         if (newPath != null) {

@@ -26,7 +26,7 @@ public abstract class ResourcePackManagerMixin {
 			method = "<init>(Lnet/minecraft/resource/ResourcePackProfile$Factory;[Lnet/minecraft/resource/ResourcePackProvider;)V",
 			at = @At(value = "RETURN")
 	)
-	private void init(CallbackInfo ci) {
+	private void shared_resources_init(CallbackInfo ci) {
 		providers = new HashSet<>(providers);
 
 		providers.add(new ExternalFileResourcePackProvider(() -> GameResourceHelper.getPathFor(RESOURCEPACKS)));

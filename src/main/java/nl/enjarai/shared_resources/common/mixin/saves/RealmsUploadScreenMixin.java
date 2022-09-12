@@ -12,14 +12,14 @@ import java.io.File;
 @Mixin(RealmsUploadScreen.class)
 public abstract class RealmsUploadScreenMixin {
     @ModifyVariable(
-            method = "upload()V",
+            method = "upload",
             at = @At(
                     value = "INVOKE_ASSIGN",
                     target = "java/io/File.<init>(Ljava/lang/String;Ljava/lang/String;)V"
             ),
             argsOnly = true
     )
-    private File changePath(File original) {
+    private File shared_resources_changePath(File original) {
         var newPath = GameResourceHelper.getPathFor(GameResources.SAVES);
 
         if (newPath != null) {

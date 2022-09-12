@@ -18,7 +18,7 @@ public abstract class MinecraftClientMixin {
                     target = "Ljava/nio/file/Path;resolve(Ljava/lang/String;)Ljava/nio/file/Path;"
             )
     )
-    private Path changePath(Path rootDir, String defaultPath) {
+    private Path shared_resources_changePath(Path rootDir, String defaultPath) {
         var newPath = GameResourceHelper.getPathFor(GameResources.SAVES);
 
         if (newPath != null) {

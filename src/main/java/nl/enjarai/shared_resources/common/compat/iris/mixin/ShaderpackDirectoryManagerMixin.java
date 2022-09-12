@@ -1,4 +1,4 @@
-package nl.enjarai.shared_resources.mc19.compat.iris.mixin;
+package nl.enjarai.shared_resources.common.compat.iris.mixin;
 
 import nl.enjarai.shared_resources.common.SharedResources;
 import nl.enjarai.shared_resources.common.api.GameResourceHelper;
@@ -21,9 +21,10 @@ public abstract class ShaderpackDirectoryManagerMixin {
             at = @At(
                     value = "INVOKE",
                     target = "Ljava/nio/file/Files;list(Ljava/nio/file/Path;)Ljava/util/stream/Stream;"
-            )
+            ),
+            remap = false
     )
-    private Stream<Path> injectShaderpacks(Path originalPath) throws IOException {
+    private Stream<Path> shared_resources_injectShaderpacks(Path originalPath) throws IOException {
         var original = Files.list(originalPath);
 
         var source = GameResourceHelper.getPathFor(GameResources.SHADERPACKS);

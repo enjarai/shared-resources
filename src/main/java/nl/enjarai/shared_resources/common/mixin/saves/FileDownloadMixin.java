@@ -19,7 +19,7 @@ public abstract class FileDownloadMixin {
             ),
             argsOnly = true
     )
-    private File changePath(File original) {
+    private File shared_resources_changePath(File original) {
         var newPath = GameResourceHelper.getPathFor(GameResources.SAVES);
 
         if (newPath != null) {
