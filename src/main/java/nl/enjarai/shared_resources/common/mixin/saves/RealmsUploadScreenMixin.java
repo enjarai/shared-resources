@@ -8,6 +8,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 import java.io.File;
+import java.nio.file.Path;
 
 @Mixin(RealmsUploadScreen.class)
 public abstract class RealmsUploadScreenMixin {
@@ -20,7 +21,7 @@ public abstract class RealmsUploadScreenMixin {
             argsOnly = true
     )
     private File shared_resources_changePath(File original) {
-        var newPath = GameResourceHelper.getPathFor(GameResources.SAVES);
+        Path newPath = GameResourceHelper.getPathFor(GameResources.SAVES);
 
         if (newPath != null) {
             return newPath.toFile();

@@ -4,7 +4,9 @@ import net.minecraft.text.Text;
 import nl.enjarai.shared_resources.common.api.GameResource;
 
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
+@SuppressWarnings("unused")
 public class ResourceFileBuilder {
     private final Path defaultFile;
     private Text displayName;
@@ -27,7 +29,7 @@ public class ResourceFileBuilder {
      * @param defaultFile The file in <code>.minecraft</code> where this resource usually resides.
      */
     public ResourceFileBuilder(String defaultFile) {
-        this(Path.of(defaultFile));
+        this(Paths.get(defaultFile));
     }
 
     /**

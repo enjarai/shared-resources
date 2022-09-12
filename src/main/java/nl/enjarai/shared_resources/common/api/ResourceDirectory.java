@@ -1,13 +1,12 @@
 package nl.enjarai.shared_resources.common.api;
 
-import nl.enjarai.shared_resources.common.api.GameResource;
-
 import java.nio.file.Path;
 
 /**
  * Represents a directory in <code>.minecraft</code> where a certain resource is stored.
  * Should be registered in {@link GameResourceRegistry} and probably stored in a constant for later use.
  */
+@SuppressWarnings("unused")
 public interface ResourceDirectory extends GameResource {
 
     /**

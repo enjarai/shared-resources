@@ -4,7 +4,9 @@ import net.minecraft.text.Text;
 import nl.enjarai.shared_resources.common.api.GameResource;
 
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
+@SuppressWarnings("unused")
 public class ResourceDirectoryBuilder {
     private final Path defaultDirectory;
     private Text displayName;
@@ -28,7 +30,7 @@ public class ResourceDirectoryBuilder {
      * @param defaultDirectory The subdirectory of <code>.minecraft</code> where this resource usually resides.
      */
     public ResourceDirectoryBuilder(String defaultDirectory) {
-        this(Path.of(defaultDirectory));
+        this(Paths.get(defaultDirectory));
     }
 
     /**

@@ -7,6 +7,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 import java.io.File;
 
+@SuppressWarnings("unused")
 @Mixin(FileResourcePackProvider.class)
 public interface FileResourcePackProviderAccessor {
     @Accessor("packsFolder")

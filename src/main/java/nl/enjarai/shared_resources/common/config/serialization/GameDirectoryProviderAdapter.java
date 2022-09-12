@@ -8,16 +8,17 @@ import nl.enjarai.shared_resources.common.util.directory.GameDirectoryProvider;
 import nl.enjarai.shared_resources.common.util.directory.RootedGameDirectoryProvider;
 
 import java.io.IOException;
-import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class GameDirectoryProviderAdapter extends TypeAdapter<GameDirectoryProvider> {
 
     @Override
     public void write(JsonWriter out, GameDirectoryProvider gameDirectoryProvider) throws IOException {
 
-        var value = "";
+        String value = "";
 
-        if (gameDirectoryProvider instanceof RootedGameDirectoryProvider rooted) {
+        if (gameDirectoryProvider instanceof RootedGameDirectoryProvider) {
+            RootedGameDirectoryProvider rooted = (RootedGameDirectoryProvider) gameDirectoryProvider;
             value = rooted.getRoot().toString();
         }
 
@@ -33,12 +34,12 @@ public class GameDirectoryProviderAdapter extends TypeAdapter<GameDirectoryProvi
 
         in.beginObject();
         while (in.hasNext()) {
-            var name = in.nextName();
+            String name = in.nextName();
 
             if (name.equals("root")) {
-                var root = in.nextString();
+                String root = in.nextString();
 
-                result = new RootedGameDirectoryProvider(Path.of(root));
+                result = new RootedGameDirectoryProvider(Paths.get(root));
             } else {
                 in.skipValue();
             }

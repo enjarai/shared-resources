@@ -17,7 +17,7 @@ public class GameResourceHelper {
             return null;
         }
 
-        var path = SharedResourcesConfig.INSTANCE.getGlobalDirectory().getDirectory(resource);
+        Path path = SharedResourcesConfig.INSTANCE.getGlobalDirectory().getDirectory(resource);
 
         // Ensure the path exists.
         if (path != null) {

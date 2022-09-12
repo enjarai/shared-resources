@@ -19,7 +19,7 @@ public abstract class MinecraftClientMixin {
             )
     )
     private Path shared_resources_changePath(Path rootDir, String defaultPath) {
-        var newPath = GameResourceHelper.getPathFor(GameResources.SAVES);
+        Path newPath = GameResourceHelper.getPathFor(GameResources.SAVES);
 
         if (newPath != null) {
             return newPath;

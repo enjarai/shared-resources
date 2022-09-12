@@ -24,7 +24,7 @@ public abstract class IrisMixin {
         if (IrisMixinHooks.fixShaderpackFolders > 0) {
             IrisMixinHooks.fixShaderpackFolders--;
 
-            var source = GameResourceHelper.getPathFor(GameResources.SHADERPACKS);
+            Path source = GameResourceHelper.getPathFor(GameResources.SHADERPACKS);
             if (source != null) {
                 ci.setReturnValue(source);
             }
@@ -37,7 +37,7 @@ public abstract class IrisMixin {
     )
     private static void shared_resources_fixShaderpackDirectory(String name, CallbackInfoReturnable<Boolean> ci) {
 
-        var source = GameResourceHelper.getPathFor(GameResources.SHADERPACKS);
+        Path source = GameResourceHelper.getPathFor(GameResources.SHADERPACKS);
         if (source == null) return;
 
         if (source.resolve(name).toFile().exists()) {

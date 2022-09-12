@@ -6,8 +6,6 @@
     "mixins": [
     ],
     "client": [
-        "FileResourcePackProviderAccessor",
-        "ResourcePackManagerMixin"
     ],
     "injectors": {
         "defaultRequire": 1

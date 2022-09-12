@@ -4,6 +4,7 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import nl.enjarai.shared_resources.common.util.TextBuilder;
 
+@SuppressWarnings("unused")
 public class TextBuilderImpl implements TextBuilder {
     @Override
     public Text translatable(String key) {

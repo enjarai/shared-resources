@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.io.File;
+import java.nio.file.Path;
 
 @Mixin(GameOptions.class)
 public abstract class GameOptionsMixin {
@@ -23,7 +24,7 @@ public abstract class GameOptionsMixin {
             at = @At(value = "RETURN")
     )
     private void shared_resources_overwritePath(CallbackInfo ci) {
-        var newPath = GameResourceHelper.getPathFor(GameResources.OPTIONS);
+        Path newPath = GameResourceHelper.getPathFor(GameResources.OPTIONS);
 
         if (newPath != null) {
             optionsFile = newPath.toFile();

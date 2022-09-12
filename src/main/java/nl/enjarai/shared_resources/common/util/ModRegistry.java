@@ -6,6 +6,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.Iterator;
 
+@SuppressWarnings("UnusedReturnValue")
 public class ModRegistry<T> {
     private final HashMap<Identifier, T> entries = new HashMap<>();
 

@@ -3,8 +3,10 @@ package nl.enjarai.shared_resources.common.config;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
+import me.shedaniel.clothconfig2.api.ConfigCategory;
+import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
+import me.shedaniel.clothconfig2.gui.entries.BooleanListEntry;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import nl.enjarai.shared_resources.common.SharedResources;
 import nl.enjarai.shared_resources.common.api.GameResource;
@@ -21,11 +23,15 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import static nl.enjarai.shared_resources.common.SharedResources.TEXT_BUILDER;
 
+@SuppressWarnings("unused")
 public class SharedResourcesConfig {
     // Make sure we use the default config location instead of our modified one.
     public static final File CONFIG_FILE = GameResources.CONFIG.getDefaultDirectory().resolve(SharedResources.MODID + ".json").toFile();
@@ -41,10 +47,10 @@ public class SharedResourcesConfig {
     static {
         INSTANCE = loadConfigFile(CONFIG_FILE);
 
-        var allDirs = GameResourceRegistry.REGISTRY.iterator();
+        Iterator<GameResource> allDirs = GameResourceRegistry.REGISTRY.iterator();
         while (allDirs.hasNext()) {
-            var dir = allDirs.next();
-            var id = dir.getId();
+            GameResource dir = allDirs.next();
+            Identifier id = dir.getId();
 
             if (!INSTANCE.enabled.containsKey(id)) {
                 INSTANCE.setEnabled(id, dir.isDefaultEnabled());
@@ -54,7 +60,7 @@ public class SharedResourcesConfig {
         INSTANCE.save();
     }
 
-    private GameDirectoryProvider globalDirectory = new RootedGameDirectoryProvider(Path.of("global_resources"));
+    private GameDirectoryProvider globalDirectory = new RootedGameDirectoryProvider(Paths.get("global_resources"));
     private final HashMap<Identifier, Boolean> enabled = new HashMap<>();
 
 
@@ -70,7 +76,7 @@ public class SharedResourcesConfig {
         }
 
         GameResourceRegistry.REGISTRY.iterator().forEachRemaining(directory -> {
-            var dirPath = GameResourceHelper.getPathFor(directory);
+            Path dirPath = GameResourceHelper.getPathFor(directory);
             directory.getUpdateCallback().onUpdate(dirPath);
         });
     }
@@ -98,14 +104,19 @@ public class SharedResourcesConfig {
 
     public Screen getScreen(Screen parent) {
 
-        var builder = ConfigBuilder.create()
+        ConfigBuilder builder = ConfigBuilder.create()
                 .setParentScreen(parent)
                 .setTitle(TEXT_BUILDER.translatable("config.shared_resources.title"))
                 .setSavingRunnable(this::save);
 
-        var entryBuilder = builder.entryBuilder();
+        ConfigEntryBuilder entryBuilder = builder.entryBuilder();
 
-        var generalCategory = builder
+        Path globalDir = null;
+        if (this.getGlobalDirectory() instanceof RootedGameDirectoryProvider) {
+            globalDir = ((RootedGameDirectoryProvider) this.getGlobalDirectory()).getRoot();
+        }
+
+        ConfigCategory generalCategory = builder
                 .getOrCreateCategory(TEXT_BUILDER.translatable("config.shared_resources.general"))
                 .addEntry(
                         entryBuilder.startTextDescription(
@@ -114,8 +125,8 @@ public class SharedResourcesConfig {
                 )
                 .addEntry(new DirectoryConfigEntry(
                         TEXT_BUILDER.translatable("config.shared_resources.general.directory"),
-                        getGlobalDirectory() instanceof RootedGameDirectoryProvider rooted ? rooted.getRoot() : null,
-                        Path.of("global_resources"),
+                        globalDir,
+                        Paths.get("global_resources"),
                         this::setGlobalDirectory
                 ))
                 .addEntry(
@@ -125,10 +136,10 @@ public class SharedResourcesConfig {
                 );
 
         enabled.forEach((id, enabled) -> {
-            var directory = GameResourceRegistry.REGISTRY.get(id);
+            GameResource directory = GameResourceRegistry.REGISTRY.get(id);
             if (directory == null) return;
 
-            var entry = entryBuilder.startBooleanToggle(directory.getDisplayName(), enabled)
+            BooleanListEntry entry = entryBuilder.startBooleanToggle(directory.getDisplayName(), enabled)
                     .setDefaultValue(directory.isDefaultEnabled())
                     .setSaveConsumer(newEnabled -> {
                         setEnabled(id, newEnabled);
@@ -159,7 +170,7 @@ public class SharedResourcesConfig {
         if (file.exists()) {
             // An existing config is present, we should use its values
             try (BufferedReader fileReader = new BufferedReader(
-                    new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8)
+                    new InputStreamReader(Files.newInputStream(file.toPath()), StandardCharsets.UTF_8)
             )) {
                 // Parses the config file and puts the values into config object
                 config = GSON.fromJson(fileReader, SharedResourcesConfig.class);
@@ -183,7 +194,7 @@ public class SharedResourcesConfig {
      * @param file file to save config to
      */
     private void saveConfigFile(File file) {
-        try (Writer writer = new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8)) {
+        try (Writer writer = new OutputStreamWriter(Files.newOutputStream(file.toPath()), StandardCharsets.UTF_8)) {
             GSON.toJson(this, writer);
         } catch (IOException e) {
             e.printStackTrace();

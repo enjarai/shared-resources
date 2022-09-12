@@ -9,6 +9,9 @@ import nl.enjarai.shared_resources.common.api.SharedResourcesEntrypoint;
 import nl.enjarai.shared_resources.common.registry.GameResources;
 import nl.enjarai.shared_resources.common.util.SRConfigEntryPoint;
 
+import java.lang.reflect.Field;
+import java.nio.file.Path;
+
 public class SharedResourcesPreLaunch implements PreLaunchEntrypoint {
     @Override
     public void onPreLaunch() {
@@ -19,23 +22,21 @@ public class SharedResourcesPreLaunch implements PreLaunchEntrypoint {
             throw new RuntimeException("Shared Resources didn't load correctly!");
         }
 
-        FabricLoader.getInstance().getEntrypoints("shared-resources-config", SRConfigEntryPoint.class).forEach(it -> {
-                    SharedResources.TEXT_BUILDER = it.getTextBuilder();
-                });
+        FabricLoader.getInstance().getEntrypoints("shared-resources-config", SRConfigEntryPoint.class).forEach(it -> SharedResources.TEXT_BUILDER = it.getTextBuilder());
 
         // Load all resource directories.
         FabricLoader.getInstance().getEntrypoints("shared-resources", SharedResourcesEntrypoint.class).forEach(
                 entrypoint -> entrypoint.registerResources(GameResourceRegistry.REGISTRY));
 
         // Load config directory override if enabled.
-        var configDir = GameResourceHelper.getPathFor(GameResources.CONFIG);
+        Path configDir = GameResourceHelper.getPathFor(GameResources.CONFIG);
 
         if (configDir != null) {
 
             SharedResources.LOGGER.info("Config directory override enabled, changing fabric config directory to: {}. *proceed with caution*", configDir);
 
             try {
-                var field = FabricLoaderImpl.class.getDeclaredField("configDir");
+                Field field = FabricLoaderImpl.class.getDeclaredField("configDir");
                 field.setAccessible(true);
                 field.set(FabricLoader.getInstance(), configDir);
 

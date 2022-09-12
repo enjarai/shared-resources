@@ -25,15 +25,15 @@ public abstract class ShaderpackDirectoryManagerMixin {
             remap = false
     )
     private Stream<Path> shared_resources_injectShaderpacks(Path originalPath) throws IOException {
-        var original = Files.list(originalPath);
+        Stream<Path> original = Files.list(originalPath);
 
-        var source = GameResourceHelper.getPathFor(GameResources.SHADERPACKS);
+        Path source = GameResourceHelper.getPathFor(GameResources.SHADERPACKS);
         if (source == null) return original;
 
 
         try {
 
-            var extraPaths = Files.list(source);
+            Stream<Path> extraPaths = Files.list(source);
             return Stream.concat(original, extraPaths);
 
         } catch (IOException e) {

@@ -1,7 +1,6 @@
 package nl.enjarai.shared_resources.common.registry;
 
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.text.Text;
 import nl.enjarai.shared_resources.common.SharedResources;
 import nl.enjarai.shared_resources.common.api.*;
 

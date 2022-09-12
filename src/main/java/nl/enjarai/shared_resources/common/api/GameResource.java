@@ -11,6 +11,7 @@ import java.util.Objects;
  * An abstract game resource.
  * You'll probably want to use {@link ResourceDirectory} or {@link ResourceFile} instead.
  */
+@SuppressWarnings("unused")
 public interface GameResource {
     @Nullable
     default Identifier getId() {
@@ -26,7 +27,7 @@ public interface GameResource {
      * The display name of the resource, used in the config menu.
      */
     default Text getDisplayName() {
-        var id = getId();
+        Identifier id = getId();
         Objects.requireNonNull(id, "Resource should be registered.");
 
         return Text.of(id.toString());

@@ -12,6 +12,7 @@ import net.minecraft.text.Text;
 import org.lwjgl.util.tinyfd.TinyFileDialogs;
 
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
@@ -19,6 +20,7 @@ import java.util.function.Consumer;
 
 import static nl.enjarai.shared_resources.common.SharedResources.TEXT_BUILDER;
 
+@SuppressWarnings("unused")
 public class DirectoryConfigEntry extends AbstractConfigListEntry<Path> {
 
     private final AtomicReference<Path> path;
@@ -41,13 +43,11 @@ public class DirectoryConfigEntry extends AbstractConfigListEntry<Path> {
             String val = TinyFileDialogs.tinyfd_selectFolderDialog("Select directory", path.get().toString());
 
             if (val != null) {
-                path.set(Path.of(val));
+                path.set(Paths.get(val));
             }
         });
         Text resetButtonKey = TEXT_BUILDER.translatable("text.cloth-config.reset_value");
-        resetButton = new ButtonWidget(0, 0, MinecraftClient.getInstance().textRenderer.getWidth(resetButtonKey) + 6, 20, resetButtonKey, (widget) -> {
-            path.set(defaultValue);
-        });
+        resetButton = new ButtonWidget(0, 0, MinecraftClient.getInstance().textRenderer.getWidth(resetButtonKey) + 6, 20, resetButtonKey, (widget) -> path.set(defaultValue));
         widgets = Lists.newArrayList(pathButton, resetButton);
     }
 
