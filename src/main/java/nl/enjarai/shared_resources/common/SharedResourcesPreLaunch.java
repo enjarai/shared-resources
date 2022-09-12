@@ -7,10 +7,22 @@ import nl.enjarai.shared_resources.common.api.GameResourceHelper;
 import nl.enjarai.shared_resources.common.api.GameResourceRegistry;
 import nl.enjarai.shared_resources.common.api.SharedResourcesEntrypoint;
 import nl.enjarai.shared_resources.common.registry.GameResources;
+import nl.enjarai.shared_resources.common.util.SRConfigEntryPoint;
 
 public class SharedResourcesPreLaunch implements PreLaunchEntrypoint {
     @Override
     public void onPreLaunch() {
+        // Configure Mod based on Version
+        if (FabricLoader.getInstance().getAllMods().stream().noneMatch(container -> container
+                        .getMetadata()
+                        .getId().startsWith("shared-resources-mc"))) {
+            throw new RuntimeException("Shared Resources didn't load correctly!");
+        }
+
+        FabricLoader.getInstance().getEntrypoints("shared-resources-config", SRConfigEntryPoint.class).forEach(it -> {
+                    SharedResources.TEXT_BUILDER = it.getTextBuilder();
+                });
+
         // Load all resource directories.
         FabricLoader.getInstance().getEntrypoints("shared-resources", SharedResourcesEntrypoint.class).forEach(
                 entrypoint -> entrypoint.registerResources(GameResourceRegistry.REGISTRY));
