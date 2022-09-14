@@ -19,9 +19,9 @@ public class ExternalFileResourcePackProvider extends FileResourcePackProvider {
 
     @Override
     public void register(Consumer<ResourcePackProfile> profileAdder, ResourcePackProfile.Factory factory) {
-        var thiz = (FileResourcePackProviderAccessor) this;
+        FileResourcePackProviderAccessor thiz = (FileResourcePackProviderAccessor) this;
 
-        var path = pathSupplier.get();
+        Path path = pathSupplier.get();
         if (path == null) return;
         thiz.setPacksFolder(path.toFile());
 

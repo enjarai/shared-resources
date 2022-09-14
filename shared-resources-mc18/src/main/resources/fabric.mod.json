@@ -23,8 +23,7 @@
     ]
   },
   "depends": {
-    "minecraft": "1.18.x",
-    "cloth-config": "*"
+    "minecraft": "1.18.x"
   },
   "mixins": [
     "shared-resources18.mixins.json"
