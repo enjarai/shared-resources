@@ -73,12 +73,8 @@ dependencies {
         exclude(group: "net.fabricmc.fabric-api")
     }
 
-    // JiJ every sub project
-//    subprojects.each {
-//        include(project("${it.name}:"))
-//    }
     subprojects.forEach((project)->{
-        runtimeOnly(include(project)){
+        include(project){
             transitive = false
         }
     })
