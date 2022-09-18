@@ -1,17 +1,17 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "nl.enjarai.shared_resources.mixin",
+  "package": "nl.enjarai.shared_resources.common.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
   ],
   "client": [
-    "options.GameOptionsMixin",
-    "resourcepacks.FileResourcePackProviderAccessor",
-    "resourcepacks.ResourcePackManagerMixin",
-    "saves.FileDownloadMixin",
-    "saves.MinecraftClientMixin",
-    "saves.RealmsUploadScreenMixin"
+      "options.GameOptionsMixin",
+      "resourcepacks.FileResourcePackProviderAccessor",
+      "resourcepacks.ResourcePackManagerMixin",
+      "saves.FileDownloadMixin",
+      "saves.MinecraftClientMixin",
+      "saves.RealmsUploadScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1
