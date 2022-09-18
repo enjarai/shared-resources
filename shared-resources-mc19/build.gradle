@@ -17,6 +17,6 @@ dependencies {
     modImplementation(fabricApi.module("fabric-rendering-data-attachment-v1", project.fabric_version))
     modImplementation(fabricApi.module("fabric-resource-loader-v0", project.fabric_version))
 
-    modRuntimeOnly "maven.modrinth:sodium:mc1.19.2-0.4.4"
-    modRuntimeOnly "maven.modrinth:lazydfu:0.1.3"
+    //modImplementation "maven.modrinth:sodium:mc1.19.2-0.4.4"
+    modImplementation "maven.modrinth:lazydfu:0.1.3"
 }

@@ -1,5 +1,6 @@
 archives_base_name = "shared-resources-1.16"
 version = "1.0.0"
+fabric_version = "0.42.0+1.16"
 
 dependencies {
     minecraft "com.mojang:minecraft:1.16.5"
@@ -11,7 +12,12 @@ dependencies {
         exclude(group: "net.fabricmc.fabric-api")
     }
 
-    modImplementation "maven.modrinth:sodium:mc1.16.5-0.2.0"
+    modImplementation(fabricApi.module("fabric-api-base", project.fabric_version))
+    modImplementation(fabricApi.module("fabric-rendering-fluids-v1", project.fabric_version))
+    modImplementation(fabricApi.module("fabric-rendering-data-attachment-v1", project.fabric_version))
+    modImplementation(fabricApi.module("fabric-resource-loader-v0", project.fabric_version))
+
+    //modImplementation "maven.modrinth:sodium:mc1.16.5-0.2.0"
     modImplementation "maven.modrinth:lazydfu:0.1.2"
 
 }

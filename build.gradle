@@ -59,10 +59,6 @@ allprojects {
     }
 }
 
-subprojects.each {
-    remapJar.dependsOn("${it.path}:remapJar")
-}
-
 dependencies {
     // dummy versions
     minecraft "com.mojang:minecraft:1.19.2"
@@ -84,7 +80,8 @@ dependencies {
 subprojects {
     dependencies {
         // include the root project because that's where our common code is
-        implementation (rootProject) {
+
+        modImplementation(rootProject) {
             // having 2 floaders from the sub project and root project causes issues so we get rid of one.
             exclude group: "net.fabricmc", module: "fabric-loader"
         }
