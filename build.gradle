@@ -81,7 +81,7 @@ subprojects {
     dependencies {
         // include the root project because that's where our common code is
 
-        modImplementation(rootProject) {
+        implementation(project(path: ":", configuration: "namedElements")) {
             // having 2 floaders from the sub project and root project causes issues so we get rid of one.
             exclude group: "net.fabricmc", module: "fabric-loader"
         }
