@@ -148,7 +148,7 @@ public class SharedResourcesConfig {
 
             List<Text> description = new ArrayList<>(directory.getDescription());
             if (directory.isExperimental()) {
-                if (description.size() > 0) description.add(Text.of(""));
+                if (description.size() > 0) description.add(Text.of(" "));
                 description.add(TEXT_BUILDER.translatable("config.shared_resources.experimental[0]"));
                 description.add(TEXT_BUILDER.translatable("config.shared_resources.experimental[1]"));
             }
