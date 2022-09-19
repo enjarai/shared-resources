@@ -1,4 +1,4 @@
-package nl.enjarai.shared_resources.common.api;
+package nl.enjarai.shared_resources.api;
 
 import nl.enjarai.shared_resources.common.config.SharedResourcesConfig;
 import org.jetbrains.annotations.Nullable;

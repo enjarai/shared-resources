@@ -6,13 +6,14 @@ import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
 import me.shedaniel.clothconfig2.gui.entries.BooleanListEntry;
-import net.minecraft.client.MinecraftClient;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import nl.enjarai.shared_resources.api.GameResource;
+import nl.enjarai.shared_resources.api.GameResourceHelper;
+import nl.enjarai.shared_resources.api.GameResourceRegistry;
 import nl.enjarai.shared_resources.common.SharedResources;
-import nl.enjarai.shared_resources.common.api.GameResource;
-import nl.enjarai.shared_resources.common.api.GameResourceHelper;
-import nl.enjarai.shared_resources.common.api.GameResourceRegistry;
 import nl.enjarai.shared_resources.common.config.serialization.GameDirectoryProviderAdapter;
 import nl.enjarai.shared_resources.common.config.serialization.IdentifierAdapter;
 import nl.enjarai.shared_resources.common.gui.DirectoryConfigEntry;
@@ -27,8 +28,10 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 import static nl.enjarai.shared_resources.common.SharedResources.TEXT_BUILDER;
 
@@ -36,7 +39,7 @@ import static nl.enjarai.shared_resources.common.SharedResources.TEXT_BUILDER;
 public class SharedResourcesConfig {
     // Make sure we use the default config location instead of our modified one.
     public static final File CONFIG_FILE =
-            MinecraftClient.getInstance().runDirectory.toPath()
+            FabricLoader.getInstance().getGameDir()
                     .resolve(GameResources.CONFIG.getDefaultDirectory()
                             .resolve(SharedResources.MODID + ".json")).toFile();
     private static final Gson GSON = new GsonBuilder()
@@ -143,12 +146,19 @@ public class SharedResourcesConfig {
             GameResource directory = GameResourceRegistry.REGISTRY.get(id);
             if (directory == null) return;
 
+            List<Text> description = new ArrayList<>(directory.getDescription());
+            if (directory.isExperimental()) {
+                description.add(TEXT_BUILDER.translatable("config.shared_resources.experimental[0]"));
+                description.add(TEXT_BUILDER.translatable("config.shared_resources.experimental[1]"));
+            }
+
             BooleanListEntry entry = entryBuilder.startBooleanToggle(directory.getDisplayName(), enabled)
                     .setDefaultValue(directory.isDefaultEnabled())
                     .setSaveConsumer(newEnabled -> {
                         setEnabled(id, newEnabled);
                         directory.getUpdateCallback().onUpdate(GameResourceHelper.getPathFor(directory));
                     })
+                    .setTooltip(description.toArray(new Text[0]))
                     .build();
             entry.setRequiresRestart(directory.isRequiresRestart());
             generalCategory.addEntry(entry);

@@ -3,9 +3,9 @@ package nl.enjarai.shared_resources.common;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.entrypoint.PreLaunchEntrypoint;
 import net.fabricmc.loader.impl.FabricLoaderImpl;
-import nl.enjarai.shared_resources.common.api.GameResourceHelper;
-import nl.enjarai.shared_resources.common.api.GameResourceRegistry;
-import nl.enjarai.shared_resources.common.api.SharedResourcesEntrypoint;
+import nl.enjarai.shared_resources.api.GameResourceHelper;
+import nl.enjarai.shared_resources.api.GameResourceRegistry;
+import nl.enjarai.shared_resources.api.SharedResourcesEntrypoint;
 import nl.enjarai.shared_resources.common.registry.GameResources;
 import nl.enjarai.shared_resources.common.util.SRConfigEntryPoint;
 
@@ -15,13 +15,14 @@ import java.nio.file.Path;
 public class SharedResourcesPreLaunch implements PreLaunchEntrypoint {
     @Override
     public void onPreLaunch() {
-        // Configure Mod based on Version
+        // Make sure one of our version-specific submods is loaded
         if (FabricLoader.getInstance().getAllMods().stream().noneMatch(container -> container
                         .getMetadata()
                         .getId().startsWith("shared-resources-mc"))) {
-            throw new RuntimeException("Shared Resources didn't load correctly!");
+            throw new RuntimeException("Shared Resources didn't load correctly! You're probably using an unsupported version of Minecraft.");
         }
 
+        // Load the version specific text builder
         FabricLoader.getInstance().getEntrypoints("shared-resources-config", SRConfigEntryPoint.class).forEach(it -> SharedResources.TEXT_BUILDER = it.getTextBuilder());
 
         // Load all resource directories.

@@ -1,8 +1,9 @@
 package nl.enjarai.shared_resources.common.mixin.resourcepacks;
 
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.resource.ResourcePackManager;
 import net.minecraft.resource.ResourcePackProvider;
-import nl.enjarai.shared_resources.common.api.GameResourceHelper;
+import nl.enjarai.shared_resources.api.GameResourceHelper;
 import nl.enjarai.shared_resources.common.util.ExternalFileResourcePackProvider;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -26,9 +27,13 @@ public abstract class ResourcePackManagerMixin {
 			method = "<init>(Lnet/minecraft/resource/ResourcePackProfile$Factory;[Lnet/minecraft/resource/ResourcePackProvider;)V",
 			at = @At(value = "RETURN")
 	)
-	private void shared_resources_init(CallbackInfo ci) {
-		providers = new HashSet<>(providers);
+	private void shared_resources$initResourcePackProvider(CallbackInfo ci) {
+		// Only add our own provider if this is the manager of client
+		// resource packs, we wouldn't want to mess with datapacks
+		if (providers.stream().anyMatch(provider -> provider == MinecraftClient.getInstance().getResourcePackProvider())) {
 
-		providers.add(new ExternalFileResourcePackProvider(() -> GameResourceHelper.getPathFor(RESOURCEPACKS)));
+			providers = new HashSet<>(providers);
+			providers.add(new ExternalFileResourcePackProvider(() -> GameResourceHelper.getPathFor(RESOURCEPACKS)));
+		}
 	}
 }

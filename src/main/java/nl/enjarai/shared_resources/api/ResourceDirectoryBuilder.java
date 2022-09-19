@@ -1,15 +1,19 @@
-package nl.enjarai.shared_resources.common.api;
+package nl.enjarai.shared_resources.api;
 
 import net.minecraft.text.Text;
-import nl.enjarai.shared_resources.common.api.GameResource;
+import org.jetbrains.annotations.Nullable;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 @SuppressWarnings("unused")
 public class ResourceDirectoryBuilder {
     private final Path defaultDirectory;
     private Text displayName;
+    private List<Text> description = Collections.emptyList();
     private boolean requiresRestart = false;
     private boolean overridesDefaultDirectory = false;
     private boolean defaultEnabled = true;
@@ -38,6 +42,14 @@ public class ResourceDirectoryBuilder {
      */
     public ResourceDirectoryBuilder setDisplayName(Text displayName) {
         this.displayName = displayName;
+        return this;
+    }
+
+    /**
+     * Set the description of this resource directory, with each Text element representing a new line.
+     */
+    public ResourceDirectoryBuilder setDescription(Text... description) {
+        this.description = Arrays.asList(description);
         return this;
     }
 
@@ -94,6 +106,11 @@ public class ResourceDirectoryBuilder {
                 if (displayName == null) return ResourceDirectory.super.getDisplayName();
 
                 return displayName;
+            }
+
+            @Override
+            public List<Text> getDescription() {
+                return description;
             }
 
             @Override

@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "Shared Resources for 1.19",
-  "description": "#TODO",
+  "description": "Version-specific code for Minecraft 1.19",
   "authors": [
     "enjarai"
   ],

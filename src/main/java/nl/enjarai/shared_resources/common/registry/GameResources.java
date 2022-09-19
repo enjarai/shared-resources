@@ -1,8 +1,8 @@
 package nl.enjarai.shared_resources.common.registry;
 
 import net.fabricmc.loader.api.FabricLoader;
+import nl.enjarai.shared_resources.api.*;
 import nl.enjarai.shared_resources.common.SharedResources;
-import nl.enjarai.shared_resources.common.api.*;
 
 import static nl.enjarai.shared_resources.common.SharedResources.TEXT_BUILDER;
 
@@ -17,6 +17,10 @@ public class GameResources implements SharedResourcesEntrypoint {
             .build();
     public static final ResourceDirectory CONFIG = new ResourceDirectoryBuilder("config")
             .setDisplayName(TEXT_BUILDER.translatable("shared_resources.directory.config"))
+            .setDescription(
+                    TEXT_BUILDER.translatable("shared_resources.directory.config.description[0]"),
+                    TEXT_BUILDER.translatable("shared_resources.directory.config.description[1]")
+            )
             .requiresRestart()
             .overridesDefaultDirectory()
             .defaultEnabled(false)
@@ -28,6 +32,7 @@ public class GameResources implements SharedResourcesEntrypoint {
 
     public static final ResourceFile OPTIONS = new ResourceFileBuilder("options.txt")
             .setDisplayName(TEXT_BUILDER.translatable("shared_resources.file.options"))
+            .setDescription(TEXT_BUILDER.translatable("shared_resources.file.options.description"))
             .requiresRestart()
             .build();
 

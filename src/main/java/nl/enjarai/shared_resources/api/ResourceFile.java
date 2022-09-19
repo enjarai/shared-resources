@@ -1,6 +1,4 @@
-package nl.enjarai.shared_resources.common.api;
-
-import nl.enjarai.shared_resources.common.api.GameResource;
+package nl.enjarai.shared_resources.api;
 
 import java.nio.file.Path;
 

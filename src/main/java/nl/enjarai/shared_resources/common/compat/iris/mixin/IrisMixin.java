@@ -1,6 +1,6 @@
 package nl.enjarai.shared_resources.common.compat.iris.mixin;
 
-import nl.enjarai.shared_resources.common.api.GameResourceHelper;
+import nl.enjarai.shared_resources.api.GameResourceHelper;
 import nl.enjarai.shared_resources.common.compat.iris.IrisMixinHooks;
 import nl.enjarai.shared_resources.common.registry.GameResources;
 import org.spongepowered.asm.mixin.Mixin;
@@ -19,7 +19,7 @@ public abstract class IrisMixin {
             at = @At(value = "HEAD"),
             cancellable = true
     )
-    private static void shared_resources_injectShaderpacksDirectory(CallbackInfoReturnable<Path> ci) {
+    private static void shared_resources$injectShaderpacksDirectory(CallbackInfoReturnable<Path> ci) {
 
         if (IrisMixinHooks.fixShaderpackFolders > 0) {
             IrisMixinHooks.fixShaderpackFolders--;
@@ -35,7 +35,7 @@ public abstract class IrisMixin {
             method = "loadExternalShaderpack(Ljava/lang/String;)Z",
             at = @At(value = "HEAD")
     )
-    private static void shared_resources_fixShaderpackDirectory(String name, CallbackInfoReturnable<Boolean> ci) {
+    private static void shared_resources$fixShaderpackDirectory(String name, CallbackInfoReturnable<Boolean> ci) {
 
         Path source = GameResourceHelper.getPathFor(GameResources.SHADERPACKS);
         if (source == null) return;

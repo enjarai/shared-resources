@@ -1,7 +1,7 @@
 package nl.enjarai.shared_resources.common.mixin.saves;
 
 import net.minecraft.client.realms.FileDownload;
-import nl.enjarai.shared_resources.common.api.GameResourceHelper;
+import nl.enjarai.shared_resources.api.GameResourceHelper;
 import nl.enjarai.shared_resources.common.registry.GameResources;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

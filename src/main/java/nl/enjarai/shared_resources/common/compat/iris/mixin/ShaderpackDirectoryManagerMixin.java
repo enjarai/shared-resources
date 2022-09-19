@@ -1,7 +1,7 @@
 package nl.enjarai.shared_resources.common.compat.iris.mixin;
 
+import nl.enjarai.shared_resources.api.GameResourceHelper;
 import nl.enjarai.shared_resources.common.SharedResources;
-import nl.enjarai.shared_resources.common.api.GameResourceHelper;
 import nl.enjarai.shared_resources.common.registry.GameResources;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
@@ -24,7 +24,7 @@ public abstract class ShaderpackDirectoryManagerMixin {
             ),
             remap = false
     )
-    private Stream<Path> shared_resources_injectShaderpacks(Path originalPath) throws IOException {
+    private Stream<Path> shared_resources$injectShaderpacks(Path originalPath) throws IOException {
         Stream<Path> original = Files.list(originalPath);
 
         Path source = GameResourceHelper.getPathFor(GameResources.SHADERPACKS);

@@ -1,4 +1,4 @@
-package nl.enjarai.shared_resources.common.api;
+package nl.enjarai.shared_resources.api;
 
 /**
  * Entrypoint interface for the Shared Resources mod.

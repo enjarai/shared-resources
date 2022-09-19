@@ -1,10 +1,11 @@
-package nl.enjarai.shared_resources.common.api;
+package nl.enjarai.shared_resources.api;
 
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -32,6 +33,11 @@ public interface GameResource {
 
         return Text.of(id.toString());
     }
+
+    /**
+     * The description of this resource, with each Text element representing a new line.
+     */
+    List<Text> getDescription();
 
     /**
      * Whether this resource requires a restart to be changed.
