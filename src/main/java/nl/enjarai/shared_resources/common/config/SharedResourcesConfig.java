@@ -6,6 +6,7 @@ import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
 import me.shedaniel.clothconfig2.gui.entries.BooleanListEntry;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.util.Identifier;
 import nl.enjarai.shared_resources.common.SharedResources;
@@ -34,7 +35,10 @@ import static nl.enjarai.shared_resources.common.SharedResources.TEXT_BUILDER;
 @SuppressWarnings("unused")
 public class SharedResourcesConfig {
     // Make sure we use the default config location instead of our modified one.
-    public static final File CONFIG_FILE = GameResources.CONFIG.getDefaultDirectory().resolve(SharedResources.MODID + ".json").toFile();
+    public static final File CONFIG_FILE =
+            MinecraftClient.getInstance().runDirectory.toPath()
+                    .resolve(GameResources.CONFIG.getDefaultDirectory()
+                            .resolve(SharedResources.MODID + ".json")).toFile();
     private static final Gson GSON = new GsonBuilder()
             .registerTypeAdapter(Identifier.class, new IdentifierAdapter())
             .registerTypeAdapter(GameDirectoryProvider.class, new GameDirectoryProviderAdapter())
