@@ -7,8 +7,8 @@
   "shared_resources.directory.resourcepacks": "Resource packs",
   "shared_resources.directory.saves": "Saves",
   "shared_resources.directory.config": "Configs",
-  "shared_resources.directory.config.description[0]": "Global configuration files for most mods excluding",
-  "shared_resources.directory.config.description[1]": "this one. (everything located in .minecraft/config)",
+  "shared_resources.directory.config.description[0]": "Global configuration files for most mods excluding this one.",
+  "shared_resources.directory.config.description[1]": "(everything located in .minecraft/config)",
   "shared_resources.directory.shaderpacks": "Iris shader packs",
   "shared_resources.file.options": "Options",
   "shared_resources.file.options.description": "The vanilla options.txt file."
