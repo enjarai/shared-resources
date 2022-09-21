@@ -3,15 +3,20 @@ package nl.enjarai.shared_resources.common;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.entrypoint.PreLaunchEntrypoint;
 import net.fabricmc.loader.impl.FabricLoaderImpl;
+import net.minecraft.util.Identifier;
+import nl.enjarai.shared_resources.api.GameResource;
 import nl.enjarai.shared_resources.api.GameResourceHelper;
 import nl.enjarai.shared_resources.api.GameResourceRegistry;
 import nl.enjarai.shared_resources.api.SharedResourcesEntrypoint;
 import nl.enjarai.shared_resources.common.config.SharedResourcesConfig;
 import nl.enjarai.shared_resources.common.registry.GameResources;
-import nl.enjarai.shared_resources.common.util.SRConfigEntryPoint;
+import nl.enjarai.shared_resources.versioned.Versioned;
 
 import java.lang.reflect.Field;
 import java.nio.file.Path;
+import java.util.Iterator;
+
+import static nl.enjarai.shared_resources.common.config.SharedResourcesConfig.CONFIG;
 
 public class SharedResourcesPreLaunch implements PreLaunchEntrypoint {
     @Override
@@ -23,14 +28,16 @@ public class SharedResourcesPreLaunch implements PreLaunchEntrypoint {
             throw new RuntimeException("Shared Resources didn't load correctly! You're probably using an unsupported version of Minecraft.");
         }
 
-        GameResourceHelper.setConfigSource(SharedResourcesConfig.INSTANCE);
+        // Load the versioned objects
+        Versioned.load();
 
-        // Load the version specific text builder
-        FabricLoader.getInstance().getEntrypoints("shared-resources-config", SRConfigEntryPoint.class).forEach(it -> SharedResources.TEXT_BUILDER = it.getTextBuilder());
+        // Prepare the API
+        GameResourceHelper.setConfigSource(CONFIG);
 
         // Load all resource directories.
         FabricLoader.getInstance().getEntrypoints("shared-resources", SharedResourcesEntrypoint.class).forEach(
                 entrypoint -> entrypoint.registerResources(GameResourceRegistry.REGISTRY));
+        CONFIG.initEnabledResources();
 
         // Load config directory override if enabled.
         Path configDir = GameResourceHelper.getPathFor(GameResources.CONFIG);

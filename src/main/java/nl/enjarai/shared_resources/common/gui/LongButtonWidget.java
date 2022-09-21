@@ -8,6 +8,7 @@ import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.MathHelper;
+import nl.enjarai.shared_resources.versioned.Versioned;
 
 public class LongButtonWidget extends ButtonWidget {
     public LongButtonWidget(int x, int y, int width, int height, Text message, PressAction onPress) {
@@ -18,9 +19,8 @@ public class LongButtonWidget extends ButtonWidget {
     public void renderButton(MatrixStack matrices, int mouseX, int mouseY, float delta) {
         MinecraftClient minecraftClient = MinecraftClient.getInstance();
         TextRenderer textRenderer = minecraftClient.textRenderer;
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderTexture(0, WIDGETS_TEXTURE);
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, alpha);
+        Versioned.RENDER_SYSTEM.setShaderTexture(WIDGETS_TEXTURE);
+        Versioned.RENDER_SYSTEM.setShaderColor(1.0F, 1.0F, 1.0F, alpha);
         int yImage = getYImage(isHovered());
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();

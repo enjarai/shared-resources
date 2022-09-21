@@ -1,13 +1,20 @@
 package nl.enjarai.shared_resources.mc18;
 
-import nl.enjarai.shared_resources.common.util.SRConfigEntryPoint;
-import nl.enjarai.shared_resources.common.util.TextBuilder;
-import nl.enjarai.shared_resources.mc18.util.TextBuilderImpl;
+import nl.enjarai.shared_resources.mc18.impl.RenderSystemProxyImpl;
+import nl.enjarai.shared_resources.versioned.RenderSystemProxy;
+import nl.enjarai.shared_resources.versioned.SRVersionedEntryPoint;
+import nl.enjarai.shared_resources.versioned.TextBuilder;
+import nl.enjarai.shared_resources.mc18.impl.TextBuilderImpl;
 
-public class SREntryPoint implements SRConfigEntryPoint {
+public class SREntryPoint implements SRVersionedEntryPoint {
 
     @Override
     public TextBuilder getTextBuilder() {
         return new TextBuilderImpl();
+    }
+
+    @Override
+    public RenderSystemProxy getRenderSystemProxy() {
+        return new RenderSystemProxyImpl();
     }
 }

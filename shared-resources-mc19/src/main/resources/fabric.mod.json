@@ -14,11 +14,11 @@
   },
 
   "license": "LGPLv3",
-  "icon": "assets/shared-resources/icon.png",
+  "icon": "assets/shared-resources-mc19/icon.png",
 
   "environment": "*",
   "entrypoints": {
-    "shared-resources-config": [
+    "shared-resources-versioned": [
       "nl.enjarai.shared_resources.mc19.SREntryPoint"
     ]
   },

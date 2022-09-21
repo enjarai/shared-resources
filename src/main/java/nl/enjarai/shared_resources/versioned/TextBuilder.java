@@ -1,4 +1,4 @@
-package nl.enjarai.shared_resources.common.util;
+package nl.enjarai.shared_resources.versioned;
 
 import net.minecraft.text.Text;
 

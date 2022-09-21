@@ -13,7 +13,7 @@ public class ExternalFileResourcePackProvider extends FileResourcePackProvider {
     protected final Supplier<Path> pathSupplier;
 
     public ExternalFileResourcePackProvider(Supplier<Path> pathSupplier) {
-        super(null, ResourcePackSource.PACK_SOURCE_NONE);
+        super(null, (name) -> name);
         this.pathSupplier = pathSupplier;
     }
 

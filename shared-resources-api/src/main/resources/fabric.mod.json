@@ -14,13 +14,10 @@
   },
 
   "license": "LGPLv3",
-  "icon": "assets/shared-resources/icon.png",
+  "icon": "assets/shared-resources-api/icon.png",
 
   "environment": "*",
   "entrypoints": {
-    "shared-resources-config": [
-      "nl.enjarai.shared_resources.api.SREntryPoint"
-    ]
   },
   "depends": {
     "minecraft": "*"

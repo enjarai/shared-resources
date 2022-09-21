@@ -1,6 +1,18 @@
-archives_base_name = "shared-resources-1.16"
+archives_base_name = "shared-resources-api"
 
 dependencies {
     minecraft "com.mojang:minecraft:${rootProject.common_minecraft_version}"
     mappings "net.fabricmc:yarn:${rootProject.common_yarn_mappings}:v2"
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId = rootProject.maven_group
+            artifactId = project.archives_base_name
+            version = rootProject.mod_version
+
+            from components.java
+        }
+    }
 }

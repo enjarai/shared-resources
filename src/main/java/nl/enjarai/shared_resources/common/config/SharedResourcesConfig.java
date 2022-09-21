@@ -34,7 +34,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import static nl.enjarai.shared_resources.common.SharedResources.TEXT_BUILDER;
+import static nl.enjarai.shared_resources.versioned.Versioned.TEXT;
 
 @SuppressWarnings("unused")
 public class SharedResourcesConfig implements GameResourceConfig {
@@ -50,28 +50,32 @@ public class SharedResourcesConfig implements GameResourceConfig {
             .disableHtmlEscaping() // We'll be able to use custom chars without them being saved differently
             .create();
 
-    public static SharedResourcesConfig INSTANCE;
+    public static SharedResourcesConfig CONFIG;
 
     static {
-        INSTANCE = loadConfigFile(CONFIG_FILE);
+        CONFIG = loadConfigFile(CONFIG_FILE);
 
+        CONFIG.save();
+    }
+
+    public void initEnabledResources() {
         Iterator<GameResource> allDirs = GameResourceRegistry.REGISTRY.iterator();
         while (allDirs.hasNext()) {
             GameResource dir = allDirs.next();
             Identifier id = dir.getId();
 
-            if (!INSTANCE.enabled.containsKey(id)) {
-                INSTANCE.setEnabled(id, dir.isDefaultEnabled());
+            if (!enabled.containsKey(id)) {
+                setEnabled(id, dir.isDefaultEnabled());
             }
         }
-
-        INSTANCE.save();
     }
 
+    // Actual saved data
     private GameDirectoryProvider globalDirectory = new RootedGameDirectoryProvider(Paths.get("global_resources"));
     private final HashMap<Identifier, Boolean> enabled = new HashMap<>();
 
 
+    // Getters, setters and utils
     public GameDirectoryProvider getGlobalDirectory() {
         return globalDirectory;
     }
@@ -120,7 +124,7 @@ public class SharedResourcesConfig implements GameResourceConfig {
 
         ConfigBuilder builder = ConfigBuilder.create()
                 .setParentScreen(parent)
-                .setTitle(TEXT_BUILDER.translatable("config.shared_resources.title"))
+                .setTitle(TEXT.translatable("config.shared_resources.title"))
                 .setSavingRunnable(this::save);
 
         ConfigEntryBuilder entryBuilder = builder.entryBuilder();
@@ -131,21 +135,21 @@ public class SharedResourcesConfig implements GameResourceConfig {
         }
 
         ConfigCategory generalCategory = builder
-                .getOrCreateCategory(TEXT_BUILDER.translatable("config.shared_resources.general"))
+                .getOrCreateCategory(TEXT.translatable("config.shared_resources.general"))
                 .addEntry(
                         entryBuilder.startTextDescription(
-                                TEXT_BUILDER.translatable("config.shared_resources.general.directory")
+                                TEXT.translatable("config.shared_resources.general.directory")
                         ).build()
                 )
                 .addEntry(new DirectoryConfigEntry(
-                        TEXT_BUILDER.translatable("config.shared_resources.general.directory"),
+                        TEXT.translatable("config.shared_resources.general.directory"),
                         globalDir,
                         Paths.get("global_resources"),
                         this::setGlobalDirectory
                 ))
                 .addEntry(
                         entryBuilder.startTextDescription(
-                                TEXT_BUILDER.translatable("config.shared_resources.general.enabled")
+                                TEXT.translatable("config.shared_resources.general.enabled")
                         ).build()
                 );
 
@@ -156,8 +160,8 @@ public class SharedResourcesConfig implements GameResourceConfig {
             List<Text> description = new ArrayList<>(directory.getDescription());
             if (directory.isExperimental()) {
                 if (description.size() > 0) description.add(Text.of(" "));
-                description.add(TEXT_BUILDER.translatable("config.shared_resources.experimental[0]"));
-                description.add(TEXT_BUILDER.translatable("config.shared_resources.experimental[1]"));
+                description.add(TEXT.translatable("config.shared_resources.experimental[0]"));
+                description.add(TEXT.translatable("config.shared_resources.experimental[1]"));
             }
 
             BooleanListEntry entry = entryBuilder.startBooleanToggle(directory.getDisplayName(), enabled)
@@ -216,6 +220,7 @@ public class SharedResourcesConfig implements GameResourceConfig {
      * @param file file to save config to
      */
     private void saveConfigFile(File file) {
+        file.getParentFile().mkdirs();
         try (Writer writer = new OutputStreamWriter(Files.newOutputStream(file.toPath()), StandardCharsets.UTF_8)) {
             GSON.toJson(this, writer);
         } catch (IOException e) {

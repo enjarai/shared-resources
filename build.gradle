@@ -46,7 +46,7 @@ allprojects {
 
     // floader needs to be in every sub module
     dependencies {
-        modApi "net.fabricmc:fabric-loader:${loader_version}"
+        modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     }
 
     processResources {
@@ -54,18 +54,6 @@ allprojects {
 
         filesMatching("fabric.mod.json") {
             expand "version": version
-        }
-    }
-
-    publishing {
-        publications {
-            mavenJava(MavenPublication) {
-                groupId = project.maven_group
-                artifactId = project.name
-                version = project.mod_version
-
-                from components.java
-            }
         }
     }
 }
@@ -80,7 +68,10 @@ dependencies {
         exclude(group: "net.fabricmc.fabric-api")
     }
 
-    implementation project(":shared-resources-api")
+    api(project(path: ":shared-resources-api", configuration: "namedElements")) {
+        // make sure to yeet one of the loaders
+        exclude group: "net.fabricmc", module: "fabric-loader"
+    }
 
     subprojects.forEach((project) -> {
         include(project) {

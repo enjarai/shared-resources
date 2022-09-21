@@ -1,7 +1,7 @@
-package nl.enjarai.shared_resources.mc19.util;
+package nl.enjarai.shared_resources.mc19.impl;
 
 import net.minecraft.text.Text;
-import nl.enjarai.shared_resources.common.util.TextBuilder;
+import nl.enjarai.shared_resources.versioned.TextBuilder;
 
 @SuppressWarnings("unused")
 public class TextBuilderImpl implements TextBuilder {
