@@ -11,13 +11,9 @@ loom {
     }
 }
 
-version = project.mod_version
-group = project.maven_group
-
 // stuff that applies to all projects
 allprojects {
     apply plugin: "maven-publish"
-    apply plugin: "fabric-loom"
 
     tasks.withType(JavaCompile).configureEach {
         it.options.release = 8
@@ -26,6 +22,14 @@ allprojects {
     java {
         withSourcesJar()
     }
+
+    version = project.mod_version
+    group = project.maven_group
+
+    // skip our BOM module
+    if (it.name == "shared-resources-api") return
+
+    apply plugin: "fabric-loom"
 
     // add repos for all projects
     repositories {
@@ -57,6 +61,18 @@ allprojects {
         }
 
     }
+
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                groupId = project.maven_group
+                artifactId = project.name
+                version = project.mod_version
+
+                from components.java
+            }
+        }
+    }
 }
 
 dependencies {
@@ -69,8 +85,11 @@ dependencies {
         exclude(group: "net.fabricmc.fabric-api")
     }
 
-    subprojects.forEach((project)->{
-        include(project){
+    subprojects.forEach((project) -> {
+        // skip our BOM module
+        if (project.name == "shared-resources-api") return
+
+        include(project) {
             transitive = false
         }
     })
@@ -78,9 +97,11 @@ dependencies {
 
 // stuff that applies to all sub projects
 subprojects {
+    // skip our BOM module
+    if (it.name == "shared-resources-api") return
+
     dependencies {
         // include the root project because that's where our common code is
-
         implementation(project(path: ":", configuration: "namedElements")) {
             // having 2 floaders from the sub project and root project causes issues so we get rid of one.
             exclude group: "net.fabricmc", module: "fabric-loader"
@@ -88,14 +109,3 @@ subprojects {
     }
 }
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            groupId = project.maven_group
-            artifactId = project.archives_base_name
-            version = project.mod_version
-
-            from components.java
-        }
-    }
-}
