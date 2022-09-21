@@ -1,59 +1,6 @@
-/**
- * This project generates a maven bill of materials (BOM) all submods, alongside the main mod.
- */
+archives_base_name = "shared-resources-1.16"
 
-//dependencies {
-//    allprojects.forEach {
-//        // skip our BOM module
-//        if (it.name == "shared-resources-api") return
-//
-//        // add all submods as dependencies
-//        api project(it.path)
-//    }
-//}
-//apply plugin: 'java-platform'
-//
-//javaPlatform {
-//    allowDependencies()
-//}
-//
-//dependencies {
-//    constraints {
-//        rootProject.allprojects.forEach {
-//            // skip our BOM module
-//            if (it.name == "shared-resources-api") return
-//
-//            // add all submods as dependencies
-//            api project(it.path)
-//        }
-//    }
-//}
-//
-//publishing {
-//    publications {
-//        maven(MavenPublication) {
-//            from components.javaPlatform
-//        }
-//    }
-//}
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifactId = project.name
-
-            pom.withXml {
-                def depsNode = asNode().appendNode("dependencies")
-                rootProject.allprojects.forEach {
-                    if (it.name == "shared-resources-api") return // Dont depend on yourself :)
-
-                    def depNode = depsNode.appendNode("dependency")
-                    depNode.appendNode("groupId", it.group)
-                    depNode.appendNode("artifactId", it.name)
-                    depNode.appendNode("version", it.version)
-                    depNode.appendNode("scope", "compile")
-                }
-            }
-        }
-    }
+dependencies {
+    minecraft "com.mojang:minecraft:${rootProject.common_minecraft_version}"
+    mappings "net.fabricmc:yarn:${rootProject.common_yarn_mappings}:v2"
 }

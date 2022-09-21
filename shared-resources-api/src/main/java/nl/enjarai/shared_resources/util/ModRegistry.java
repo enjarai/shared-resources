@@ -1,4 +1,4 @@
-package nl.enjarai.shared_resources.common.util;
+package nl.enjarai.shared_resources.util;
 
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;

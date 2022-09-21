@@ -6,6 +6,7 @@ import net.fabricmc.loader.impl.FabricLoaderImpl;
 import nl.enjarai.shared_resources.api.GameResourceHelper;
 import nl.enjarai.shared_resources.api.GameResourceRegistry;
 import nl.enjarai.shared_resources.api.SharedResourcesEntrypoint;
+import nl.enjarai.shared_resources.common.config.SharedResourcesConfig;
 import nl.enjarai.shared_resources.common.registry.GameResources;
 import nl.enjarai.shared_resources.common.util.SRConfigEntryPoint;
 
@@ -21,6 +22,8 @@ public class SharedResourcesPreLaunch implements PreLaunchEntrypoint {
                         .getId().startsWith("shared-resources-mc"))) {
             throw new RuntimeException("Shared Resources didn't load correctly! You're probably using an unsupported version of Minecraft.");
         }
+
+        GameResourceHelper.setConfigSource(SharedResourcesConfig.INSTANCE);
 
         // Load the version specific text builder
         FabricLoader.getInstance().getEntrypoints("shared-resources-config", SRConfigEntryPoint.class).forEach(it -> SharedResources.TEXT_BUILDER = it.getTextBuilder());

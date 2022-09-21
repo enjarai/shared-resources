@@ -21,6 +21,7 @@ import nl.enjarai.shared_resources.common.registry.GameResources;
 import nl.enjarai.shared_resources.common.util.directory.EmptyGameDirectoryProvider;
 import nl.enjarai.shared_resources.common.util.directory.GameDirectoryProvider;
 import nl.enjarai.shared_resources.common.util.directory.RootedGameDirectoryProvider;
+import nl.enjarai.shared_resources.util.GameResourceConfig;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
@@ -36,7 +37,7 @@ import java.util.List;
 import static nl.enjarai.shared_resources.common.SharedResources.TEXT_BUILDER;
 
 @SuppressWarnings("unused")
-public class SharedResourcesConfig {
+public class SharedResourcesConfig implements GameResourceConfig {
     // Make sure we use the default config location instead of our modified one.
     public static final File CONFIG_FILE =
             FabricLoader.getInstance().getGameDir()
@@ -99,8 +100,14 @@ public class SharedResourcesConfig {
         this.enabled.put(id, enabled);
     }
 
+    @Override
     public boolean isEnabled(GameResource directory) {
         return isEnabled(directory.getId());
+    }
+
+    @Override
+    public @Nullable Path getDirectory(GameResource resource) {
+        return getGlobalDirectory().getDirectory(resource);
     }
 
     public void setEnabled(GameResource directory, boolean enabled) {

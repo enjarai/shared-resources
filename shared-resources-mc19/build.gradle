@@ -1,5 +1,5 @@
 archives_base_name = "shared-resources-1.19"
-fabric_version = "0.60.0+1.19.2"
+var fabric_version = "0.60.0+1.19.2"
 
 dependencies {
     minecraft "com.mojang:minecraft:1.19.2"

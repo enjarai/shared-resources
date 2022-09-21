@@ -14,6 +14,7 @@ loom {
 // stuff that applies to all projects
 allprojects {
     apply plugin: "maven-publish"
+    apply plugin: "fabric-loom"
 
     tasks.withType(JavaCompile).configureEach {
         it.options.release = 8
@@ -25,11 +26,6 @@ allprojects {
 
     version = project.mod_version
     group = project.maven_group
-
-    // skip our BOM module
-    if (it.name == "shared-resources-api") return
-
-    apply plugin: "fabric-loom"
 
     // add repos for all projects
     repositories {
@@ -59,7 +55,6 @@ allprojects {
         filesMatching("fabric.mod.json") {
             expand "version": version
         }
-
     }
 
     publishing {
@@ -77,18 +72,17 @@ allprojects {
 
 dependencies {
     // dummy versions
-    minecraft "com.mojang:minecraft:1.19.2"
-    mappings "net.fabricmc:yarn:1.19.2+build.8:v2"
+    minecraft "com.mojang:minecraft:${project.common_minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.common_yarn_mappings}:v2"
 
-    modCompileOnly "com.terraformersmc:modmenu:4.0.6"
-    modCompileOnly("me.shedaniel.cloth:cloth-config-fabric:${cloth_config_version}") {
+    modCompileOnly "com.terraformersmc:modmenu:${project.common_modmenu_version}"
+    modCompileOnly("me.shedaniel.cloth:cloth-config-fabric:${project.common_cloth_config_version}") {
         exclude(group: "net.fabricmc.fabric-api")
     }
 
-    subprojects.forEach((project) -> {
-        // skip our BOM module
-        if (project.name == "shared-resources-api") return
+    implementation project(":shared-resources-api")
 
+    subprojects.forEach((project) -> {
         include(project) {
             transitive = false
         }
@@ -97,7 +91,7 @@ dependencies {
 
 // stuff that applies to all sub projects
 subprojects {
-    // skip our BOM module
+    // skip our API module
     if (it.name == "shared-resources-api") return
 
     dependencies {

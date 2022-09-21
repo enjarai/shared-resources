@@ -1,11 +1,9 @@
 package nl.enjarai.shared_resources.api;
 
 import net.minecraft.text.Text;
-import org.jetbrains.annotations.Nullable;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
