@@ -13,8 +13,8 @@ public class GameResourceHelper {
      * @param resource The resource to get the path for.
      */
     @Nullable
-    public static Path getPathFor(GameResource resource) {
-        if (config == null || !config.isEnabled(resource)) return null;
+    public static Path getPathFor(@Nullable GameResource resource) {
+        if (config == null || resource == null || !config.isEnabled(resource)) return null;
 
         Path path = config.getDirectory(resource);
 

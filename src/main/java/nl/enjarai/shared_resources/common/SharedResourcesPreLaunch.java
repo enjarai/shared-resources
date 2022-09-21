@@ -37,6 +37,7 @@ public class SharedResourcesPreLaunch implements PreLaunchEntrypoint {
         // Load all resource directories.
         FabricLoader.getInstance().getEntrypoints("shared-resources", SharedResourcesEntrypoint.class).forEach(
                 entrypoint -> entrypoint.registerResources(GameResourceRegistry.REGISTRY));
+        GameResourceRegistry.REGISTRY.finalise();
         CONFIG.initEnabledResources();
 
         // Load config directory override if enabled.

@@ -9,8 +9,10 @@ import java.util.Iterator;
 @SuppressWarnings("UnusedReturnValue")
 public class ModRegistry<T> {
     private final HashMap<Identifier, T> entries = new HashMap<>();
+    private boolean locked = false;
 
     public T register(Identifier id, T entry) {
+        if (locked) throw new IllegalStateException("Registry is finalized");
         entries.put(id, entry);
         return entry;
     }
@@ -31,5 +33,9 @@ public class ModRegistry<T> {
 
     public Iterator<T> iterator() {
         return entries.values().iterator();
+    }
+
+    public void finalise() {
+        locked = true;
     }
 }
