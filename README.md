@@ -56,7 +56,8 @@ Then, you'll want to create a Shared Resources entrypoint in your mod's `fabric.
 ```
 
 Make sure to implement the `SharedResourcesEntryPoint` interface in your entrypoint class, 
-and use that to create and register your `GameResource` instances, each corresponding to a game file or directory:
+and use that to create and register your `GameResource` instances, each corresponding to a game file or directory.
+**This entrypoint is run during fabric's preLaunch phase, limit your interaction with Minecraft classes to a minimum.**
 
 ```java
 public class GameResources implements SharedResourcesEntrypoint {
@@ -85,26 +86,24 @@ public class GameResources implements SharedResourcesEntrypoint {
 }
 ```
 
+After registering your resources, they will automatically show up in the main mod's config screen, if it is loaded.
+
 Finally, you can use `GameDirectoryHelper` to get the path to the location of your resource when loading it:
 
 ```java
-// If a global directory is selected, this will return the path to the global directory
-Path dirLocation = GameDirectoryHelper.getPathFor(GameResources.MY_CUSTOM_DIRECTORY);
-
-// Make sure to check if its null before using it
-if (dirLocation != null) {
-    loadYourStuffFunction(dirLocation);
+// You'll want to check if the main mod is loaded before interacting with the API outside the entrypoint
+if (FabricLoader.getInstance().isModLoaded("shared-resources")) {
+    // If a global directory is selected, this will return the path to the global directory
+    Path dirLocation = GameDirectoryHelper.getPathFor(GameResources.MY_CUSTOM_DIRECTORY);
+    
+    // Make sure to check if its null before using it
+    if(dirLocation! = null) {
+        loadYourStuffFunction(dirLocation);
+    }
 }
 
 // Try to load from your default directory as well when possible
 loadYourStuffFunction(GameResources.MY_CUSTOM_DIRECTORY.getDefaultPath());
-
-
-// If you want to completely override the default location, you can use this
-Path fileLocation = GameDirectoryHelper.getPathOrDefaultFor(GameResources.A_CUSTOM_FILE);
-
-// You dont need a null check for this one, as it will always return a valid path
-loadYourFileFunction(fileLocation);
 ```
 
 ## License
