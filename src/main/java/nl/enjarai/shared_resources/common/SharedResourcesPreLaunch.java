@@ -28,6 +28,13 @@ public class SharedResourcesPreLaunch implements PreLaunchEntrypoint {
             throw new RuntimeException("Shared Resources didn't load correctly! You're probably using an unsupported version of Minecraft.");
         }
 
+        // Check if cloth config is loaded
+        if (FabricLoader.getInstance().getAllMods().stream().noneMatch(container -> container
+                .getMetadata()
+                .getId().startsWith("cloth-config"))) {
+            throw new RuntimeException("Shared Resources didn't load correctly! Cloth Config is required for Shared Resources to work.");
+        }
+
         // Load the versioned objects
         Versioned.load();
 

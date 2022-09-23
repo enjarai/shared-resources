@@ -27,6 +27,15 @@ public class GameResourceHelper {
     }
 
     /**
+     * Returns the current custom path for this resource, or the specified default if it is either disabled or not set.
+     * Only use this for resources that completely overwrite their default location.
+     */
+    public static Path getPathOrDefaultFor(GameResource resource) {
+        Path path = getPathFor(resource);
+        return path != null ? path : resource.getDefaultPath();
+    }
+
+    /**
      * Sets the source of statuses and paths for resources.
      * Available to let the main mod interact with this API.
      * <b>Unless you really know what you're doing, don't use.</b>

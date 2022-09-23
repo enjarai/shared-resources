@@ -96,7 +96,7 @@ public class ResourceDirectoryBuilder {
     public ResourceDirectory build() {
         return new ResourceDirectory() {
             @Override
-            public Path getDefaultDirectory() {
+            public Path getDefaultPath() {
                 return defaultDirectory;
             }
 

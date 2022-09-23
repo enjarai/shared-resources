@@ -86,7 +86,7 @@ public class ResourceFileBuilder {
     public ResourceFile build() {
         return new ResourceFile() {
             @Override
-            public Path getDefaultDirectory() {
+            public Path getDefaultPath() {
                 return defaultFile;
             }
 

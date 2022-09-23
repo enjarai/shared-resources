@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "Shared Resources",
-  "description": "#TODO",
+  "description": "A mod for sharing game files like resource packs, shaders, saves and more between separate Minecraft instances.",
   "authors": [
     "enjarai"
   ],

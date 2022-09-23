@@ -20,9 +20,9 @@ public interface GameResource {
     }
 
     /**
-     * The subdirectory of <code>.minecraft</code> where this resource usually resides.
+     * The location in <code>.minecraft</code> where this resource usually resides.
      */
-    Path getDefaultDirectory();
+    Path getDefaultPath();
 
     /**
      * The display name of the resource, used in the config menu.

@@ -41,7 +41,7 @@ public class SharedResourcesConfig implements GameResourceConfig {
     // Make sure we use the default config location instead of our modified one.
     public static final File CONFIG_FILE =
             FabricLoader.getInstance().getGameDir()
-                    .resolve(GameResources.CONFIG.getDefaultDirectory()
+                    .resolve(GameResources.CONFIG.getDefaultPath()
                             .resolve(SharedResources.MODID + ".json")).toFile();
     private static final Gson GSON = new GsonBuilder()
             .registerTypeAdapter(Identifier.class, new IdentifierAdapter())
