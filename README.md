@@ -28,7 +28,11 @@ Currently supported game files/directories:
 A robust API is available for other mods to use, allowing them to easily
 add support for their own game files and directories.
 
-To make use of the API, first add it as a dependency in gradle:
+To make use of the API, first add it as a dependency in gradle.
+It's recommended to include the API as a JiJ dependency as well,
+as the file size is small, and it doesn't do anything without the main mod present.
+You can also use it without JiJ'ing, but you'll have to make sure you only 
+interact with API classes when the main mod is present.
 
 ```groovy
 repositories {
@@ -36,7 +40,7 @@ repositories {
 }
 
 dependencies {
-    modImplementation "com.github.enjarai:shared-resources:[VERSION]"
+    modImplementation include("com.github.enjarai:shared-resources:[VERSION]")
 }
 ```
 
@@ -90,16 +94,14 @@ After registering your resources, they will automatically show up in the main mo
 Finally, you can use `GameDirectoryHelper` to get the path to the location of your resource when loading it:
 
 ```java
-// You'll want to check if the main mod is loaded before interacting with the API outside the entrypoint
-if (FabricLoader.getInstance().isModLoaded("shared-resources")) {
-    // If a global directory is selected, this will return the path to the global directory
-    Path dirLocation = GameDirectoryHelper.getPathFor(GameResources.MY_CUSTOM_DIRECTORY);
-    
-    // Make sure to check if its null before using it
-    if (dirLocation! = null) {
-        loadYourStuffFunction(dirLocation);
-    }
+// If a global directory is selected, this will return the path to the global directory
+Path dirLocation = GameDirectoryHelper.getPathFor(GameResources.MY_CUSTOM_DIRECTORY);
+
+// Make sure to check if its null before using it
+if (dirLocation != null) {
+    loadYourStuffFunction(dirLocation);
 }
+    
 
 // Try to load from your default directory as well when possible
 loadYourStuffFunction(GameResources.MY_CUSTOM_DIRECTORY.getDefaultPath());
