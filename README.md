@@ -20,8 +20,11 @@ Currently supported game files/directories:
 - Resource packs
 - Saves
 - Vanilla options (video settings, controls, etc.)
+- Servers
+- Screenshots
 - The fabric config folder (should work with the configs of any properly coded mods)
 - Shader packs (via Iris)
+- Schematics (via Litematica)
 
 ## API
 
