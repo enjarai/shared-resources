@@ -30,9 +30,7 @@ public class GameResources implements SharedResourcesEntrypoint {
             .setDisplayName(TEXT.translatable("shared_resources.directory.screenshots"))
             .overridesDefaultDirectory()
             .build();
-    public static final ResourceDirectory SHADERPACKS = new ResourceDirectoryBuilder("shaderpacks")
-            .setDisplayName(TEXT.translatable("shared_resources.directory.shaderpacks"))
-            .build();
+
 
     public static final ResourceFile OPTIONS = new ResourceFileBuilder("options.txt")
             .setDisplayName(TEXT.translatable("shared_resources.file.options"))
@@ -42,6 +40,19 @@ public class GameResources implements SharedResourcesEntrypoint {
     public static final ResourceFile SERVERS = new ResourceFileBuilder("servers.dat")
             .setDisplayName(TEXT.translatable("shared_resources.file.servers"))
             .setDescription(TEXT.translatable("shared_resources.file.servers.description"))
+            .build();
+
+    public static final ResourceDirectory SHADERPACKS = new ResourceDirectoryBuilder("shaderpacks")
+            .setDisplayName(TEXT.translatable("shared_resources.directory.shaderpacks"))
+            .build();
+    public static final ResourceDirectory SCHEMATICS = new ResourceDirectoryBuilder("schematics")
+            .setDisplayName(TEXT.translatable("shared_resources.directory.schematics"))
+            .setDescription(
+                    TEXT.translatable("shared_resources.directory.schematics.description[0]"),
+                    TEXT.translatable("shared_resources.directory.schematics.description[1]")
+            )
+            .defaultEnabled(false)
+            .overridesDefaultDirectory()
             .build();
 
     @Override
@@ -54,11 +65,16 @@ public class GameResources implements SharedResourcesEntrypoint {
         registry.register(SharedResources.id("options"), OPTIONS);
         registry.register(SharedResources.id("servers"), SERVERS);
 
-        // Only load shaderpack compat if iris is available.
-        if (FabricLoader.getInstance().isModLoaded("iris")) {
-            SharedResources.LOGGER.info("Iris available, loading shaderpack compat.");
+        // Only compat if a mod is available.
+        if (checkLoaded("iris")) registry.register(SharedResources.id("shaderpacks"), SHADERPACKS);
+        if (checkLoaded("litematica")) registry.register(SharedResources.id("schematics"), SCHEMATICS);
+    }
 
-            registry.register(SharedResources.id("shaderpacks"), SHADERPACKS);
+    private static boolean checkLoaded(String modid) {
+        boolean loaded = FabricLoader.getInstance().isModLoaded(modid);
+        if (loaded) {
+            SharedResources.LOGGER.info("Mod {} is loaded, enabling compat.", modid);
         }
+        return loaded;
     }
 }

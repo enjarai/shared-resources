@@ -1,1 +1,2 @@
 - Added support for screenshots and servers.dat
+- Added Litematica compat, even though its not really needed at all

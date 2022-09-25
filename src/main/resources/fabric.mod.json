@@ -35,7 +35,8 @@
   },
   "mixins": [
     "shared-resources.mixins.json",
-    "shared-resources.compat.iris.mixins.json"
+    "shared-resources.compat.iris.mixins.json",
+    "shared-resources.compat.litematica.mixins.json"
   ],
 
   "depends": {
