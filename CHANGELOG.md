@@ -1,1 +1,1 @@
-Initial release.
+- Added support for screenshots and servers.dat

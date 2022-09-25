@@ -6,12 +6,15 @@
   "mixins": [
   ],
   "client": [
-      "options.GameOptionsMixin",
-      "resourcepacks.FileResourcePackProviderAccessor",
-      "resourcepacks.ResourcePackManagerMixin",
-      "saves.FileDownloadMixin",
-      "saves.MinecraftClientMixin",
-      "saves.RealmsUploadScreenMixin"
+    "options.GameOptionsMixin",
+    "resourcepacks.FileResourcePackProviderAccessor",
+    "resourcepacks.ResourcePackManagerMixin",
+    "saves.FileDownloadMixin",
+    "saves.MinecraftClientMixin",
+    "saves.RealmsUploadScreenMixin",
+    "screenshots.ScreenshotRecorderMixin",
+    "screenshots.ScreenshotUtilsMixin",
+    "servers.ServerListMixin"
   ],
   "injectors": {
     "defaultRequire": 1

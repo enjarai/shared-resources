@@ -1,5 +1,6 @@
 package nl.enjarai.shared_resources.common;
 
+import com.llamalad7.mixinextras.MixinExtrasBootstrap;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.entrypoint.PreLaunchEntrypoint;
 import net.fabricmc.loader.impl.FabricLoaderImpl;
@@ -21,6 +22,9 @@ import static nl.enjarai.shared_resources.common.config.SharedResourcesConfig.CO
 public class SharedResourcesPreLaunch implements PreLaunchEntrypoint {
     @Override
     public void onPreLaunch() {
+        // Boot up Mixin Extras
+        MixinExtrasBootstrap.init();
+
         // Make sure one of our version-specific submods is loaded
         if (FabricLoader.getInstance().getAllMods().stream().noneMatch(container -> container
                         .getMetadata()

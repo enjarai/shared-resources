@@ -23,7 +23,7 @@ public abstract class GameOptionsMixin {
             method = "load()V",
             at = @At(value = "HEAD")
     )
-    private void shared_resources$overwriteOptionsPath(CallbackInfo ci) {
+    private void sharedresources$overwriteOptionsPath(CallbackInfo ci) {
         Path newPath = GameResourceHelper.getPathFor(GameResources.OPTIONS);
 
         if (newPath != null) {

@@ -20,7 +20,7 @@ public abstract class RealmsUploadScreenMixin {
             ),
             argsOnly = true
     )
-    private File shared_resources_changePath(File original) {
+    private File sharedresources$changePath(File original) {
         Path newPath = GameResourceHelper.getPathFor(GameResources.SAVES);
 
         if (newPath != null) {

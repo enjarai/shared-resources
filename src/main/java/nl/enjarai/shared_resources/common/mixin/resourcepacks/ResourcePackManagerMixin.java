@@ -27,7 +27,7 @@ public abstract class ResourcePackManagerMixin {
 			method = "<init>(Lnet/minecraft/resource/ResourcePackProfile$Factory;[Lnet/minecraft/resource/ResourcePackProvider;)V",
 			at = @At(value = "RETURN")
 	)
-	private void shared_resources$initResourcePackProvider(CallbackInfo ci) {
+	private void sharedresources$initResourcePackProvider(CallbackInfo ci) {
 		// Only add our own provider if this is the manager of client
 		// resource packs, we wouldn't want to mess with datapacks
 		if (providers.stream().anyMatch(provider -> provider == MinecraftClient.getInstance().getResourcePackProvider())) {

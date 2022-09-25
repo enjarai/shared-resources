@@ -26,6 +26,10 @@ public class GameResources implements SharedResourcesEntrypoint {
             .defaultEnabled(false)
             .isExperimental()
             .build();
+    public static final ResourceDirectory SCREENSHOTS = new ResourceDirectoryBuilder("screenshots")
+            .setDisplayName(TEXT.translatable("shared_resources.directory.screenshots"))
+            .overridesDefaultDirectory()
+            .build();
     public static final ResourceDirectory SHADERPACKS = new ResourceDirectoryBuilder("shaderpacks")
             .setDisplayName(TEXT.translatable("shared_resources.directory.shaderpacks"))
             .build();
@@ -35,14 +39,20 @@ public class GameResources implements SharedResourcesEntrypoint {
             .setDescription(TEXT.translatable("shared_resources.file.options.description"))
             .requiresRestart()
             .build();
+    public static final ResourceFile SERVERS = new ResourceFileBuilder("servers.dat")
+            .setDisplayName(TEXT.translatable("shared_resources.file.servers"))
+            .setDescription(TEXT.translatable("shared_resources.file.servers.description"))
+            .build();
 
     @Override
     public void registerResources(GameResourceRegistry registry) {
         registry.register(SharedResources.id("resourcepacks"), RESOURCEPACKS);
         registry.register(SharedResources.id("saves"), SAVES);
         registry.register(SharedResources.id("config"), CONFIG);
+        registry.register(SharedResources.id("screenshots"), SCREENSHOTS);
 
         registry.register(SharedResources.id("options"), OPTIONS);
+        registry.register(SharedResources.id("servers"), SERVERS);
 
         // Only load shaderpack compat if iris is available.
         if (FabricLoader.getInstance().isModLoaded("iris")) {

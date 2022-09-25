@@ -1,11 +1,13 @@
 package nl.enjarai.shared_resources.api;
 
+import net.fabricmc.loader.api.FabricLoader;
 import nl.enjarai.shared_resources.util.GameResourceConfig;
 import org.jetbrains.annotations.Nullable;
 
 import java.nio.file.Path;
 
 public class GameResourceHelper {
+    private static final Path GAME_ROOT = FabricLoader.getInstance().getGameDir();
     private static GameResourceConfig config;
 
     /**
@@ -27,12 +29,20 @@ public class GameResourceHelper {
     }
 
     /**
-     * Returns the current custom path for this resource, or the specified default if it is either disabled or not set.
+     * Returns the current custom path for this resource, or the registered default path if it is either disabled or not set.
      * Only use this for resources that completely overwrite their default location.
      */
     public static Path getPathOrDefaultFor(GameResource resource) {
+        return getPathOrDefaultFor(resource, GAME_ROOT.resolve(resource.getDefaultPath()));
+    }
+
+    /**
+     * Returns the current custom path for this resource, or the specified default path if it is either disabled or not set.
+     * Only use this for resources that completely overwrite their default location.
+     */
+    public static Path getPathOrDefaultFor(GameResource resource, Path defaultPath) {
         Path path = getPathFor(resource);
-        return path != null ? path : resource.getDefaultPath();
+        return path != null ? path : defaultPath;
     }
 
     /**

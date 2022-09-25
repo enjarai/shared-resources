@@ -9,7 +9,10 @@
   "shared_resources.directory.config": "Configs",
   "shared_resources.directory.config.description[0]": "Global configuration files for most mods excluding this one.",
   "shared_resources.directory.config.description[1]": "(everything located in .minecraft/config)",
+  "shared_resources.directory.screenshots": "Screenshots",
   "shared_resources.directory.shaderpacks": "Iris shader packs",
   "shared_resources.file.options": "Options",
-  "shared_resources.file.options.description": "The vanilla options.txt file."
+  "shared_resources.file.options.description": "The vanilla options.txt file.",
+  "shared_resources.file.servers": "Servers",
+  "shared_resources.file.servers.description": "The vanilla servers.dat file."
 }

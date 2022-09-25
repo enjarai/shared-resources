@@ -42,6 +42,7 @@ allprojects {
             url = "https://api.modrinth.com/maven"
             content { includeGroup "maven.modrinth" }
         }
+        maven { url 'https://jitpack.io' }
     }
 
     // floader needs to be in every sub module
@@ -72,6 +73,9 @@ dependencies {
         // make sure to yeet one of the loaders
         exclude group: "net.fabricmc", module: "fabric-loader"
     }
+
+    api(include("com.github.LlamaLad7:MixinExtras:${project.mixin_extras_version}"))
+    annotationProcessor("com.github.LlamaLad7:MixinExtras:${project.mixin_extras_version}")
 
     subprojects.forEach((project) -> {
         include(project) {
