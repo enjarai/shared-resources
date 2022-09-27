@@ -11,6 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.io.File;
 import java.nio.file.Path;
 
+@SuppressWarnings("UnresolvedMixinReference")
 @Pseudo
 @Mixin(targets = "fi.dy.masa.litematica.data.DataManager")
 public abstract class DataManagerMixin {

@@ -14,6 +14,7 @@ import nl.enjarai.shared_resources.api.GameResource;
 import nl.enjarai.shared_resources.api.GameResourceHelper;
 import nl.enjarai.shared_resources.api.GameResourceRegistry;
 import nl.enjarai.shared_resources.common.SharedResources;
+import nl.enjarai.shared_resources.common.SharedResourcesPreLaunch;
 import nl.enjarai.shared_resources.common.config.serialization.GameDirectoryProviderAdapter;
 import nl.enjarai.shared_resources.common.config.serialization.IdentifierAdapter;
 import nl.enjarai.shared_resources.common.gui.DirectoryConfigEntry;
@@ -24,14 +25,13 @@ import nl.enjarai.shared_resources.common.util.directory.RootedGameDirectoryProv
 import nl.enjarai.shared_resources.util.GameResourceConfig;
 import org.jetbrains.annotations.Nullable;
 
+import java.awt.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.*;
 import java.util.List;
 
 import static nl.enjarai.shared_resources.versioned.Versioned.TEXT;
@@ -53,9 +53,25 @@ public class SharedResourcesConfig implements GameResourceConfig {
     public static SharedResourcesConfig CONFIG;
 
     static {
+        boolean isNew = !CONFIG_FILE.exists();
+
         CONFIG = loadConfigFile(CONFIG_FILE);
 
+        SharedResourcesPreLaunch.initApi();
+
+        // If this is a new config, we're not headless and not on Mac, we'll open the first time setup screen.
+        if (isNew && !GraphicsEnvironment.isHeadless() && !System.getProperty("os.name").toLowerCase(Locale.ROOT).contains("mac")) {
+            try {
+                FirstStartupWindow.open(CONFIG);
+            } catch (Exception e) {
+                SharedResources.LOGGER.error("Error opening first startup window, skipping.", e);
+            }
+        }
+
         CONFIG.save();
+    }
+
+    public static void touch() {
     }
 
     public void initEnabledResources() {
@@ -71,7 +87,7 @@ public class SharedResourcesConfig implements GameResourceConfig {
     }
 
     // Actual saved data
-    private GameDirectoryProvider globalDirectory = new RootedGameDirectoryProvider(Paths.get("global_resources"));
+    private GameDirectoryProvider globalDirectory = new RootedGameDirectoryProvider(Paths.get("."));
     private final HashMap<Identifier, Boolean> enabled = new HashMap<>();
 
 
@@ -87,10 +103,12 @@ public class SharedResourcesConfig implements GameResourceConfig {
             globalDirectory = new RootedGameDirectoryProvider(path);
         }
 
-        GameResourceRegistry.REGISTRY.iterator().forEachRemaining(directory -> {
-            Path dirPath = GameResourceHelper.getPathFor(directory);
-            directory.getUpdateCallback().onUpdate(dirPath);
-        });
+        Iterator<GameResource> it = GameResourceRegistry.REGISTRY.iterator();
+        while (it.hasNext()) {
+            GameResource resource = it.next();
+            Path dirPath = GameResourceHelper.getPathOrDefaultFor(resource);
+            resource.getUpdateCallback().onUpdate(dirPath);
+        }
     }
 
 
@@ -107,6 +125,10 @@ public class SharedResourcesConfig implements GameResourceConfig {
     @Override
     public boolean isEnabled(GameResource directory) {
         return isEnabled(directory.getId());
+    }
+
+    public HashMap<Identifier, Boolean> getEnabled() {
+        return enabled;
     }
 
     @Override
@@ -209,8 +231,6 @@ public class SharedResourcesConfig implements GameResourceConfig {
             config = new SharedResourcesConfig();
         }
 
-        // Saves the file in order to write new fields if they were added
-        config.saveConfigFile(file);
         return config;
     }
 

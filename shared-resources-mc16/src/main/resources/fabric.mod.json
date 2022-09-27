@@ -6,7 +6,8 @@
   "name": "Shared Resources for 1.16",
   "description": "Version-specific code for Minecraft 1.16",
   "authors": [
-    "enjarai"
+    "enjarai",
+    "jacg"
   ],
   "contact": {
     "homepage": "https://enjarai.nl/",

@@ -6,7 +6,8 @@
   "name": "Shared Resources API",
   "description": "Independent API module for Shared Resources",
   "authors": [
-    "enjarai"
+    "enjarai",
+    "jacg"
   ],
   "contact": {
     "homepage": "https://enjarai.nl/",

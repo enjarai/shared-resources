@@ -49,7 +49,8 @@ public class GameResources implements SharedResourcesEntrypoint {
             .setDisplayName(TEXT.translatable("shared_resources.directory.schematics"))
             .setDescription(
                     TEXT.translatable("shared_resources.directory.schematics.description[0]"),
-                    TEXT.translatable("shared_resources.directory.schematics.description[1]")
+                    TEXT.translatable("shared_resources.directory.schematics.description[1]"),
+                    TEXT.translatable("shared_resources.directory.schematics.description[2]")
             )
             .defaultEnabled(false)
             .overridesDefaultDirectory()

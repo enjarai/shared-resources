@@ -42,14 +42,8 @@ public class SharedResourcesPreLaunch implements PreLaunchEntrypoint {
         // Load the versioned objects
         Versioned.load();
 
-        // Prepare the API
-        GameResourceHelper.setConfigSource(CONFIG);
-
-        // Load all resource directories.
-        FabricLoader.getInstance().getEntrypoints("shared-resources", SharedResourcesEntrypoint.class).forEach(
-                entrypoint -> entrypoint.registerResources(GameResourceRegistry.REGISTRY));
-        GameResourceRegistry.REGISTRY.finalise();
-        CONFIG.initEnabledResources();
+        // Carefully touch our config to get it to load and wake up the API
+        SharedResourcesConfig.touch();
 
         // Load config directory override if enabled.
         Path configDir = GameResourceHelper.getPathFor(GameResources.CONFIG);
@@ -68,5 +62,16 @@ public class SharedResourcesPreLaunch implements PreLaunchEntrypoint {
 
             }
         }
+    }
+
+    public static void initApi() {
+        // Prepare the API
+        GameResourceHelper.setConfigSource(CONFIG);
+
+        // Load all resource directories.
+        FabricLoader.getInstance().getEntrypoints("shared-resources", SharedResourcesEntrypoint.class).forEach(
+                entrypoint -> entrypoint.registerResources(GameResourceRegistry.REGISTRY));
+        GameResourceRegistry.REGISTRY.finalise();
+        CONFIG.initEnabledResources();
     }
 }
