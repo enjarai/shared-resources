@@ -9,9 +9,7 @@
     "options.GameOptionsMixin",
     "resourcepacks.FileResourcePackProviderAccessor",
     "resourcepacks.ResourcePackManagerMixin",
-    "saves.FileDownloadMixin",
     "saves.MinecraftClientMixin",
-    "saves.RealmsUploadScreenMixin",
     "screenshots.ScreenshotRecorderMixin",
     "screenshots.ScreenshotUtilsMixin",
     "servers.ServerListMixin"

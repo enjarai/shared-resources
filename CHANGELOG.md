@@ -1,2 +1,1 @@
-- Added a first startup dialog to easily configure the global directories before anything else loads.
-- Fixed an issue with missing translations.
+- Fix compat with Memory Leak Fix
