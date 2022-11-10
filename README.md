@@ -39,11 +39,13 @@ interact with API classes when the main mod is present.
 
 ```groovy
 repositories {
-    maven { url 'https://jitpack.io' }
+    maven {
+        url "https://maven.enjarai.nl/releases"
+    }
 }
 
 dependencies {
-    modImplementation include("com.github.enjarai:shared-resources:[VERSION]")
+    modImplementation include("nl.enjarai:shared-resources-api::[VERSION]")
 }
 ```
 
