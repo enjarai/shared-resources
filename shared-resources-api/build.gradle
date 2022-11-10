@@ -6,10 +6,21 @@ dependencies {
 }
 
 publishing {
+    repositories {
+        maven {
+            name = "enjaraiMaven"
+            url = "https://maven.enjarai.nl/releases"
+            credentials(PasswordCredentials)
+            authentication {
+                basic(BasicAuthentication)
+            }
+        }
+    }
+
     publications {
         mavenJava(MavenPublication) {
             groupId = rootProject.maven_group
-            artifactId = project.archives_base_name
+            artifactId = archives_base_name
             version = rootProject.mod_version
 
             from components.java

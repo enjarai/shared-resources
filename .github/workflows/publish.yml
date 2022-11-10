@@ -41,6 +41,11 @@ jobs:
         run: chmod +x ./gradlew
       - name: build
         run: ./gradlew build
+      - name: publish to maven
+        run: ./gradlew publish
+        env:
+          ORG_GRADLE_PROJECT_enjaraiMavenUsername: ${{ secrets.PUBLISH_MAVEN_USERNAME }}
+          ORG_GRADLE_PROJECT_enjaraiMavenPassword: ${{ secrets.PUBLISH_MAVEN_PASSWORD }}
       - name: capture build artifacts
         if: ${{ runner.os == 'Linux' && matrix.java == '17' }} # Only upload artifacts built from latest java on one OS
         uses: actions/upload-artifact@v2
