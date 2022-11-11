@@ -42,7 +42,7 @@ allprojects {
             url = "https://api.modrinth.com/maven"
             content { includeGroup "maven.modrinth" }
         }
-        maven { url 'https://maven.enjarai.nl/releases' }
+        maven { url 'https://maven.enjarai.nl/' }
     }
 
     // floader needs to be in every sub module
