@@ -1,1 +1,1 @@
-- Fix compat with Memory Leak Fix
+- Minor version to switch to new api distribution repository, no changes to functionality
