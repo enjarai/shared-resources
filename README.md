@@ -26,6 +26,11 @@ Currently supported game files/directories:
 - Shader packs (via Iris)
 - Schematics (via Litematica)
 
+Incorporates code from [RememberMyTxt](https://github.com/DuncanRuns/RememberMyTxt)
+(with permission from [DuncanRuns](https://github.com/DuncanRuns))
+to ensure game options aren't lost when sharing the options.txt file
+between different game versions and mod sets.
+
 ## API
 
 A robust API is available for other mods to use, allowing them to easily

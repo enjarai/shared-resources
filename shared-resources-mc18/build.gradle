@@ -10,3 +10,7 @@ dependencies {
         exclude(group: "net.fabricmc.fabric-api")
     }
 }
+
+loom {
+    accessWidenerPath = file("src/main/resources/shared-resources18.accesswidener")
+}

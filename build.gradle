@@ -9,6 +9,8 @@ loom {
     runConfigs.configureEach {
         ideConfigGenerated = true
     }
+
+    accessWidenerPath = file("src/main/resources/shared-resources.accesswidener")
 }
 
 // stuff that applies to all projects

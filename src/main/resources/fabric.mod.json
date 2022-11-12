@@ -38,6 +38,7 @@
     "shared-resources.compat.iris.mixins.json",
     "shared-resources.compat.litematica.mixins.json"
   ],
+  "accessWidener": "shared-resources.accesswidener",
 
   "depends": {
     "minecraft": ["1.16.x", "1.18.x", "1.19.x"]

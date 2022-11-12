@@ -1,1 +1,1 @@
-- Minor version to switch to new api distribution repository, no changes to functionality
+- Incorporate code from RememberMyTxt by @DuncanRuns to ensure game options aren't lost when sharing the options.txt file.

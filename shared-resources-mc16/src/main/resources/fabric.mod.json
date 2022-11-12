@@ -29,6 +29,7 @@
   "mixins": [
     "shared-resources16.mixins.json"
   ],
+  "accessWidener": "shared-resources16.accesswidener",
   "custom": {
     "modmenu": {
       "parent": "shared-resources",
