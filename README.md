@@ -8,7 +8,7 @@
 [![CurseForge](https://cf.way2muchnoise.eu/full_679045_downloads.svg)](https://curseforge.com/minecraft/mc-mods/shared-resources)
 
 A mod for easily sharing game files between separate Minecraft instances. 
-Best used with a multi-instance launcher like [MultiMC](https://multimc.org/) or [PolyMC](https://polymc.org/).
+Best used with a multi-instance launcher like [MultiMC](https://multimc.org/) or [Prism Launcher](https://prismlauncher.org/).
 
 It works by selecting a global directory to hold your common game files, 
 and modifying Minecraft to use that directory instead of the default one.
