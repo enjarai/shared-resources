@@ -8,6 +8,7 @@
   "client": [
     "options.GameOptionsMixin",
     "resourcepacks.FileResourcePackProviderAccessor",
+    "resourcepacks.PackScreenMixin",
     "resourcepacks.ResourcePackManagerMixin",
     "saves.MinecraftClientMixin",
     "screenshots.ScreenshotRecorderMixin",

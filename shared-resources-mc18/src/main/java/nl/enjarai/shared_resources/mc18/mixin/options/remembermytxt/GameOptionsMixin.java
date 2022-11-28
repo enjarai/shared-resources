@@ -1,5 +1,6 @@
 package nl.enjarai.shared_resources.mc18.mixin.options.remembermytxt;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import net.minecraft.client.option.GameOptions;
 import net.minecraft.nbt.NbtCompound;
 import nl.enjarai.shared_resources.common.SharedResources;
@@ -33,13 +34,23 @@ public abstract class GameOptionsMixin {
     private NbtCompound sharedresources$loadedData;
     private Map<String, String> sharedresources$unacceptedOptions;
 
-    @Inject(method = "load", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/option/GameOptions;update(Lnet/minecraft/nbt/NbtCompound;)Lnet/minecraft/nbt/NbtCompound;", shift = At.Shift.AFTER), locals = LocalCapture.CAPTURE_FAILSOFT)
-    private void sharedresources$getKeysMixin(CallbackInfo ci, NbtCompound nbtCompound2) {
+    @ModifyExpressionValue(
+            method = "load",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/client/option/GameOptions;update(Lnet/minecraft/nbt/NbtCompound;)Lnet/minecraft/nbt/NbtCompound;"
+            )
+    )
+    private NbtCompound sharedresources$getKeys(NbtCompound nbtCompound2) {
         sharedresources$loadedData = nbtCompound2;
+        return nbtCompound2;
     }
 
-    @Inject(method = "load", at = @At("TAIL"))
-    private void sharedresources$endLoadMixin(CallbackInfo info) {
+    @Inject(
+            method = "load",
+            at = @At("TAIL")
+    )
+    private void sharedresources$endLoad(CallbackInfo info) {
         Set<String> unacceptedKeys = sharedresources$loadedData.getKeys();
         accept(new GameOptions.Visitor() {
             @Override
@@ -95,8 +106,16 @@ public abstract class GameOptionsMixin {
         }
     }
 
-    @Inject(method = "write", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/option/GameOptions;accept(Lnet/minecraft/client/option/GameOptions$Visitor;)V", shift = At.Shift.BEFORE), locals = LocalCapture.CAPTURE_FAILSOFT)
-    private void sharedresources$writeUnacceptedMixin(CallbackInfo info, PrintWriter printWriter) {
+    @Inject(
+            method = "write",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/client/option/GameOptions;accept(Lnet/minecraft/client/option/GameOptions$Visitor;)V",
+                    shift = At.Shift.BEFORE
+            ),
+            locals = LocalCapture.CAPTURE_FAILSOFT
+    )
+    private void sharedresources$writeUnaccepted(CallbackInfo info, PrintWriter printWriter) {
         // Unaccepted variables will be placed at the top in case they weren't accepted by the visitor during reading.
         // This probably means that they will be written a second time later in the file, and for duplicate keys, the
         // lowest one in the file is the one which will be loaded.
