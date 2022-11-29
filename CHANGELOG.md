@@ -1,2 +1,2 @@
-- Incorporate code from RememberMyTxt by @DuncanRuns to ensure game options aren't lost when sharing the options.txt file. (WIP for 1.16)
-- Override the "Open pack folder" button with the correct directory in the resource pack screen.
+- Fix a critical issue with the RememberMyTxt mixin.
+- Hopefully added Quilt support for the config directory override. (courtesy of @jacg311)

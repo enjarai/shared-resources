@@ -20,7 +20,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
 
-@Debug(export = true)
 @Mixin(GameOptions.class)
 public abstract class GameOptionsMixin {
     /*
