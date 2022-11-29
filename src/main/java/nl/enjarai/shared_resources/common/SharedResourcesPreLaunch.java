@@ -14,6 +14,8 @@ import nl.enjarai.shared_resources.common.registry.GameResources;
 import nl.enjarai.shared_resources.versioned.Versioned;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.nio.file.Path;
 import java.util.Iterator;
 
@@ -53,11 +55,26 @@ public class SharedResourcesPreLaunch implements PreLaunchEntrypoint {
             SharedResources.LOGGER.info("Config directory override enabled, changing fabric config directory to: {}. *proceed with caution*", configDir);
 
             try {
-                Field field = FabricLoaderImpl.class.getDeclaredField("configDir");
-                field.setAccessible(true);
-                field.set(FabricLoader.getInstance(), configDir);
+                Class<?> loaderClass;
 
-            } catch (IllegalAccessException | NoSuchFieldException e) {
+                if (FabricLoader.getInstance().isModLoaded("quilt_loader")) {
+                    loaderClass = Class.forName("org.quiltmc.loader.impl.QuiltLoaderImpl");
+                }
+                else if (FabricLoader.getInstance().isModLoaded("fabricloader")) {
+                    loaderClass = Class.forName("net.fabricmc.loader.impl.FabricLoaderImpl");
+                }
+                else {
+                    SharedResources.LOGGER.error("Could not find Fabric or Quilt. Abort setting config override");
+                    return;
+                }
+
+                Field configDirField = loaderClass.getDeclaredField("configDir");
+                configDirField.setAccessible(true);
+                configDirField.set(loaderClass.getDeclaredField("INSTANCE").get(null), configDir);
+
+            } catch (IllegalAccessException |
+                     NoSuchFieldException |
+                     ClassNotFoundException e) {
                 SharedResources.LOGGER.error("Failed to set config directory override.", e);
 
             }
