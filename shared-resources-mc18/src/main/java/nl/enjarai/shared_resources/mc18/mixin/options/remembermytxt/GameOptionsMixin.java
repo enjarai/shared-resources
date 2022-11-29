@@ -1,6 +1,5 @@
 package nl.enjarai.shared_resources.mc18.mixin.options.remembermytxt;
 
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import net.minecraft.client.option.GameOptions;
 import net.minecraft.nbt.NbtCompound;
 import nl.enjarai.shared_resources.common.SharedResources;
@@ -9,6 +8,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 import java.io.PrintWriter;
@@ -34,16 +34,9 @@ public abstract class GameOptionsMixin {
     private NbtCompound sharedresources$loadedData;
     private Map<String, String> sharedresources$unacceptedOptions;
 
-    @ModifyExpressionValue(
-            method = "load",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/client/option/GameOptions;update(Lnet/minecraft/nbt/NbtCompound;)Lnet/minecraft/nbt/NbtCompound;"
-            )
-    )
-    private NbtCompound sharedresources$getKeys(NbtCompound nbtCompound2) {
-        sharedresources$loadedData = nbtCompound2;
-        return nbtCompound2;
+    @Inject(method = "update", at = @At("HEAD"))
+    private void sharedresources$getKeys(NbtCompound nbtCompound, CallbackInfoReturnable<NbtCompound> cir) {
+        sharedresources$loadedData = nbtCompound;
     }
 
     @Inject(
