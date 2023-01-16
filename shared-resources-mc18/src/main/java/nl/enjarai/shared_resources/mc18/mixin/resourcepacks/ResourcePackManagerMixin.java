@@ -1,10 +1,10 @@
-package nl.enjarai.shared_resources.common.mixin.resourcepacks;
+package nl.enjarai.shared_resources.mc18.mixin.resourcepacks;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.resource.ResourcePackManager;
 import net.minecraft.resource.ResourcePackProvider;
 import nl.enjarai.shared_resources.api.GameResourceHelper;
-import nl.enjarai.shared_resources.common.util.ExternalFileResourcePackProvider;
+import nl.enjarai.shared_resources.mc18.util.ExternalFileResourcePackProvider;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Mutable;

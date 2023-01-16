@@ -10,6 +10,7 @@ import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.ClickableWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
+import nl.enjarai.shared_resources.versioned.Versioned;
 import org.lwjgl.util.tinyfd.TinyFileDialogs;
 
 import java.nio.file.Path;
@@ -40,7 +41,7 @@ public class DirectoryConfigEntry extends AbstractConfigListEntry<Path> {
         this.defaultValue = defaultValue;
         this.saveConsumer = saveConsumer;
 
-        pathButton = new LongButtonWidget(0, 0, 150, 20, TEXT.translatable("config.shared_resources.directoryEntry"), button -> {
+        pathButton = Versioned.SCREEN_ELEMENTS.buildLongButton(0, 0, 150, 20, TEXT.translatable("config.shared_resources.directoryEntry"), button -> {
             Path absolutePath = path.get().isAbsolute() ? path.get() : FabricLoader.getInstance().getGameDir().resolve(path.get());
             String val = TinyFileDialogs.tinyfd_selectFolderDialog("Select directory", absolutePath.toString());
 
@@ -49,7 +50,7 @@ public class DirectoryConfigEntry extends AbstractConfigListEntry<Path> {
             }
         });
         Text resetButtonKey = TEXT.translatable("text.cloth-config.reset_value");
-        resetButton = new ButtonWidget(0, 0, MinecraftClient.getInstance().textRenderer.getWidth(resetButtonKey) + 6, 20, resetButtonKey, (widget) -> path.set(defaultValue));
+        resetButton = Versioned.SCREEN_ELEMENTS.buildButton(0, 0, MinecraftClient.getInstance().textRenderer.getWidth(resetButtonKey) + 6, 20, resetButtonKey, (widget) -> path.set(defaultValue));
         widgets = Lists.newArrayList(pathButton, resetButton);
     }
 

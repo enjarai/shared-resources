@@ -1,2 +1,1 @@
-- Fix a critical issue with the RememberMyTxt mixin.
-- Hopefully added Quilt support for the config directory override. (courtesy of @jacg311)
+- Update to 1.19.3 (with great help from @jacg311)

@@ -1,16 +1,18 @@
 {
-    "required": true,
-    "minVersion": "0.8",
-    "package": "nl.enjarai.shared_resources.mc19_3.mixin",
-    "compatibilityLevel": "JAVA_17",
-    "mixins": [
-        "resourcepacks.FileResourcePackProviderMixin",
-        "resourcepacks.ResourcePackManagerMixin"
-    ],
-    "client": [
-        "options.remembermytxt.GameOptionsMixin"
-    ],
-    "injectors": {
-        "defaultRequire": 1
-    }
+  "required": true,
+  "minVersion": "0.8",
+  "package": "nl.enjarai.shared_resources.mc19_3.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+  ],
+  "client": [
+    "options.remembermytxt.GameOptionsMixin",
+    "resourcepacks.FileResourcePackProviderAccessor",
+    "resourcepacks.FileResourcePackProviderMixin",
+    "resourcepacks.PackScreenMixin",
+    "resourcepacks.ResourcePackManagerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
 }

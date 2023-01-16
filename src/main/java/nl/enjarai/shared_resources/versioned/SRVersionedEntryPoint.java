@@ -4,4 +4,6 @@ public interface SRVersionedEntryPoint {
     TextBuilder getTextBuilder();
 
     RenderSystemProxy getRenderSystemProxy();
+
+    ScreenElementsBuilder getScreenElementsBuilder();
 }

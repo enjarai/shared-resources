@@ -1,10 +1,9 @@
-package nl.enjarai.shared_resources.common.gui;
+package nl.enjarai.shared_resources.mc19_3.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.MathHelper;
@@ -12,7 +11,7 @@ import nl.enjarai.shared_resources.versioned.Versioned;
 
 public class LongButtonWidget extends ButtonWidget {
     public LongButtonWidget(int x, int y, int width, int height, Text message, PressAction onPress) {
-        super(x, y, width, height, message, onPress);
+        super(x, y, width, height, message, onPress, DEFAULT_NARRATION_SUPPLIER);
     }
 
     @Override
@@ -28,7 +27,7 @@ public class LongButtonWidget extends ButtonWidget {
 
         drawTexture(
                 matrices,
-                x, y,
+                getX(), getY(),
                 0, 46 + yImage * 20,
                 10, height
         );
@@ -37,14 +36,14 @@ public class LongButtonWidget extends ButtonWidget {
         for (int i = 0; i < repetitions; i++) {
             drawTexture(
                     matrices,
-                    x + 10 + fillableWidth / repetitions * i, y,
+                    getX() + 10 + fillableWidth / repetitions * i, getY(),
                     10 + 80 / repetitions * i, 46 + yImage * 20,
                     fillableWidth / repetitions, height
             );
         }
         drawTexture(
                 matrices,
-                x + width - 20, y,
+                getX() + width - 20, getY(),
                 200 - 20, 46 + yImage * 20,
                 20, height
         );
@@ -63,7 +62,7 @@ public class LongButtonWidget extends ButtonWidget {
         drawCenteredText(
                 matrices, textRenderer,
                 trimmedMessage,
-                x + width / 2, y + (height - 8) / 2,
+                getX() + width / 2, getY() + (height - 8) / 2,
                 j | MathHelper.ceil(alpha * 255.0F) << 24
         );
     }

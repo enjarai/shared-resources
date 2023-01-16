@@ -28,7 +28,16 @@
   ],
   "custom": {
     "modmenu": {
-      "parent": "shared-resources",
+      "parent": {
+        "id": "shared-resources",
+        "name": "Shared Resources",
+        "description": "Only API is present, no functionality",
+        "authors": [
+          "enjarai",
+          "jacg"
+        ],
+        "icon": "assets/shared-resources-api/icon.png"
+      },
       "badges": ["library"]
     }
   }

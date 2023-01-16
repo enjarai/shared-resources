@@ -6,6 +6,7 @@ public class Versioned {
 
     public static TextBuilder TEXT;
     public static RenderSystemProxy RENDER_SYSTEM;
+    public static ScreenElementsBuilder SCREEN_ELEMENTS;
 
     public static void load() {
         SRVersionedEntryPoint entryPoint = FabricLoader.getInstance()
@@ -16,5 +17,6 @@ public class Versioned {
 
         TEXT = entryPoint.getTextBuilder();
         RENDER_SYSTEM = entryPoint.getRenderSystemProxy();
+        SCREEN_ELEMENTS = entryPoint.getScreenElementsBuilder();
     }
 }

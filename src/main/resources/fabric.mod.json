@@ -18,7 +18,7 @@
   "license": "LGPLv3",
   "icon": "assets/shared-resources/icon.png",
 
-  "environment": "*",
+  "environment": "client",
   "entrypoints": {
     "main": [
       "nl.enjarai.shared_resources.common.SharedResources"
@@ -27,10 +27,10 @@
       "nl.enjarai.shared_resources.common.SharedResourcesPreLaunch"
     ],
     "shared-resources": [
-        "nl.enjarai.shared_resources.common.registry.GameResources"
+      "nl.enjarai.shared_resources.common.registry.GameResources"
     ],
     "modmenu": [
-        "nl.enjarai.shared_resources.common.compat.modmenu.ModMenuIntegration"
+      "nl.enjarai.shared_resources.common.compat.modmenu.ModMenuIntegration"
     ]
   },
   "mixins": [

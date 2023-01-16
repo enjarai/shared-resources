@@ -17,7 +17,7 @@
   "license": "LGPLv3",
   "icon": "assets/shared-resources-mc19-3/icon.png",
 
-  "environment": "*",
+  "environment": "client",
   "entrypoints": {
     "shared-resources-versioned": [
         "nl.enjarai.shared_resources.mc19_3.SREntryPoint"
