@@ -13,6 +13,7 @@ rootProject.name = "shared-resources"
 
 include("shared-resources-mc16")
 include("shared-resources-mc18")
-include("shared-resources-mc19")
+include("shared-resources-mc19-2")
+include("shared-resources-mc19-3")
 include("shared-resources-api")
 

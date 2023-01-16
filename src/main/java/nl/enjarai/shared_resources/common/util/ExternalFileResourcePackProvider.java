@@ -2,8 +2,7 @@ package nl.enjarai.shared_resources.common.util;
 
 import net.minecraft.resource.FileResourcePackProvider;
 import net.minecraft.resource.ResourcePackProfile;
-import net.minecraft.resource.ResourcePackSource;
-import nl.enjarai.shared_resources.common.mixin.resourcepacks.FileResourcePackProviderAccessor;
+import nl.enjarai.shared_resources.versioned.FileResourcepackProviderProxy;
 
 import java.nio.file.Path;
 import java.util.function.Consumer;
@@ -19,11 +18,11 @@ public class ExternalFileResourcePackProvider extends FileResourcePackProvider {
 
     @Override
     public void register(Consumer<ResourcePackProfile> profileAdder, ResourcePackProfile.Factory factory) {
-        FileResourcePackProviderAccessor thiz = (FileResourcePackProviderAccessor) this;
+        FileResourcepackProviderProxy thiz = (FileResourcepackProviderProxy) this;
 
         Path path = pathSupplier.get();
         if (path == null) return;
-        thiz.setPacksFolder(path.toFile());
+        thiz.sharedresources$setPacksFolder(path);
 
         super.register(profileAdder, factory);
     }

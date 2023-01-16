@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "shared-resources-mc19-3",
+  "version": "${version}",
+
+  "name": "Shared Resources for 1.19.3",
+  "description": "Version-specific code for Minecraft 1.19.3",
+  "authors": [
+    "enjarai",
+    "jacg"
+  ],
+  "contact": {
+    "homepage": "https://enjarai.nl/",
+    "sources": "https://github.com/enjarai/shared-resources"
+  },
+
+  "license": "LGPLv3",
+  "icon": "assets/shared-resources-mc19-3/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "shared-resources-versioned": [
+        "nl.enjarai.shared_resources.mc19_3.SREntryPoint"
+    ]
+  },
+  "depends": {
+    "minecraft": ">=1.19.3"
+  },
+  "mixins": [
+    "shared-resources19-3.mixins.json"
+  ],
+  "accessWidener": "shared-resources19-3.accesswidener",
+  "custom": {
+    "modmenu": {
+      "parent": "shared-resources",
+      "badges": ["library"]
+    }
+  }
+}
