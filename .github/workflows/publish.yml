@@ -41,6 +41,8 @@ jobs:
         run: chmod +x ./gradlew
       - name: build
         run: ./gradlew build
+        env:
+          GRADLE_OPTS: -Xmx4g
       - name: publish to maven
         run: ./gradlew publish
         env:
