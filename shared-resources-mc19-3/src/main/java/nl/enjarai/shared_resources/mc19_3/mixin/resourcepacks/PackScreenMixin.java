@@ -7,7 +7,6 @@ import nl.enjarai.shared_resources.common.registry.GameResources;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-import java.io.File;
 import java.nio.file.Path;
 
 @Mixin(PackScreen.class)

@@ -1,1 +1,1 @@
-- Update to 1.19.3 (with great help from @jacg311)
+- Fixed crash when opening resource pack screen or singleplayer menu on 1.19.3.

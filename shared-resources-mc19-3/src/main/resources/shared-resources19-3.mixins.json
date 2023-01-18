@@ -9,7 +9,6 @@
     "options.remembermytxt.GameOptionsMixin",
     "resourcepacks.FileResourcePackProviderAccessor",
     "resourcepacks.FileResourcePackProviderMixin",
-    "resourcepacks.PackScreenMixin",
     "resourcepacks.ResourcePackManagerMixin"
   ],
   "injectors": {
