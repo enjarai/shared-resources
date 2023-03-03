@@ -1,1 +1,2 @@
-- Fixed crash when opening resource pack screen or singleplayer menu on 1.19.3.
+- Updated to support 1.19.4.
+- Made Mod Menu entry for API-only more clear.
