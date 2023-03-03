@@ -30,7 +30,7 @@
     "modmenu": {
       "parent": {
         "id": "shared-resources",
-        "name": "Shared Resources",
+        "name": "Shared Resources (API Only)",
         "description": "Only API is present, no functionality",
         "authors": [
           "enjarai",
