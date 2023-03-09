@@ -9,7 +9,7 @@
   "shared_resources.directory.config": "Настройки модов",
   "shared_resources.directory.config.description[0]": "Общие файлы настроек для большинства модов, за исключением этого",
   "shared_resources.directory.config.description[1]": "(всё, что расположено в .minecraft/config).",
-  "shared_resources.directory.screenshots": "Скриншоты",
+  "shared_resources.directory.screenshots": "Снимки экрана",
   "shared_resources.directory.shaderpacks": "Наборы шейдеров Iris",
   "shared_resources.directory.schematics": "Схемы",
   "shared_resources.directory.schematics.description[0]": "Специально для схем Litematica.",
