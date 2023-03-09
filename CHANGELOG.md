@@ -1,2 +1,1 @@
-- Updated to support 1.19.4.
-- Made Mod Menu entry for API-only more clear.
+- Added support for saved hotbars.

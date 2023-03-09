@@ -41,6 +41,10 @@ public class GameResources implements SharedResourcesEntrypoint {
             .setDisplayName(TEXT.translatable("shared_resources.file.servers"))
             .setDescription(TEXT.translatable("shared_resources.file.servers.description"))
             .build();
+    public static final ResourceFile HOTBARS = new ResourceFileBuilder("hotbar.nbt")
+            .setDisplayName(TEXT.translatable("shared_resources.file.hotbars"))
+            .setDescription(TEXT.translatable("shared_resources.file.hotbars.description"))
+            .build();
 
     public static final ResourceDirectory SHADERPACKS = new ResourceDirectoryBuilder("shaderpacks")
             .setDisplayName(TEXT.translatable("shared_resources.directory.shaderpacks"))
@@ -65,6 +69,7 @@ public class GameResources implements SharedResourcesEntrypoint {
 
         registry.register(SharedResources.id("options"), OPTIONS);
         registry.register(SharedResources.id("servers"), SERVERS);
+        registry.register(SharedResources.id("hotbars"), HOTBARS);
 
         // Only compat if a mod is available.
         if (checkLoaded("iris")) registry.register(SharedResources.id("shaderpacks"), SHADERPACKS);

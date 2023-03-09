@@ -6,6 +6,7 @@
   "mixins": [
   ],
   "client": [
+    "hotbars.HotbarStorageMixin",
     "options.GameOptionsMixin",
     "saves.MinecraftClientMixin",
     "screenshots.ScreenshotRecorderMixin",

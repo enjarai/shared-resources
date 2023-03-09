@@ -18,5 +18,7 @@
   "shared_resources.file.options": "Options",
   "shared_resources.file.options.description": "The vanilla options.txt file.",
   "shared_resources.file.servers": "Servers",
-  "shared_resources.file.servers.description": "The vanilla servers.dat file."
+  "shared_resources.file.servers.description": "The vanilla servers.dat file.",
+  "shared_resources.file.hotbars": "Saved Hotbars",
+  "shared_resources.file.hotbars.description": "The vanilla hotbar.nbt file."
 }
