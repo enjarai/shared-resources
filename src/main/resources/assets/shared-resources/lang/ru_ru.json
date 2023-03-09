@@ -1,0 +1,27 @@
+{
+  "config.shared_resources.title": "Shared Resources",
+  "config.shared_resources.general.directory": "Общая корневая папка игры:",
+  "config.shared_resources.general.enabled": "Общие ресурсы:",
+  "config.shared_resources.experimental[0]": "§4Внимание: §cЭто экспериментальная функция, которая может работать",
+  "config.shared_resources.experimental[1]": "§cне так, как задумано. Используйте на свой страх и риск.",
+  "shared_resources.directory.resourcepacks": "Наборы ресурсов",
+  "shared_resources.directory.saves": "Миры",
+  "shared_resources.directory.config": "Настройки модов",
+  "shared_resources.directory.config.description[0]": "Общие файлы настроек для большинства модов, за исключением этого",
+  "shared_resources.directory.config.description[1]": "(всё, что расположено в .minecraft/config).",
+  "shared_resources.directory.screenshots": "Снимки экрана",
+  "shared_resources.directory.shaderpacks": "Наборы шейдеров Iris",
+  "shared_resources.directory.schematics": "Схемы",
+  "shared_resources.directory.schematics.description[0]": "Специально для схем Litematica.",
+  "shared_resources.directory.schematics.description[1]": "Litematica и так позволяет настроить папку,",
+  "shared_resources.directory.schematics.description[2]": "но для удобства это можно сделать и здесь.",
+  "shared_resources.file.options": "Настройки игры",
+  "shared_resources.file.options.description": "Файл настроек исходной игры (options.txt).",
+  "shared_resources.file.servers": "Серверы",
+  "shared_resources.file.servers.description": "Файл со списком серверов (servers.dat).",
+  "shared_resources.file.hotbars": "Сохранённые инструменты",
+  "shared_resources.file.hotbars.description": "Файл с сохранёнными инструментами (hotbar.nbt).",
+
+  "modmenu.summaryTranslation.shared-resources": "Общие ресурсы игры для разных установок.",
+  "modmenu.descriptionTranslation.shared-resources": "С помощью Shared Resources можно объединять миры, наборы ресурсов и шейдеров, панели инструментов и другие компоненты между разными установками игры."
+}
