@@ -31,7 +31,7 @@ public abstract class GameOptionsMixin {
     protected abstract void accept(GameOptions.Visitor visitor);
 
     private NbtCompound sharedresources$loadedData;
-    private Map<String, String> sharedresources$unacceptedOptions;
+    private Map<String, String> sharedresources$unacceptedOptions = new HashMap<>();
 
     @Inject(method = "update", at = @At("HEAD"))
     private void sharedresources$getKeys(NbtCompound nbtCompound, CallbackInfoReturnable<NbtCompound> cir) {

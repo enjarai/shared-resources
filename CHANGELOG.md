@@ -1,1 +1,1 @@
-- Added support for saved hotbars.
+- Hopefully fixed a bug with options.txt preservation.
