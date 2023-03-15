@@ -1,1 +1,2 @@
-- Hopefully fixed a bug with options.txt preservation.
+- Added support for datapacks.
+- Optimised external resource pack loading and fixed a bug related to it.

@@ -6,10 +6,11 @@
   "mixins": [
   ],
   "client": [
+    "datapacks.VanillaDataPackProviderMixin",
     "options.remembermytxt.GameOptionsMixin",
     "resourcepacks.FileResourcePackProviderAccessor",
     "resourcepacks.FileResourcePackProviderMixin",
-    "resourcepacks.ResourcePackManagerMixin"
+    "resourcepacks.MinecraftClientMixin"
   ],
   "injectors": {
     "defaultRequire": 1

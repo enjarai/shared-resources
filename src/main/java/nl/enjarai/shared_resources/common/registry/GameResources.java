@@ -30,6 +30,14 @@ public class GameResources implements SharedResourcesEntrypoint {
             .setDisplayName(TEXT.translatable("shared_resources.directory.screenshots"))
             .overridesDefaultDirectory()
             .build();
+    public static final ResourceDirectory DATAPACKS = new ResourceDirectoryBuilder("datapacks")
+            .setDisplayName(TEXT.translatable("shared_resources.directory.datapacks"))
+            .setDescription(
+                    TEXT.translatable("shared_resources.directory.datapacks.description[0]"),
+                    TEXT.translatable("shared_resources.directory.datapacks.description[1]"),
+                    TEXT.translatable("shared_resources.directory.datapacks.description[2]")
+            )
+            .build();
 
 
     public static final ResourceFile OPTIONS = new ResourceFileBuilder("options.txt")
@@ -66,6 +74,7 @@ public class GameResources implements SharedResourcesEntrypoint {
         registry.register(SharedResources.id("saves"), SAVES);
         registry.register(SharedResources.id("config"), CONFIG);
         registry.register(SharedResources.id("screenshots"), SCREENSHOTS);
+        registry.register(SharedResources.id("datapacks"), DATAPACKS);
 
         registry.register(SharedResources.id("options"), OPTIONS);
         registry.register(SharedResources.id("servers"), SERVERS);

@@ -6,10 +6,12 @@
   "mixins": [
   ],
   "client": [
+    "datapacks.CreateWorldScreenMixin",
+    "datapacks.MinecraftClientMixin",
     "options.remembermytxt.GameOptionsMixin",
     "resourcepacks.FileResourcePackProviderMixin",
-    "resourcepacks.PackScreenMixin",
-    "resourcepacks.ResourcePackManagerMixin"
+    "resourcepacks.MinecraftClientMixin",
+    "resourcepacks.PackScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

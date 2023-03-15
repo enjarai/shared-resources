@@ -14,10 +14,11 @@ It works by selecting a global directory to hold your common game files,
 and modifying Minecraft to use that directory instead of the default one.
 Where possible, the mod tries to load files from the global directory together 
 with the local ones, merging the two and allowing you to select from both. 
-This is currently only available for resource packs and shaders.
+This is currently only available for resource packs, data packs and shaders.
 
 Currently supported game files/directories:
 - Resource packs
+- Data packs
 - Saves
 - Vanilla options (video settings, controls, etc.)
 - Servers
