@@ -1,2 +1,1 @@
-- Added support for datapacks.
-- Optimised external resource pack loading and fixed a bug related to it.
+- Fixed a major crash caused by a minor mixin in 1.19.2
