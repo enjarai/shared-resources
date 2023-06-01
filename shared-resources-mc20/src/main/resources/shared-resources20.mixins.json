@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "nl.enjarai.shared_resources.mc20.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+  ],
+  "client": [
+    "datapacks.VanillaDataPackProviderMixin",
+    "options.remembermytxt.GameOptionsMixin",
+    "resourcepacks.FileResourcePackProviderAccessor",
+    "resourcepacks.FileResourcePackProviderMixin",
+    "resourcepacks.MinecraftClientMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
