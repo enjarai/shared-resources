@@ -1,1 +1,1 @@
-- Fixed a major crash caused by a minor mixin in 1.19.2
+- Updated to 1.20 and 1.20.1.

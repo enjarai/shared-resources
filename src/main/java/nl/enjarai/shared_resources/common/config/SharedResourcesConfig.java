@@ -23,6 +23,7 @@ import nl.enjarai.shared_resources.common.util.directory.EmptyGameDirectoryProvi
 import nl.enjarai.shared_resources.common.util.directory.GameDirectoryProvider;
 import nl.enjarai.shared_resources.common.util.directory.RootedGameDirectoryProvider;
 import nl.enjarai.shared_resources.util.GameResourceConfig;
+import nl.enjarai.shared_resources.versioned.Versioned;
 import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
@@ -163,7 +164,7 @@ public class SharedResourcesConfig implements GameResourceConfig {
                                 TEXT.translatable("config.shared_resources.general.directory")
                         ).build()
                 )
-                .addEntry(new DirectoryConfigEntry(
+                .addEntry(Versioned.SCREEN_ELEMENTS.getDirectoryEntry(
                         TEXT.translatable("config.shared_resources.general.directory"),
                         globalDir,
                         Paths.get("global_resources"),

@@ -1,10 +1,10 @@
 archives_base_name = "shared-resources-1.20"
 
 dependencies {
-    minecraft "com.mojang:minecraft:1.20-rc1"
-    mappings "net.fabricmc:yarn:1.20-rc1+build.2"
+    minecraft "com.mojang:minecraft:1.20"
+    mappings "net.fabricmc:yarn:1.20+build.1"
 
-    modImplementation "com.terraformersmc:modmenu:7.0.0-beta.2"
+    modImplementation "com.terraformersmc:modmenu:7.0.1"
     modImplementation("me.shedaniel.cloth:cloth-config-fabric:11.0.98") {
         exclude(group: "net.fabricmc.fabric-api")
     }
