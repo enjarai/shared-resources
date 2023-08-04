@@ -4,12 +4,6 @@ plugins {
 }
 
 loom {
-    // im not sure what this does,
-    // but i think we might need it
-    runConfigs.configureEach {
-        ideConfigGenerated = true
-    }
-
     accessWidenerPath = file("src/main/resources/shared-resources.accesswidener")
 }
 
@@ -91,6 +85,16 @@ dependencies {
 subprojects {
     // skip our API module
     if (it.name == "shared-resources-api") return
+
+    loom {
+        runs {
+            runMcVersion {
+                inherit(client)
+                ideConfigGenerated = true
+                configName = "Run Minecraft 1.${project.name.split("-mc").last().replace("-", ".")}"
+            }
+        }
+    }
 
     dependencies {
         // include the root project because that's where our common code is
