@@ -67,6 +67,10 @@ public class GameResources implements SharedResourcesEntrypoint {
             .defaultEnabled(false)
             .overridesDefaultDirectory()
             .build();
+    public static final ResourceDirectory REPLAY_RECORDINGS = new ResourceDirectoryBuilder("replay_recordings")
+            .setDisplayName(TEXT.translatable("shared_resources.directory.replay_recordings"))
+            .overridesDefaultDirectory()
+            .build();
 
     @Override
     public void registerResources(GameResourceRegistry registry) {
@@ -83,6 +87,7 @@ public class GameResources implements SharedResourcesEntrypoint {
         // Only compat if a mod is available.
         if (checkLoaded("iris")) registry.register(SharedResources.id("shaderpacks"), SHADERPACKS);
         if (checkLoaded("litematica")) registry.register(SharedResources.id("schematics"), SCHEMATICS);
+        if (checkLoaded("replaymod")) registry.register(SharedResources.id("replay_recordings"), REPLAY_RECORDINGS);
     }
 
     private static boolean checkLoaded(String modid) {

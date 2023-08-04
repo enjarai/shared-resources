@@ -1,5 +1,7 @@
 package nl.enjarai.shared_resources.api;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 
 /**
@@ -10,8 +12,11 @@ public interface ResourceFile extends GameResource {
 
     @Override
     default void ensureExists(Path resourceLocation) {
-        if (!resourceLocation.toFile().exists()) {
-            resourceLocation.toFile().getParentFile().mkdirs();
+        if (!Files.exists(resourceLocation)) {
+            try {
+                Files.createDirectories(resourceLocation.getParent());
+            } catch (IOException ignored) {
+            }
         }
     }
 }

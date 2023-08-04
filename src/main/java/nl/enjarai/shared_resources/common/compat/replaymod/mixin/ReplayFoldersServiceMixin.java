@@ -1,4 +1,4 @@
-package nl.enjarai.shared_resources.common.compat.litematica.mixin;
+package nl.enjarai.shared_resources.common.compat.replaymod.mixin;
 
 import nl.enjarai.shared_resources.api.GameResourceHelper;
 import nl.enjarai.shared_resources.common.registry.GameResources;
@@ -9,25 +9,23 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.io.File;
 import java.nio.file.Path;
 
-@SuppressWarnings("UnresolvedMixinReference")
 @Pseudo
-@Mixin(targets = "fi.dy.masa.litematica.data.DataManager")
-public abstract class DataManagerMixin {
+@Mixin(targets = "com.replaymod.core.files.ReplayFoldersService")
+public abstract class ReplayFoldersServiceMixin {
     @Dynamic
     @Inject(
             remap = false,
-            method = "getDefaultBaseSchematicDirectory",
-            at = @At(value = "HEAD"),
+            method = "getReplayFolder",
+            at = @At("HEAD"),
             cancellable = true
     )
-    private static void sharedresources$modifyLitematicsDir(CallbackInfoReturnable<File> ci) {
-        Path newDir = GameResourceHelper.getPathFor(GameResources.SCHEMATICS);
+    private void sharedresources$modifyReplayFolder(CallbackInfoReturnable<Path> ci) {
+        Path newDir = GameResourceHelper.getPathFor(GameResources.REPLAY_RECORDINGS);
 
         if (newDir != null) {
-            ci.setReturnValue(newDir.toFile());
+            ci.setReturnValue(newDir);
         }
     }
 }
