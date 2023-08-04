@@ -19,6 +19,8 @@
   "shared_resources.directory.schematics.description[0]": "Specifically Litematica schematics.",
   "shared_resources.directory.schematics.description[1]": "Litematica does have it's own directory setting,",
   "shared_resources.directory.schematics.description[2]": "but its available here too for convenience.",
+  "shared_resources.directory.replay_recordings": "Replay Recordings",
+  "shared_resources.directory.skinshuffle_data": "SkinShuffle profiles and data",
   "shared_resources.file.options": "Options",
   "shared_resources.file.options.description": "The vanilla options.txt file.",
   "shared_resources.file.servers": "Servers",

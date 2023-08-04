@@ -37,7 +37,8 @@
     "shared-resources.mixins.json",
     "shared-resources.compat.iris.mixins.json",
     "shared-resources.compat.litematica.mixins.json",
-    "shared-resources.compat.replaymod.mixins.json"
+    "shared-resources.compat.replaymod.mixins.json",
+    "shared-resources.compat.skinshuffle.mixins.json"
   ],
   "accessWidener": "shared-resources.accesswidener",
 
