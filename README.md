@@ -27,6 +27,9 @@ Currently supported game files/directories:
 - The fabric config folder (should work with the configs of any properly coded mods)
 - Shader packs (via Iris)
 - Schematics (via Litematica)
+- Replay Recordings (via ReplayMod)
+- Skin Presets (via SkinShuffle)
+- World Map Data (via Xaero's World Map)
 
 Incorporates code from [RememberMyTxt](https://github.com/DuncanRuns/RememberMyTxt)
 (with permission from [DuncanRuns](https://github.com/DuncanRuns))
