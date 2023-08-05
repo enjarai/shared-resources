@@ -1,5 +1,6 @@
 package nl.enjarai.shared_resources.common.config;
 
+import net.minecraft.util.Identifier;
 import nl.enjarai.shared_resources.api.GameResource;
 import nl.enjarai.shared_resources.api.GameResourceRegistry;
 import nl.enjarai.shared_resources.common.util.directory.GameDirectoryProvider;
@@ -15,8 +16,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.*;
+import java.util.List;
 import java.util.Timer;
-import java.util.TimerTask;
 
 // Base structure largely copied from oωo-sentinel
 public class FirstStartupWindow {
@@ -157,10 +159,12 @@ public class FirstStartupWindow {
 
         configPanel.add(new JLabel("Enabled resources:"));
 
-        config.getEnabled().forEach((resource, enabled) -> {
-            GameResource gameResource = GameResourceRegistry.REGISTRY.get(resource);
-            JCheckBox checkBox = new JCheckBox(gameResource.getDefaultPath().toString(), enabled);
-            checkBox.addActionListener(e -> config.setEnabled(resource, checkBox.isSelected()));
+        List<Identifier> resources = new ArrayList<>(GameResourceRegistry.REGISTRY.getIds());
+        Collections.sort(resources);
+        resources.forEach(id -> {
+            GameResource gameResource = GameResourceRegistry.REGISTRY.get(id);
+            JCheckBox checkBox = new JCheckBox(gameResource.getDefaultPath().toString(), config.isEnabled(id));
+            checkBox.addActionListener(e -> config.setEnabled(id, checkBox.isSelected()));
             configPanel.add(checkBox);
         });
 

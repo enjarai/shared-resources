@@ -79,6 +79,15 @@ public class GameResources implements SharedResourcesEntrypoint {
             .requiresRestart()
             .overridesDefaultDirectory()
             .build();
+    public static final ResourceFile XAEROS_WORLDMAP_CONFIG = new ResourceFileBuilder("config/xaeroworldmap.txt")
+            .setDisplayName(TEXT.translatable("shared_resources.file.xaeros_worldmap_config"))
+            .requiresRestart()
+            .build();
+    public static final ResourceDirectory XAEROS_WORLDMAP_DATA = new ResourceDirectoryBuilder("XaeroWorldMap")
+            .setDisplayName(TEXT.translatable("shared_resources.directory.xaeros_worldmap_data"))
+            .requiresRestart()
+            .overridesDefaultDirectory()
+            .build();
 
     @Override
     public void registerResources(GameResourceRegistry registry) {
@@ -99,6 +108,10 @@ public class GameResources implements SharedResourcesEntrypoint {
         if (checkLoaded("litematica")) registry.register(id("schematics"), SCHEMATICS);
         if (checkLoaded("replaymod")) registry.register(id("replay_recordings"), REPLAY_RECORDINGS);
         if (checkLoaded("skinshuffle")) registry.register(id("skinshuffle_data"), SKINSHUFFLE_DATA);
+        if (checkLoaded("xaeroworldmap")) {
+            registry.register(id("xaeros_worldmap_config"), XAEROS_WORLDMAP_CONFIG);
+            registry.register(id("xaeros_worldmap_data"), XAEROS_WORLDMAP_DATA);
+        }
     }
 
     private static boolean checkLoaded(String modid) {

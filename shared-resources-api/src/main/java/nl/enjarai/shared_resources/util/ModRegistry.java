@@ -5,6 +5,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Set;
 
 @SuppressWarnings("UnusedReturnValue")
 public class ModRegistry<T> {
@@ -33,6 +34,10 @@ public class ModRegistry<T> {
 
     public Iterator<T> iterator() {
         return entries.values().iterator();
+    }
+
+    public Set<Identifier> getIds() {
+        return entries.keySet();
     }
 
     public void finalise() {

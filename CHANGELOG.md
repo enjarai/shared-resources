@@ -1,1 +1,5 @@
-- Added compatibility with ReplayMod.
+- Added compatibility with:
+  - ReplayMod
+  - SkinShuffle
+  - Xaero's World Map
+- Reordered the resource toggles in the config screen to appear in alphabetical order.

@@ -17,7 +17,6 @@ import nl.enjarai.shared_resources.common.SharedResources;
 import nl.enjarai.shared_resources.common.SharedResourcesPreLaunch;
 import nl.enjarai.shared_resources.common.config.serialization.GameDirectoryProviderAdapter;
 import nl.enjarai.shared_resources.common.config.serialization.IdentifierAdapter;
-import nl.enjarai.shared_resources.common.gui.DirectoryConfigEntry;
 import nl.enjarai.shared_resources.common.registry.GameResources;
 import nl.enjarai.shared_resources.common.util.directory.EmptyGameDirectoryProvider;
 import nl.enjarai.shared_resources.common.util.directory.GameDirectoryProvider;
@@ -32,8 +31,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 
 import static nl.enjarai.shared_resources.versioned.Versioned.TEXT;
 
@@ -176,28 +175,30 @@ public class SharedResourcesConfig implements GameResourceConfig {
                         ).build()
                 );
 
-        enabled.forEach((id, enabled) -> {
-            GameResource directory = GameResourceRegistry.REGISTRY.get(id);
-            if (directory == null) return;
+        List<Identifier> resources = new ArrayList<>(GameResourceRegistry.REGISTRY.getIds());
+        Collections.sort(resources);
+        for (Identifier id : resources) {
+            GameResource resource = GameResourceRegistry.REGISTRY.get(id);
+            boolean enabled = isEnabled(id);
 
-            List<Text> description = new ArrayList<>(directory.getDescription());
-            if (directory.isExperimental()) {
+            List<Text> description = new ArrayList<>(resource.getDescription());
+            if (resource.isExperimental()) {
                 if (description.size() > 0) description.add(Text.of(" "));
                 description.add(TEXT.translatable("config.shared_resources.experimental[0]"));
                 description.add(TEXT.translatable("config.shared_resources.experimental[1]"));
             }
 
-            BooleanListEntry entry = entryBuilder.startBooleanToggle(directory.getDisplayName(), enabled)
-                    .setDefaultValue(directory.isDefaultEnabled())
+            BooleanListEntry entry = entryBuilder.startBooleanToggle(resource.getDisplayName(), enabled)
+                    .setDefaultValue(resource.isDefaultEnabled())
                     .setSaveConsumer(newEnabled -> {
                         setEnabled(id, newEnabled);
-                        directory.getUpdateCallback().onUpdate(GameResourceHelper.getPathFor(directory));
+                        resource.getUpdateCallback().onUpdate(GameResourceHelper.getPathFor(resource));
                     })
                     .setTooltip(description.toArray(new Text[0]))
                     .build();
-            entry.setRequiresRestart(directory.isRequiresRestart());
+            entry.setRequiresRestart(resource.isRequiresRestart());
             generalCategory.addEntry(entry);
-        });
+        }
 
         return builder.build();
     }
