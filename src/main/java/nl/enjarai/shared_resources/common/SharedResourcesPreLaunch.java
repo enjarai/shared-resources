@@ -53,22 +53,20 @@ public class SharedResourcesPreLaunch implements PreLaunchEntrypoint {
 
                 if (FabricLoader.getInstance().isModLoaded("quilt_loader")) {
                     loaderClass = Class.forName("org.quiltmc.loader.impl.QuiltLoaderImpl");
-                }
-                else if (FabricLoader.getInstance().isModLoaded("fabricloader")) {
+                } else if (FabricLoader.getInstance().isModLoaded("fabricloader")) {
                     loaderClass = Class.forName("net.fabricmc.loader.impl.FabricLoaderImpl");
-                }
-                else {
-                    SharedResources.LOGGER.error("Could not find Fabric or Quilt. Abort setting config override");
-                    return;
+                } else {
+                    throw new IllegalStateException("Could not find Fabric or Quilt. Abort setting config override");
                 }
 
                 Field configDirField = loaderClass.getDeclaredField("configDir");
                 configDirField.setAccessible(true);
                 configDirField.set(loaderClass.getDeclaredField("INSTANCE").get(null), configDir);
 
-            } catch (IllegalAccessException |
-                     NoSuchFieldException |
-                     ClassNotFoundException e) {
+            } catch ( IllegalStateException |
+                      IllegalAccessException |
+                      NoSuchFieldException |
+                      ClassNotFoundException e) {
                 SharedResources.LOGGER.error("Failed to set config directory override.", e);
 
             }

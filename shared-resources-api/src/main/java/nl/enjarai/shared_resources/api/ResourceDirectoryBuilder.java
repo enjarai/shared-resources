@@ -4,6 +4,7 @@ import net.minecraft.text.Text;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -18,6 +19,7 @@ public class ResourceDirectoryBuilder {
     private boolean defaultEnabled = true;
     private boolean experimental = false;
     private GameResource.ResourceUpdateCallback updateCallback = (path) -> {};
+    private List<String> mixinPackages = new ArrayList<>();
 
     /**
      * A simple builder for {@link ResourceDirectory}s, providing easy access to all settings and defaults.
@@ -93,6 +95,14 @@ public class ResourceDirectoryBuilder {
         return this;
     }
 
+    /**
+     * Add a mixin package that this directory needs to function.
+     */
+    public ResourceDirectoryBuilder addMixinPackage(String mixinPackage) {
+        mixinPackages.add(mixinPackage);
+        return this;
+    }
+
     public ResourceDirectory build() {
         return new ResourceDirectory() {
             @Override
@@ -135,6 +145,11 @@ public class ResourceDirectoryBuilder {
             @Override
             public GameResource.ResourceUpdateCallback getUpdateCallback() {
                 return updateCallback;
+            }
+
+            @Override
+            public List<String> getMixinPackages() {
+                return mixinPackages;
             }
         };
     }

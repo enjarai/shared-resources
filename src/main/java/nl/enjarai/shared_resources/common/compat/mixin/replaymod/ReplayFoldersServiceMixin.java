@@ -1,6 +1,7 @@
-package nl.enjarai.shared_resources.common.compat.replaymod.mixin;
+package nl.enjarai.shared_resources.common.compat.mixin.replaymod;
 
 import nl.enjarai.shared_resources.api.GameResourceHelper;
+import nl.enjarai.shared_resources.common.compat.CompatMixin;
 import nl.enjarai.shared_resources.common.registry.GameResources;
 import org.spongepowered.asm.mixin.Dynamic;
 import org.spongepowered.asm.mixin.Mixin;
@@ -12,6 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.nio.file.Path;
 
 @Pseudo
+@CompatMixin("replaymod")
 @Mixin(targets = "com.replaymod.core.files.ReplayFoldersService")
 public abstract class ReplayFoldersServiceMixin {
     @Dynamic

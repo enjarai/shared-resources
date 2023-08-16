@@ -4,6 +4,7 @@ import net.minecraft.text.Text;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -17,6 +18,7 @@ public class ResourceFileBuilder {
     private boolean defaultEnabled = true;
     private boolean experimental = false;
     private GameResource.ResourceUpdateCallback updateCallback = (path) -> {};
+    private List<String> mixinPackages = new ArrayList<>();
 
     /**
      * A simple builder for {@link ResourceFile}s, providing easy access to all settings and defaults.
@@ -83,6 +85,14 @@ public class ResourceFileBuilder {
         return this;
     }
 
+    /**
+     * Add a mixin package that this file needs to function.
+     */
+    public ResourceFileBuilder addMixinPackage(String mixinPackage) {
+        mixinPackages.add(mixinPackage);
+        return this;
+    }
+
     public ResourceFile build() {
         return new ResourceFile() {
             @Override
@@ -120,6 +130,11 @@ public class ResourceFileBuilder {
             @Override
             public ResourceUpdateCallback getUpdateCallback() {
                 return updateCallback;
+            }
+
+            @Override
+            public List<String> getMixinPackages() {
+                return mixinPackages;
             }
         };
     }

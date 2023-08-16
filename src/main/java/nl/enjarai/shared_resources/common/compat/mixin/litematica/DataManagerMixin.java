@@ -1,6 +1,7 @@
-package nl.enjarai.shared_resources.common.compat.litematica.mixin;
+package nl.enjarai.shared_resources.common.compat.mixin.litematica;
 
 import nl.enjarai.shared_resources.api.GameResourceHelper;
+import nl.enjarai.shared_resources.common.compat.CompatMixin;
 import nl.enjarai.shared_resources.common.registry.GameResources;
 import org.spongepowered.asm.mixin.Dynamic;
 import org.spongepowered.asm.mixin.Mixin;
@@ -14,6 +15,7 @@ import java.nio.file.Path;
 
 @SuppressWarnings("UnresolvedMixinReference")
 @Pseudo
+@CompatMixin("litematica")
 @Mixin(targets = "fi.dy.masa.litematica.data.DataManager")
 public abstract class DataManagerMixin {
     @Dynamic

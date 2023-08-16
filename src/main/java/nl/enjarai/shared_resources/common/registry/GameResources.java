@@ -59,6 +59,7 @@ public class GameResources implements SharedResourcesEntrypoint {
     // Compat
     public static final ResourceDirectory SHADERPACKS = new ResourceDirectoryBuilder("shaderpacks")
             .setDisplayName(TEXT.translatable("shared_resources.directory.shaderpacks"))
+            .addMixinPackage("iris")
             .build();
     public static final ResourceDirectory SCHEMATICS = new ResourceDirectoryBuilder("schematics")
             .setDisplayName(TEXT.translatable("shared_resources.directory.schematics"))
@@ -69,24 +70,29 @@ public class GameResources implements SharedResourcesEntrypoint {
             )
             .defaultEnabled(false)
             .overridesDefaultDirectory()
+            .addMixinPackage("litematica")
             .build();
     public static final ResourceDirectory REPLAY_RECORDINGS = new ResourceDirectoryBuilder("replay_recordings")
             .setDisplayName(TEXT.translatable("shared_resources.directory.replay_recordings"))
             .overridesDefaultDirectory()
+            .addMixinPackage("replaymod")
             .build();
     public static final ResourceDirectory SKINSHUFFLE_DATA = new ResourceDirectoryBuilder("config/skinshuffle")
             .setDisplayName(TEXT.translatable("shared_resources.directory.skinshuffle_data"))
             .requiresRestart()
             .overridesDefaultDirectory()
+            .addMixinPackage("skinshuffle")
             .build();
     public static final ResourceFile XAEROS_WORLDMAP_CONFIG = new ResourceFileBuilder("config/xaeroworldmap.txt")
             .setDisplayName(TEXT.translatable("shared_resources.file.xaeros_worldmap_config"))
             .requiresRestart()
+            .addMixinPackage("xaeroworldmap")
             .build();
     public static final ResourceDirectory XAEROS_WORLDMAP_DATA = new ResourceDirectoryBuilder("XaeroWorldMap")
             .setDisplayName(TEXT.translatable("shared_resources.directory.xaeros_worldmap_data"))
             .requiresRestart()
             .overridesDefaultDirectory()
+            .addMixinPackage("xaeroworldmap")
             .build();
 
     @Override

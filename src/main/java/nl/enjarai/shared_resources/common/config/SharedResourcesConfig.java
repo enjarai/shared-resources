@@ -75,9 +75,7 @@ public class SharedResourcesConfig implements GameResourceConfig {
     }
 
     public void initEnabledResources() {
-        Iterator<GameResource> allDirs = GameResourceRegistry.REGISTRY.iterator();
-        while (allDirs.hasNext()) {
-            GameResource dir = allDirs.next();
+        for (GameResource dir : GameResourceRegistry.REGISTRY) {
             Identifier id = dir.getId();
 
             if (!enabled.containsKey(id)) {
@@ -103,9 +101,7 @@ public class SharedResourcesConfig implements GameResourceConfig {
             globalDirectory = new RootedGameDirectoryProvider(path);
         }
 
-        Iterator<GameResource> it = GameResourceRegistry.REGISTRY.iterator();
-        while (it.hasNext()) {
-            GameResource resource = it.next();
+        for (GameResource resource : GameResourceRegistry.REGISTRY) {
             Path dirPath = GameResourceHelper.getPathOrDefaultFor(resource);
             resource.getUpdateCallback().onUpdate(dirPath);
         }

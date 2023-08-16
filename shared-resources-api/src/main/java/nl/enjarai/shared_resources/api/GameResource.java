@@ -1,5 +1,6 @@
 package nl.enjarai.shared_resources.api;
 
+import com.google.common.collect.ImmutableList;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
@@ -66,6 +67,13 @@ public interface GameResource {
      * Should usually not create files, but should ensure directories exist.
      */
     void ensureExists(Path resourceLocation);
+
+    /**
+     * A list of mixin packages that should be applied to operate this resource.
+     */
+    default List<String> getMixinPackages() {
+        return ImmutableList.of();
+    }
 
     interface ResourceUpdateCallback {
         void onUpdate(@Nullable Path path);

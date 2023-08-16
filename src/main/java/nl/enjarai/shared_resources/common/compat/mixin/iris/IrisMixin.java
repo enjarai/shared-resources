@@ -1,10 +1,12 @@
-package nl.enjarai.shared_resources.common.compat.iris.mixin;
+package nl.enjarai.shared_resources.common.compat.mixin.iris;
 
 import nl.enjarai.shared_resources.api.GameResourceHelper;
-import nl.enjarai.shared_resources.common.compat.iris.IrisMixinHooks;
+import nl.enjarai.shared_resources.common.compat.CompatMixin;
 import nl.enjarai.shared_resources.common.registry.GameResources;
+import org.spongepowered.asm.mixin.Dynamic;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -12,8 +14,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.nio.file.Path;
 
 @Pseudo
+@CompatMixin("iris")
 @Mixin(targets = "net.coderbot.iris.Iris")
 public abstract class IrisMixin {
+    @Unique
+    private static int fixShaderpackFolders = 0;
+
+    @Dynamic
     @Inject(
             method = "getShaderpacksDirectory()Ljava/nio/file/Path;",
             at = @At(value = "HEAD"),
@@ -21,8 +28,8 @@ public abstract class IrisMixin {
     )
     private static void shared_resources$injectShaderpacksDirectory(CallbackInfoReturnable<Path> ci) {
 
-        if (IrisMixinHooks.fixShaderpackFolders > 0) {
-            IrisMixinHooks.fixShaderpackFolders--;
+        if (fixShaderpackFolders > 0) {
+            fixShaderpackFolders--;
 
             Path source = GameResourceHelper.getPathFor(GameResources.SHADERPACKS);
             if (source != null) {
@@ -31,6 +38,7 @@ public abstract class IrisMixin {
         }
     }
 
+    @Dynamic
     @Inject(
             method = "loadExternalShaderpack(Ljava/lang/String;)Z",
             at = @At(value = "HEAD")
@@ -41,7 +49,7 @@ public abstract class IrisMixin {
         if (source == null) return;
 
         if (source.resolve(name).toFile().exists()) {
-            IrisMixinHooks.fixShaderpackFolders += 2;
+            fixShaderpackFolders += 2;
         }
     }
 }

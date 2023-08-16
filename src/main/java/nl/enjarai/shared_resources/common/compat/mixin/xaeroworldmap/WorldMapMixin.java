@@ -1,7 +1,8 @@
-package nl.enjarai.shared_resources.common.compat.xaeroworldmap.mixin;
+package nl.enjarai.shared_resources.common.compat.mixin.xaeroworldmap;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import nl.enjarai.shared_resources.api.GameResourceHelper;
+import nl.enjarai.shared_resources.common.compat.CompatMixin;
 import nl.enjarai.shared_resources.common.registry.GameResources;
 import org.spongepowered.asm.mixin.Dynamic;
 import org.spongepowered.asm.mixin.Mixin;
@@ -12,6 +13,7 @@ import org.spongepowered.asm.mixin.injection.Slice;
 import java.nio.file.Path;
 
 @Pseudo
+@CompatMixin("xaeroworldmap")
 @Mixin(targets = "xaero.map.WorldMap")
 public abstract class WorldMapMixin {
     @Dynamic

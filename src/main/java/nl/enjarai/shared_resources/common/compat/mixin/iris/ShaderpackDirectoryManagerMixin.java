@@ -1,8 +1,10 @@
-package nl.enjarai.shared_resources.common.compat.iris.mixin;
+package nl.enjarai.shared_resources.common.compat.mixin.iris;
 
 import nl.enjarai.shared_resources.api.GameResourceHelper;
 import nl.enjarai.shared_resources.common.SharedResources;
+import nl.enjarai.shared_resources.common.compat.CompatMixin;
 import nl.enjarai.shared_resources.common.registry.GameResources;
+import org.spongepowered.asm.mixin.Dynamic;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;
@@ -14,8 +16,10 @@ import java.nio.file.Path;
 import java.util.stream.Stream;
 
 @Pseudo
+@CompatMixin("iris")
 @Mixin(targets = "net.coderbot.iris.shaderpack.discovery.ShaderpackDirectoryManager")
 public abstract class ShaderpackDirectoryManagerMixin {
+    @Dynamic
     @Redirect(
             method = "enumerate",
             at = @At(

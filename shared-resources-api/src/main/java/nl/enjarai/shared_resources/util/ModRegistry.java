@@ -8,7 +8,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 @SuppressWarnings("UnusedReturnValue")
-public class ModRegistry<T> {
+public class ModRegistry<T> implements Iterable<T> {
     private final HashMap<Identifier, T> entries = new HashMap<>();
     private boolean locked = false;
 
@@ -32,6 +32,7 @@ public class ModRegistry<T> {
         return null;
     }
 
+    @Override
     public Iterator<T> iterator() {
         return entries.values().iterator();
     }
