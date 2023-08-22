@@ -2,18 +2,19 @@ package nl.enjarai.shared_resources.common.compat;
 
 import net.fabricmc.loader.api.FabricLoader;
 import nl.enjarai.shared_resources.common.SharedResources;
+import org.objectweb.asm.tree.AnnotationNode;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.Mixins;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
+import org.spongepowered.asm.service.MixinService;
+import org.spongepowered.asm.util.Annotations;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Mixin config plugin for compat, only applies mixins if specific mod is present.
- */
 public class CompatMixinPlugin implements IMixinConfigPlugin {
     static ArrayList<String> mixinPackages = new ArrayList<>();
 
@@ -31,16 +32,20 @@ public class CompatMixinPlugin implements IMixinConfigPlugin {
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
         try {
-            CompatMixin annotation = Class.forName(mixinClassName).getAnnotation(CompatMixin.class);
-            for (String modId : annotation.value()) {
+            ClassNode classNode = MixinService.getService().getBytecodeProvider().getClassNode(mixinClassName);
+            AnnotationNode annotationNode = Annotations.getVisible(classNode, CompatMixin.class);
+            CompatMixin.Visitor visitor = new CompatMixin.Visitor();
+            annotationNode.accept(visitor);
+
+            for (String modId : visitor.getValue()) {
                 if (!FabricLoader.getInstance().isModLoaded(modId)) {
                     return false;
                 }
             }
 
             try {
-                Class.forName(targetClassName);
-            } catch (ClassNotFoundException ignored) {
+                MixinService.getService().getBytecodeProvider().getClassNode(targetClassName);
+            } catch (ClassNotFoundException | IOException ignored) {
                 SharedResources.LOGGER.warn("Target class not found: " + targetClassName);
                 CompatMixinErrorHandler.onError(mixinClassName);
                 return false;
@@ -54,7 +59,7 @@ public class CompatMixinPlugin implements IMixinConfigPlugin {
             }
 
             return true;
-        } catch (ClassNotFoundException ignored) {
+        } catch (ClassNotFoundException | IOException ignored) {
             return false;
         }
     }

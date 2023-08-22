@@ -8,13 +8,18 @@ import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
 import me.shedaniel.clothconfig2.gui.entries.BooleanListEntry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.text.MutableText;
+import net.minecraft.text.Style;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import nl.enjarai.shared_resources.api.GameResource;
 import nl.enjarai.shared_resources.api.GameResourceHelper;
 import nl.enjarai.shared_resources.api.GameResourceRegistry;
 import nl.enjarai.shared_resources.common.SharedResources;
 import nl.enjarai.shared_resources.common.SharedResourcesPreLaunch;
+import nl.enjarai.shared_resources.common.compat.CompatMixinErrorHandler;
+import nl.enjarai.shared_resources.common.compat.CompatMixinPlugin;
 import nl.enjarai.shared_resources.common.config.serialization.GameDirectoryProviderAdapter;
 import nl.enjarai.shared_resources.common.config.serialization.IdentifierAdapter;
 import nl.enjarai.shared_resources.common.registry.GameResources;
@@ -25,6 +30,7 @@ import nl.enjarai.shared_resources.util.GameResourceConfig;
 import nl.enjarai.shared_resources.versioned.Versioned;
 import org.jetbrains.annotations.Nullable;
 
+import javax.swing.text.html.StyleSheet;
 import java.awt.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -184,7 +190,12 @@ public class SharedResourcesConfig implements GameResourceConfig {
                 description.add(TEXT.translatable("config.shared_resources.experimental[1]"));
             }
 
-            BooleanListEntry entry = entryBuilder.startBooleanToggle(resource.getDisplayName(), enabled)
+            Text displayName = resource.getDisplayName();
+            if (resource.getMixinPackages().stream().anyMatch(CompatMixinErrorHandler::hasFailed)) {
+                displayName = MutableText.of(displayName.getContent()).setStyle(Style.EMPTY.withColor(Formatting.RED));
+            }
+
+            BooleanListEntry entry = entryBuilder.startBooleanToggle(displayName, enabled)
                     .setDefaultValue(resource.isDefaultEnabled())
                     .setSaveConsumer(newEnabled -> {
                         setEnabled(id, newEnabled);
