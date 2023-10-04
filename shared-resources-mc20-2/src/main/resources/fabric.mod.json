@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "id": "shared-resources-mc20",
+  "id": "shared-resources-mc20-2",
   "version": "${version}",
 
-  "name": "Shared Resources for 1.20",
-  "description": "Version-specific code for Minecraft 1.20",
+  "name": "Shared Resources for 1.20.2",
+  "description": "Version-specific code for Minecraft 1.20.2",
   "authors": [
     "enjarai",
     "jacg"
@@ -15,21 +15,21 @@
   },
 
   "license": "LGPLv3",
-  "icon": "assets/shared-resources-mc20/icon.png",
+  "icon": "assets/shared-resources-mc20-2/icon.png",
 
   "environment": "client",
   "entrypoints": {
     "shared-resources-versioned": [
-      "nl.enjarai.shared_resources.mc20.SREntryPoint"
+      "nl.enjarai.shared_resources.mc20_2.SREntryPoint"
     ]
   },
   "depends": {
-    "minecraft": ">=1.20- <1.20.2-"
+    "minecraft": ">=1.20.2-"
   },
   "mixins": [
-    "shared-resources20.mixins.json"
+    "shared-resources20-2.mixins.json"
   ],
-  "accessWidener": "shared-resources20.accesswidener",
+  "accessWidener": "shared-resources20-2.accesswidener",
   "custom": {
     "modmenu": {
       "parent": "shared-resources",

@@ -16,5 +16,6 @@ include("shared-resources-mc18")
 include("shared-resources-mc19-2")
 include("shared-resources-mc19-3")
 include("shared-resources-mc20")
+include("shared-resources-mc20-2")
 include("shared-resources-api")
 
