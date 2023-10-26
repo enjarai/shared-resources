@@ -5,6 +5,7 @@
   "plugin": "nl.enjarai.shared_resources.common.compat.CompatMixinPlugin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "emotecraft.EmoteInstanceMixin",
     "iris.IrisMixin",
     "iris.ShaderpackDirectoryManagerMixin",
     "litematica.DataManagerMixin",

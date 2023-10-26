@@ -94,6 +94,11 @@ public class GameResources implements SharedResourcesEntrypoint {
             .overridesDefaultDirectory()
             .addMixinPackage("xaeroworldmap")
             .build();
+    public static final ResourceDirectory EMOTES = new ResourceDirectoryBuilder("emotes")
+            .setDisplayName(TEXT.translatable("shared_resources.directory.emotes"))
+            .overridesDefaultDirectory()
+            .addMixinPackage("emotecraft")
+            .build();
 
     @Override
     public void registerResources(GameResourceRegistry registry) {
@@ -118,6 +123,7 @@ public class GameResources implements SharedResourcesEntrypoint {
             registry.register(id("xaeros_worldmap_config"), XAEROS_WORLDMAP_CONFIG);
             registry.register(id("xaeros_worldmap_data"), XAEROS_WORLDMAP_DATA);
         }
+        if (checkLoaded("emotecraft")) registry.register(id("emotes"), EMOTES);
     }
 
     private static boolean checkLoaded(String modid) {
