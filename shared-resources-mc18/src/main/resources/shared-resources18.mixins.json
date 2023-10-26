@@ -10,8 +10,7 @@
     "datapacks.MinecraftClientMixin",
     "options.remembermytxt.GameOptionsMixin",
     "resourcepacks.FileResourcePackProviderMixin",
-    "resourcepacks.MinecraftClientMixin",
-    "resourcepacks.PackScreenMixin"
+    "resourcepacks.MinecraftClientMixin"
   ],
   "injectors": {
     "defaultRequire": 1
