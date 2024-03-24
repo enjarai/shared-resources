@@ -1,8 +1,8 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "nl.enjarai.shared_resources.common.compat.mixin",
-  "plugin": "nl.enjarai.shared_resources.common.compat.CompatMixinPlugin",
+  "package": "nl.enjarai.shared_resources.compat.mixin",
+  "plugin": "nl.enjarai.shared_resources.compat.CompatMixinPlugin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "emotecraft.EmoteInstanceMixin",

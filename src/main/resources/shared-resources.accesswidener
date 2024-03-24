@@ -4,3 +4,5 @@ accessible    field    net/minecraft/client/gui/widget/ClickableWidget    alpha 
 
 accessible    field    net/minecraft/client/gui/widget/ClickableWidget    x    I
 accessible    field    net/minecraft/client/gui/widget/ClickableWidget    y    I
+
+accessible    class    net/minecraft/client/option/GameOptions$Visitor

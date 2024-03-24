@@ -4,18 +4,33 @@ pluginManagement {
             name = 'Fabric'
             url = 'https://maven.fabricmc.net/'
         }
+        maven {
+            url = "https://maven.kikugie.dev/releases"
+        }
         mavenCentral()
         gradlePluginPortal()
     }
 }
 
-rootProject.name = "shared-resources"
+//rootProject.name = "shared-resources"
 
-include("shared-resources-mc16")
-include("shared-resources-mc18")
-include("shared-resources-mc19-2")
-include("shared-resources-mc19-3")
-include("shared-resources-mc20")
-include("shared-resources-mc20-2")
+plugins {
+    id("dev.kikugie.stonecutter") version "0.3.2"
+}
+
+stonecutter {
+    shared {
+        versions "1.20.1", "1.20.2", "1.20.4"
+        vcsVersion "1.20.4"
+    }
+    create rootProject
+}
+
+//include("shared-resources-mc16")
+//include("shared-resources-mc18")
+//include("shared-resources-mc19-2")
+//include("shared-resources-mc19-3")
+//include("shared-resources-mc20")
+//include("shared-resources-mc20-2")
 include("shared-resources-api")
 

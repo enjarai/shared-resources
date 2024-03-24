@@ -1,15 +1,42 @@
-archives_base_name = "shared-resources-api"
+plugins {
+    id 'fabric-loom' version '1.5-SNAPSHOT'
+    id 'maven-publish'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 8
+}
+
+java {
+    withSourcesJar()
+}
+
+version = rootProject.property('mod.version')
+group = rootProject.property('mod.group')
+
+base {
+    archivesName = "shared-resources-api"
+}
+
+processResources {
+    inputs.property "version", version
+
+    filesMatching("fabric.mod.json") {
+        expand "version": version
+    }
+}
 
 dependencies {
-    minecraft "com.mojang:minecraft:${rootProject.common_minecraft_version}"
-    mappings "net.fabricmc:yarn:${rootProject.common_yarn_mappings}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${rootProject.property('deps.floader')}"
+    minecraft "com.mojang:minecraft:${property('deps.minecraft')}"
+    mappings "net.fabricmc:yarn:${property('deps.yarn')}:v2"
 }
 
 publishing {
     repositories {
         maven {
             name = "enjaraiMaven"
-            url = "https://maven.enjarai.nl/releases"
+            url = "https://maven.enjarai.dev/releases"
             credentials(PasswordCredentials)
             authentication {
                 basic(BasicAuthentication)
@@ -19,9 +46,9 @@ publishing {
 
     publications {
         mavenJava(MavenPublication) {
-            groupId = rootProject.maven_group
-            artifactId = archives_base_name
-            version = rootProject.mod_version
+            groupId = rootProject.property('mod.group')
+            artifactId = "shared-resources-api"
+            version = project.version
 
             from components.java
         }

@@ -1,3 +1,0 @@
-accessWidener    v1    named
-
-accessible    method    net/minecraft/client/gui/widget/ClickableWidget    getYImage    (Z)I

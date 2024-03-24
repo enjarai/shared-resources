@@ -10,7 +10,7 @@
     "jacg"
   ],
   "contact": {
-    "homepage": "https://enjarai.nl/",
+    "homepage": "https://enjarai.dev/",
     "sources": "https://github.com/enjarai/shared-resources",
     "issues": "https://github.com/enjarai/shared-resources/issues"
   },
@@ -21,16 +21,16 @@
   "environment": "client",
   "entrypoints": {
     "main": [
-      "nl.enjarai.shared_resources.common.SharedResources"
+      "nl.enjarai.shared_resources.SharedResources"
     ],
     "preLaunch": [
-      "nl.enjarai.shared_resources.common.SharedResourcesPreLaunch"
+      "nl.enjarai.shared_resources.SharedResourcesPreLaunch"
     ],
     "shared-resources": [
-      "nl.enjarai.shared_resources.common.registry.GameResources"
+      "nl.enjarai.shared_resources.registry.GameResources"
     ],
     "modmenu": [
-      "nl.enjarai.shared_resources.common.compat.modmenu.ModMenuIntegration"
+      "nl.enjarai.shared_resources.compat.modmenu.ModMenuIntegration"
     ]
   },
   "mixins": [
@@ -40,7 +40,8 @@
   "accessWidener": "shared-resources.accesswidener",
 
   "depends": {
-    "minecraft": ["1.16.x", "1.18.x", "1.19.x", "1.20.x"]
+    "minecraft": "",
+    "cicada": ">=0.6.0 <1.0.0"
   },
 
   "custom": {

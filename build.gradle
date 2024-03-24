@@ -1,78 +1,80 @@
 plugins {
-    id 'fabric-loom' version '1.4-SNAPSHOT'
+    id 'fabric-loom' version '1.5-SNAPSHOT'
     id 'maven-publish'
 }
 
 loom {
-    accessWidenerPath = file("src/main/resources/shared-resources.accesswidener")
+    accessWidenerPath = file("../../src/main/resources/shared-resources.accesswidener")
+
+    runConfigs.client {
+        ideConfigGenerated(true)
+        vmArgs("-Dmixin.debug.export=true")
+        runDir = "../../run"
+    }
 }
 
 // stuff that applies to all projects
-allprojects {
-    apply plugin: "maven-publish"
-    apply plugin: "fabric-loom"
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 8
+}
 
-    tasks.withType(JavaCompile).configureEach {
-        it.options.release = 8
+java {
+    withSourcesJar()
+}
+
+version = "${property('mod.version')}+${property('deps.minecraft')}"
+group = property('mod.group')
+
+base {
+    archivesName = property('mod.archive_name')
+}
+
+// add repos for all projects
+repositories {
+    maven { url 'https://maven.enjarai.dev/mirrors' }
+    maven { url 'https://maven.enjarai.dev/releases' }
+
+    maven {
+        name "Terraformers Maven"
+        url 'https://maven.terraformersmc.com'
     }
-
-    java {
-        withSourcesJar()
+    maven {
+        name "Shedaniel Maven"
+        url "https://maven.shedaniel.me/"
     }
-
-    version = project.mod_version
-    group = project.maven_group
-
-    // add repos for all projects
-    repositories {
-        maven { url 'https://maven.enjarai.nl/mirrors' }
-
-        maven {
-            name "Terraformers Maven"
-            url 'https://maven.terraformersmc.com'
-        }
-        maven {
-            name "Shedaniel Maven"
-            url "https://maven.shedaniel.me/"
-        }
-        maven {
-            name = "Modrinth"
-            url = "https://api.modrinth.com/maven"
-            content { includeGroup "maven.modrinth" }
-        }
+    maven {
+        name = "Modrinth"
+        url = "https://api.modrinth.com/maven"
+        content { includeGroup "maven.modrinth" }
     }
+}
 
-    // floader needs to be in every sub module
-    dependencies {
-        modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-    }
+processResources {
+    inputs.property "version", version
 
-    processResources {
-        inputs.property "version", version
-
-        filesMatching("fabric.mod.json") {
-            expand "version": version
-        }
+    filesMatching("fabric.mod.json") {
+        expand "version": version
     }
 }
 
 dependencies {
-    // dummy versions
-    minecraft "com.mojang:minecraft:${project.common_minecraft_version}"
-    mappings "net.fabricmc:yarn:${project.common_yarn_mappings}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${property('deps.floader')}"
+    minecraft "com.mojang:minecraft:${property('deps.minecraft')}"
+    mappings "net.fabricmc:yarn:${property('deps.yarn')}:v2"
 
-    modCompileOnly "com.terraformersmc:modmenu:${project.common_modmenu_version}"
-    modCompileOnly("me.shedaniel.cloth:cloth-config-fabric:${project.common_cloth_config_version}") {
+    modImplementation "com.terraformersmc:modmenu:${property('deps.modmenu')}"
+    modImplementation("me.shedaniel.cloth:cloth-config-fabric:${property('deps.cloth_config')}") {
         exclude(group: "net.fabricmc.fabric-api")
     }
 
-    api(project(path: ":shared-resources-api", configuration: "namedElements")) {
+    include(api(project(path: ":shared-resources-api", configuration: "namedElements")) {
         // make sure to yeet one of the loaders
         exclude group: "net.fabricmc", module: "fabric-loader"
-    }
+    })
 
-    api(include("com.github.LlamaLad7:MixinExtras:${project.mixin_extras_version}"))
-    annotationProcessor("com.github.LlamaLad7:MixinExtras:${project.mixin_extras_version}")
+    modImplementation("nl.enjarai:cicada-lib:${property("deps.cicada")}") {
+        exclude group: "net.fabricmc.fabric-api"
+    }
 
     subprojects.forEach((project) -> {
         include(project) {
@@ -81,49 +83,33 @@ dependencies {
     })
 }
 
-// stuff that applies to all sub projects
-subprojects {
-    // skip our API module
-    if (it.name == "shared-resources-api") return
+if (stonecutter.current.isActive()) {
+    rootProject.tasks.register("buildActive") {
+        group = "project"
 
-    loom {
-        runs {
-            runMcVersion {
-                inherit(client)
-                ideConfigGenerated = true
-                configName = "Run Minecraft 1.${project.name.split("-mc").last().replace("-", ".")}"
-            }
-        }
-    }
-
-    dependencies {
-        // include the root project because that's where our common code is
-        implementation(project(path: ":", configuration: "namedElements")) {
-            // having 2 floaders from the sub project and root project causes issues so we get rid of one.
-            exclude group: "net.fabricmc", module: "fabric-loader"
-        }
+        dependsOn(tasks.named("build"))
     }
 }
 
-publishing {
-    repositories {
-        maven {
-            name = "enjaraiMaven"
-            url = "https://maven.enjarai.nl/releases"
-            credentials(PasswordCredentials)
-            authentication {
-                basic(BasicAuthentication)
-            }
-        }
-    }
-
-    publications {
-        mavenJava(MavenPublication) {
-            groupId = maven_group
-            artifactId = archives_base_name
-            version = mod_version
-
-            from components.java
-        }
-    }
-}
+//publishing {
+//    repositories {
+//        maven {
+//            name = "enjaraiMaven"
+//            url = "https://maven.enjarai.dev/releases"
+//            credentials(PasswordCredentials)
+//            authentication {
+//                basic(BasicAuthentication)
+//            }
+//        }
+//    }
+//
+//    publications {
+//        mavenJava(MavenPublication) {
+//            groupId = property('mod.group')
+//            artifactId = property('mod.archive_name')
+//            version = project.version
+//
+//            from components.java
+//        }
+//    }
+//}

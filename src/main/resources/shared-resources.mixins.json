@@ -1,16 +1,21 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "nl.enjarai.shared_resources.common.mixin",
+  "package": "nl.enjarai.shared_resources.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "datapacks.VanillaDataPackProviderMixin",
+    "resourcepacks.FileResourcePackProviderAccessor",
+    "resourcepacks.FileResourcePackProviderMixin"
   ],
   "client": [
     "hotbars.HotbarStorageMixin",
     "options.GameOptionsMixin",
+    "options.remembermytxt.GameOptionsMixin",
+    "resourcepacks.MinecraftClientMixin",
+    "resourcepacks.PackScreenMixin",
     "saves.MinecraftClientMixin",
     "screenshots.ScreenshotRecorderMixin",
-    "screenshots.ScreenshotUtilsMixin",
     "servers.ServerListMixin"
   ],
   "injectors": {
