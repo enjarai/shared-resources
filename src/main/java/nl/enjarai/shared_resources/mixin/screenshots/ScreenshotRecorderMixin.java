@@ -1,5 +1,6 @@
 package nl.enjarai.shared_resources.mixin.screenshots;
 
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.util.ScreenshotRecorder;
 import nl.enjarai.shared_resources.api.GameResourceHelper;
 import nl.enjarai.shared_resources.registry.GameResources;
@@ -18,6 +19,10 @@ public abstract class ScreenshotRecorderMixin {
             index = 5
     )
     private static File sharedresources$modScreenshotDir(File file) {
+        if (FabricLoader.getInstance().isModLoaded("memories-are-all-we-have")) {
+            return file;
+        }
+
         return GameResourceHelper.getPathOrDefaultFor(GameResources.SCREENSHOTS, file.toPath()).toFile();
     }
 }

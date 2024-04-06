@@ -1,2 +1,3 @@
-- Fixed support for 1.16.5 and 1.18.2.
-- Added compatibility with Emotecraft.
+- Moved to a new multiversion architecture.
+- Added support for 1.20.2 and 1.20.4.
+- Removed support for 1.16-1.19.

@@ -1,6 +1,7 @@
 plugins {
-    id 'fabric-loom' version '1.5-SNAPSHOT'
+    id 'fabric-loom'
     id 'maven-publish'
+    id("me.modmuss50.mod-publish-plugin") version "0.4.4"
 }
 
 loom {
@@ -51,9 +52,10 @@ repositories {
 
 processResources {
     inputs.property "version", version
+    inputs.property "mc_target", project.property("mod.target")
 
     filesMatching("fabric.mod.json") {
-        expand "version": version
+        expand "version": version, "mc_target": project.property("mod.target")
     }
 }
 
@@ -113,3 +115,71 @@ if (stonecutter.current.isActive()) {
 //        }
 //    }
 //}
+
+publishMods {
+    file = remapJar.archiveFile
+    displayName = "${property("mod.version")} for ${property("deps.minecraft")}"
+    version = project.version
+    changelog = rootProject.file("CHANGELOG.md").text
+    type = STABLE
+    modLoaders.add("fabric")
+
+    def min = property("mod.target_min")
+    def max = property("mod.target_max")
+
+    if (providers.gradleProperty("enjaraiModrinthToken").present) {
+        modrinth {
+            projectId = property("mod.modrinth")
+            accessToken = providers.gradleProperty("enjaraiModrinthToken").get()
+
+            if (min == max) {
+                minecraftVersions.add(min)
+            } else {
+                minecraftVersionRange {
+                    start = min
+                    end = max
+                }
+            }
+
+            requires {
+                slug = "fabric-api"
+            }
+            requires {
+                slug = "cicada"
+            }
+        }
+    }
+
+    if (providers.gradleProperty("enjaraiCurseforgeToken").present) {
+        curseforge {
+            projectId = property("mod.curseforge")
+            accessToken = providers.gradleProperty("enjaraiCurseforgeToken").get()
+
+            if (min == max) {
+                minecraftVersions.add(min)
+            } else {
+                minecraftVersionRange {
+                    start = min
+                    end = max
+                }
+            }
+
+            requires {
+                slug = "fabric-api"
+            }
+            requires {
+                slug = "cicada"
+            }
+        }
+    }
+
+    if (providers.gradleProperty("enjaraiGithubToken").present) {
+        github {
+            repository = property("mod.github")
+            accessToken = providers.gradleProperty("enjaraiGithubToken").get()
+
+            commitish = "master" // property('git_branch')
+            tagName = project.version
+        }
+    }
+}
