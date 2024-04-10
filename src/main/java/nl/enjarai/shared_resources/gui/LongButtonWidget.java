@@ -47,27 +47,12 @@ public class LongButtonWidget extends ButtonWidget {
                 width, height
         );
         /*?} else {*//*
-        context.drawTexture(
-                texture,
-                getX(), getY(),
-                0, textureY,
-                10, height
-        );
-        int fillableWidth = width - 20;
-        int repetitions = fillableWidth / 80;
-        for (int i = 0; i < repetitions; i++) {
-            context.drawTexture(
-                    texture,
-                    getX() + 10 + fillableWidth / repetitions * i, getY(),
-                    10 + 80 / repetitions * i, textureY,
-                    fillableWidth / repetitions, height
-            );
-        }
-        context.drawTexture(
-                texture,
-                getX() + width - 20, getY(),
-                200 - 20, textureY,
-                20, height
+        context.drawNineSlicedTexture(
+                WIDGETS_TEXTURE, this.getX(), this.getY(),
+                this.getWidth(), this.getHeight(),
+                20, 4,
+                200, 20,
+                0, this.getTextureY()
         );
         *//*?} */
 
@@ -88,4 +73,17 @@ public class LongButtonWidget extends ButtonWidget {
                 j | MathHelper.ceil(alpha * 255.0F) << 24
         );
     }
+
+    /*? if <=1.20.1 {*//*
+    private int getTextureY() {
+        int i = 1;
+        if (!this.active) {
+            i = 0;
+        } else if (this.isSelected()) {
+            i = 2;
+        }
+
+        return 46 + i * 20;
+    }
+    *//*?} */
 }
