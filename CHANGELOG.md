@@ -1,4 +1,1 @@
-- Moved to a new multiversion architecture.
-- Added support for 1.20.2 and 1.20.4.
-- Removed support for 1.16-1.19.
-- **Fixed a critical issue causing save files to be deleted! IF YOU ARE USING 1.8.0, UPDATE ASAP.**
+- Added support for 1.20.6.
