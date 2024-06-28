@@ -111,5 +111,5 @@ public abstract class ServerListMixin {
             args.set(2, newPath.resolveSibling(newPath.getFileName() + "_old"));
         }
     }
-    /*?} */
+    /*?}*/
 }

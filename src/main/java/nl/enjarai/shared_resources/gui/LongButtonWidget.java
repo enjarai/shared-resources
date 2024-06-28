@@ -8,15 +8,16 @@ import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
+import nl.enjarai.shared_resources.SharedResources;
 
 import java.util.function.BiFunction;
 
 public class LongButtonWidget extends ButtonWidget {
     private static final BiFunction<Boolean, Boolean, Identifier> TEXTURES = (active, selected) -> {
         if (active) {
-            return selected ? new Identifier("widget/button_highlighted") : new Identifier("widget/button");
+            return selected ? SharedResources.vanillaId("widget/button_highlighted") : SharedResources.vanillaId("widget/button");
         } else {
-            return new Identifier("widget/button_disabled");
+            return SharedResources.vanillaId("widget/button_disabled");
         }
     };
 
@@ -29,7 +30,7 @@ public class LongButtonWidget extends ButtonWidget {
     public void renderWidget(DrawContext context, int mouseX, int mouseY, float delta) {
     /*?} else {*//*
     public void renderButton(DrawContext context, int mouseX, int mouseY, float delta) {
-    *//*?} */
+    *//*?}*/
         MinecraftClient minecraftClient = MinecraftClient.getInstance();
         TextRenderer textRenderer = minecraftClient.textRenderer;
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, alpha);
@@ -54,7 +55,7 @@ public class LongButtonWidget extends ButtonWidget {
                 200, 20,
                 0, this.getTextureY()
         );
-        *//*?} */
+        *//*?}*/
 
         int j = active ? 16777215 : 10526880;
         String message = getMessage().getString();
@@ -85,5 +86,5 @@ public class LongButtonWidget extends ButtonWidget {
 
         return 46 + i * 20;
     }
-    *//*?} */
+    *//*?}*/
 }

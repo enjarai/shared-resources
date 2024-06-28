@@ -39,5 +39,5 @@ public abstract class VanillaDataPackProviderMixin {
                 () -> GameResourceHelper.getPathOrDefaultFor(GameResources.DATAPACKS)
         ));
     }
-    *//*?} */
+    *//*?}*/
 }

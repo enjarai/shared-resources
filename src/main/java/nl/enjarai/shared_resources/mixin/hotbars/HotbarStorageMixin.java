@@ -56,5 +56,5 @@ public abstract class HotbarStorageMixin {
     private Path sharedresources$updateHotbarSavePath(Path file) {
         return GameResourceHelper.getPathOrDefaultFor(GameResources.HOTBARS, file);
     }
-    /*?} */
+    /*?}*/
 }

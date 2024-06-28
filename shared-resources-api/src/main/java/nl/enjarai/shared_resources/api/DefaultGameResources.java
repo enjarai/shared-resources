@@ -9,9 +9,9 @@ public class DefaultGameResources {
     public static ResourceFile OPTIONS;
 
     static void load(GameResourceRegistry registry) {
-        RESOURCEPACKS   = (ResourceDirectory)   registry.get(new Identifier("shared-resources:resourcepacks"));
-        SAVES           = (ResourceDirectory)   registry.get(new Identifier("shared-resources:saves"));
-        CONFIG          = (ResourceDirectory)   registry.get(new Identifier("shared-resources:config"));
-        OPTIONS         = (ResourceFile)        registry.get(new Identifier("shared-resources:options"));
+        RESOURCEPACKS   = (ResourceDirectory)   registry.get(Identifier.tryParse("shared-resources:resourcepacks"));
+        SAVES           = (ResourceDirectory)   registry.get(Identifier.tryParse("shared-resources:saves"));
+        CONFIG          = (ResourceDirectory)   registry.get(Identifier.tryParse("shared-resources:config"));
+        OPTIONS         = (ResourceFile)        registry.get(Identifier.tryParse("shared-resources:options"));
     }
 }

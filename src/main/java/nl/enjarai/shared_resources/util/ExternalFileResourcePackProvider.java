@@ -14,7 +14,7 @@ public class ExternalFileResourcePackProvider extends FileResourcePackProvider {
     protected final Supplier<Path> pathSupplier;
 
     public ExternalFileResourcePackProvider(Supplier<Path> pathSupplier) {
-        super(null, ResourceType.CLIENT_RESOURCES, ResourcePackSource.NONE/*? if >=1.20.2 {*/, MinecraftClient.getInstance().getSymlinkFinder()/*?} */);
+        super(null, ResourceType.CLIENT_RESOURCES, ResourcePackSource.NONE/*? if >=1.20.2 {*/, MinecraftClient.getInstance().getSymlinkFinder()/*?}*/);
         this.pathSupplier = pathSupplier;
     }
 

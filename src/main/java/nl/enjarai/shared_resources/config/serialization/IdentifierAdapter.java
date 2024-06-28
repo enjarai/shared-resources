@@ -15,6 +15,10 @@ public class IdentifierAdapter extends TypeAdapter<Identifier> {
 
     @Override
     public Identifier read(JsonReader in) throws IOException {
-        return new Identifier(in.nextString());
+        //? >=1.21 {
+        return Identifier.tryParse(in.nextString());
+        //?} else {
+        /*return new Identifier(in.nextString());
+         *///?}
     }
 }

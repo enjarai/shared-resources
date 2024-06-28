@@ -64,10 +64,10 @@ dependencies {
     minecraft "com.mojang:minecraft:${property('deps.minecraft')}"
     mappings "net.fabricmc:yarn:${property('deps.yarn')}:v2"
 
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${property('deps.fapi')}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${property('deps.fabric-api')}"
 
     modImplementation "com.terraformersmc:modmenu:${property('deps.modmenu')}"
-    modImplementation("me.shedaniel.cloth:cloth-config-fabric:${property('deps.cloth_config')}") {
+    modImplementation("me.shedaniel.cloth:cloth-config-fabric:${property('deps.cloth-config')}") {
         exclude(group: "net.fabricmc.fabric-api")
     }
 

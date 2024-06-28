@@ -14,6 +14,18 @@ public class SharedResources implements ModInitializer {
 	}
 
 	public static Identifier id(String path) {
-		return new Identifier(MODID, path);
+		//? >=1.21 {
+		return Identifier.of(path);
+		//?} else {
+		/*return new Identifier(MODID, path);
+		*///?}
+	}
+
+	public static Identifier vanillaId(String path) {
+		//? >=1.21 {
+		return Identifier.ofVanilla(path);
+		//?} else {
+		/*return new Identifier(path);
+		 *///?}
 	}
 }
