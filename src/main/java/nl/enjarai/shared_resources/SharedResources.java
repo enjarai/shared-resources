@@ -15,7 +15,7 @@ public class SharedResources implements ModInitializer {
 
 	public static Identifier id(String path) {
 		//? >=1.21 {
-		return Identifier.of(path);
+		return Identifier.of(MODID, path);
 		//?} else {
 		/*return new Identifier(MODID, path);
 		*///?}

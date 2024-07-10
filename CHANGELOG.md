@@ -1,1 +1,1 @@
-- Added support for 1.21.
+- Fix incorrect ID initialization in 1.21, causing identifiers to incorrectly use the `minecraft` namespace
