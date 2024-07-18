@@ -12,8 +12,8 @@ import java.nio.file.Path;
 
 @Mixin(HotbarStorage.class)
 public abstract class HotbarStorageMixin {
-    /*? if <1.20.4 {*//*
-    @ModifyArg(
+    /*? if <1.20.4 {*/
+    /*@ModifyArg(
             method = "load",
             at = @At(
                     value = "INVOKE",

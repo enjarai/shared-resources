@@ -15,8 +15,8 @@ import java.nio.file.Path;
 
 @Mixin(ServerList.class)
 public abstract class ServerListMixin {
-    /*? if <1.20.4 {*//*
-    @Unique
+    /*? if <1.20.4 {*/
+    /*@Unique
     private File getOverwrittenPath(File original) {
         return GameResourceHelper.getPathOrDefaultFor(GameResources.SERVERS, original.toPath()).toFile();
     }

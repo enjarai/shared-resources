@@ -26,8 +26,8 @@ public abstract class VanillaDataPackProviderMixin {
                 () -> GameResourceHelper.getPathOrDefaultFor(GameResources.DATAPACKS)
         ));
     }
-    /*?} else {*//*
-    @ModifyArg(
+    /*?} else {*/
+    /*@ModifyArg(
             method = "createManager(Ljava/nio/file/Path;)Lnet/minecraft/resource/ResourcePackManager;",
             at = @At(
                     value = "INVOKE",

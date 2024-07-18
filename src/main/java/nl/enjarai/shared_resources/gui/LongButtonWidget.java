@@ -28,8 +28,8 @@ public class LongButtonWidget extends ButtonWidget {
     @Override
     /*? if >=1.20.4 {*/
     public void renderWidget(DrawContext context, int mouseX, int mouseY, float delta) {
-    /*?} else {*//*
-    public void renderButton(DrawContext context, int mouseX, int mouseY, float delta) {
+    /*?} else {*/
+    /*public void renderButton(DrawContext context, int mouseX, int mouseY, float delta) {
     *//*?}*/
         MinecraftClient minecraftClient = MinecraftClient.getInstance();
         TextRenderer textRenderer = minecraftClient.textRenderer;
@@ -47,8 +47,8 @@ public class LongButtonWidget extends ButtonWidget {
                 getX(), getY(),
                 width, height
         );
-        /*?} else {*//*
-        context.drawNineSlicedTexture(
+        /*?} else {*/
+        /*context.drawNineSlicedTexture(
                 WIDGETS_TEXTURE, this.getX(), this.getY(),
                 this.getWidth(), this.getHeight(),
                 20, 4,
@@ -75,8 +75,8 @@ public class LongButtonWidget extends ButtonWidget {
         );
     }
 
-    /*? if <=1.20.1 {*//*
-    private int getTextureY() {
+    /*? if <=1.20.1 {*/
+    /*private int getTextureY() {
         int i = 1;
         if (!this.active) {
             i = 0;
