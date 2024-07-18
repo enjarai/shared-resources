@@ -6,6 +6,7 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "emotecraft.EmoteInstanceMixin",
+    "figura.FiguraModMixin",
     "iris.IrisMixin",
     "iris.ShaderpackDirectoryManagerMixin",
     "litematica.DataManagerMixin",

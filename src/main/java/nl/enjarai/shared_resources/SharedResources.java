@@ -2,12 +2,12 @@ package nl.enjarai.shared_resources;
 
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.Identifier;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import nl.enjarai.cicada.api.util.ProperLogger;
+import org.slf4j.Logger;
 
 public class SharedResources implements ModInitializer {
 	public static final String MODID = "shared-resources";
-	public static final Logger LOGGER = LogManager.getLogger(MODID);
+	public static final Logger LOGGER = ProperLogger.getLogger(MODID);
 
 	@Override
 	public void onInitialize() {

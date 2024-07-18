@@ -44,9 +44,9 @@ public class CompatMixinPlugin implements IMixinConfigPlugin {
 
             try {
                 MixinService.getService().getBytecodeProvider().getClassNode(targetClassName);
-            } catch (ClassNotFoundException | IOException ignored) {
+            } catch (ClassNotFoundException | IOException th) {
                 SharedResources.LOGGER.warn("Target class not found: " + targetClassName);
-                CompatMixinErrorHandler.onError(mixinClassName);
+                CompatMixinErrorHandler.onError(mixinClassName, th);
                 return false;
             }
 

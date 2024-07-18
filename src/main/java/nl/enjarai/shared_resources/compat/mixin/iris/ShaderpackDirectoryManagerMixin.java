@@ -17,7 +17,7 @@ import java.util.stream.Stream;
 
 @Pseudo
 @CompatMixin("iris")
-@Mixin(targets = "net.coderbot.iris.shaderpack.discovery.ShaderpackDirectoryManager")
+@Mixin(targets = "net.irisshaders.iris.shaderpack.discovery.ShaderpackDirectoryManager")
 public abstract class ShaderpackDirectoryManagerMixin {
     @Dynamic
     @Redirect(

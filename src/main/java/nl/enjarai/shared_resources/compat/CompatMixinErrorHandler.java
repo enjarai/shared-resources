@@ -14,7 +14,7 @@ public class CompatMixinErrorHandler implements IMixinErrorHandler {
     @Override
     public ErrorAction onPrepareError(IMixinConfig config, Throwable th, IMixinInfo mixin, ErrorAction action) {
         if (mixin.getConfig().getPlugin() instanceof CompatMixinPlugin) {
-            onError(mixin.getClassName());
+            onError(mixin.getClassName(), th);
             return ErrorAction.WARN;
         }
         return action;
@@ -23,17 +23,17 @@ public class CompatMixinErrorHandler implements IMixinErrorHandler {
     @Override
     public ErrorAction onApplyError(String targetClassName, Throwable th, IMixinInfo mixin, ErrorAction action) {
         if (mixin.getConfig().getPlugin() instanceof CompatMixinPlugin) {
-            onError(mixin.getClassName());
+            onError(mixin.getClassName(), th);
             return ErrorAction.WARN;
         }
         return action;
     }
 
-    public static void onError(String mixinClassName) {
+    public static void onError(String mixinClassName, Throwable th) {
         String mixinPackage = CompatMixinPlugin.getPackageName(mixinClassName);
 
         SharedResources.LOGGER.warn("Failed to apply mixin {} for package {}! Compatibility with the corresponding mod will most likely not work!",
-                CompatMixinPlugin.getRelativeClassName(mixinClassName), mixinPackage);
+                CompatMixinPlugin.getRelativeClassName(mixinClassName), mixinPackage, th);
         failed.add(mixinPackage);
     }
 

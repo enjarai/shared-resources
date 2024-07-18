@@ -141,6 +141,7 @@ public class SharedResourcesConfig implements GameResourceConfig {
 
 
 
+    @SuppressWarnings("UnstableApiUsage")
     public Screen getScreen(Screen parent) {
 
         ConfigBuilder builder = ConfigBuilder.create()
@@ -179,17 +180,24 @@ public class SharedResourcesConfig implements GameResourceConfig {
         for (Identifier id : resources) {
             GameResource resource = GameResourceRegistry.REGISTRY.get(id);
             boolean enabled = isEnabled(id);
+            boolean failed = resource.getMixinPackages().stream().anyMatch(CompatMixinErrorHandler::hasFailed);
 
             List<Text> description = new ArrayList<>(resource.getDescription());
             if (resource.isExperimental()) {
-                if (description.size() > 0) description.add(Text.of(" "));
+                if (!description.isEmpty()) description.add(Text.of(" "));
                 description.add(TextBuilder.translatable("config.shared_resources.experimental[0]"));
                 description.add(TextBuilder.translatable("config.shared_resources.experimental[1]"));
             }
+            if (failed) {
+                if (!description.isEmpty()) description.add(Text.of(" "));
+                description.add(TextBuilder.translatable("config.shared_resources.failed[0]"));
+                description.add(TextBuilder.translatable("config.shared_resources.failed[1]"));
+                description.add(TextBuilder.translatable("config.shared_resources.failed[2]"));
+            }
 
             Text displayName = resource.getDisplayName();
-            if (resource.getMixinPackages().stream().anyMatch(CompatMixinErrorHandler::hasFailed)) {
-                displayName = MutableText.of(displayName.getContent()).setStyle(Style.EMPTY.withColor(Formatting.RED));
+            if (failed) {
+                displayName = displayName.copy().fillStyle(Style.EMPTY.withColor(Formatting.RED));
             }
 
             BooleanListEntry entry = entryBuilder.startBooleanToggle(displayName, enabled)
@@ -199,6 +207,7 @@ public class SharedResourcesConfig implements GameResourceConfig {
                         resource.getUpdateCallback().onUpdate(GameResourceHelper.getPathFor(resource));
                     })
                     .setTooltip(description.toArray(new Text[0]))
+                    .setRequirement(() -> !failed)
                     .build();
             entry.setRequiresRestart(resource.isRequiresRestart());
             generalCategory.addEntry(entry);

@@ -1,1 +1,3 @@
-- Fix incorrect ID initialization in 1.21, causing identifiers to incorrectly use the `minecraft` namespace
+- Added compatibility with Figura.
+- Fixed compatibility with Iris.
+- Fixed compatibility issues not being shown ingame.

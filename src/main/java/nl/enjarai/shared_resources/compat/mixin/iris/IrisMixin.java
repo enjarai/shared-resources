@@ -15,7 +15,7 @@ import java.nio.file.Path;
 
 @Pseudo
 @CompatMixin("iris")
-@Mixin(targets = "net.coderbot.iris.Iris")
+@Mixin(targets = "net.irisshaders.iris.Iris")
 public abstract class IrisMixin {
     @Unique
     private static int fixShaderpackFolders = 0;

@@ -61,6 +61,12 @@ public class GameResources implements SharedResourcesEntrypoint {
             .setDisplayName(TextBuilder.translatable("shared_resources.directory.shaderpacks"))
             .addMixinPackage("iris")
             .build();
+    public static final ResourceDirectory FIGURA = new ResourceDirectoryBuilder("figura")
+            .setDisplayName(TextBuilder.translatable("shared_resources.directory.figura"))
+            .addMixinPackage("figura")
+            .overridesDefaultDirectory()
+            .requiresRestart()
+            .build();
     public static final ResourceDirectory SCHEMATICS = new ResourceDirectoryBuilder("schematics")
             .setDisplayName(TextBuilder.translatable("shared_resources.directory.schematics"))
             .setDescription(
@@ -106,7 +112,9 @@ public class GameResources implements SharedResourcesEntrypoint {
         registry.register(id("resourcepacks"), RESOURCEPACKS);
         registry.register(id("saves"), SAVES);
         registry.register(id("config"), CONFIG);
-        registry.register(id("screenshots"), SCREENSHOTS);
+        if (!checkLoaded("memories-are-all-we-have")) {
+            registry.register(id("screenshots"), SCREENSHOTS);
+        }
         registry.register(id("datapacks"), DATAPACKS);
 
         // Files
@@ -116,6 +124,7 @@ public class GameResources implements SharedResourcesEntrypoint {
 
         // Only compat if a mod is available.
         if (checkLoaded("iris")) registry.register(id("shaderpacks"), SHADERPACKS);
+        if (checkLoaded("figura")) registry.register(id("figura"), FIGURA);
         if (checkLoaded("litematica")) registry.register(id("schematics"), SCHEMATICS);
         if (checkLoaded("replaymod")) registry.register(id("replay_recordings"), REPLAY_RECORDINGS);
         if (checkLoaded("skinshuffle")) registry.register(id("skinshuffle_data"), SKINSHUFFLE_DATA);
