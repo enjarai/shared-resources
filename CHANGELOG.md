@@ -1,3 +1,1 @@
-- Added compatibility with Figura.
-- Fixed compatibility with Iris.
-- Fixed compatibility issues not being shown ingame.
+- Marked 1.21.1 as compatible.
