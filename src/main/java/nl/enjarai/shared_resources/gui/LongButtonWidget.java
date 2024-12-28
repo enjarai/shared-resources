@@ -5,6 +5,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
@@ -41,13 +42,20 @@ public class LongButtonWidget extends ButtonWidget {
 
         Identifier texture = TEXTURES.apply(this.active, this.isSelected());
 
-        /*? if >=1.20.2 {*/
+        /*? if >=1.21.3 {*/
+        context.drawGuiTexture(
+                RenderLayer::getGuiTextured,
+                texture,
+                getX(), getY(),
+                width, height
+        );
+        /*?} else if >=1.20.2 {*//*
         context.drawGuiTexture(
                 texture,
                 getX(), getY(),
                 width, height
         );
-        /*?} else {*/
+        *//*?} else {*/
         /*context.drawNineSlicedTexture(
                 WIDGETS_TEXTURE, this.getX(), this.getY(),
                 this.getWidth(), this.getHeight(),

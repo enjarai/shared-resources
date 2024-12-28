@@ -1,1 +1,1 @@
-- Marked 1.21.1 as compatible.
+- Updated to support 1.21.3 and 1.21.4.
